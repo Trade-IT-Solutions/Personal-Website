@@ -30,19 +30,19 @@ function App() {
 
     switch (pathname) {
       case "/":
-        title = "Home - Kelly Website";
-        metaDescription = "Welcome to the home page of Kelly Website.";
+        title = "Kelly Ohgee | Empowerment Through Education";
+        metaDescription = "Kelly Ohgee is a visionary speaker and entrepreneur reshaping the future of education. Empowering the next generation through purpose-driven learning and personal growth.";
         break;
       case "/contact":
-        title = "Contact - Kelly Website";
-        metaDescription = "Get in touch with us.";
+        title = "Contact - Kelly Ohgee | Empowerment Through Education";
+        metaDescription = "Get in touch with Kelly.";
         break;
       case "/about":
-        title = "About - Kelly Website";
-        metaDescription = "Learn more about Kelly and the mission.";
+        title = "About - Kelly Ohgee | Empowerment Through Education";
+        metaDescription = "Learn more about Kelly and Her mission.";
         break;
       default:
-        title = "Kelly Website";
+        title = "Kelly Ohgee | Empowerment Through Education";
     }
 
     if (title) {
