@@ -1,0 +1,401 @@
+.kellyLogo1 {
+  height: 36.4px;
+  width: 73.8px;
+  position: relative;
+  object-fit: cover;
+}
+.services {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 41px;
+}
+.work {
+  position: absolute;
+  top: 0px;
+  left: 74.9px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 25px;
+}
+.about {
+  position: absolute;
+  top: 0px;
+  left: 110.4px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 30px;
+}
+.blog {
+  position: absolute;
+  top: 0px;
+  left: 148.7px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 23px;
+}
+.servicesParent {
+  position: relative;
+}
+.header1 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: var(--br-11xs-1);
+  background-color: var(--color-gray-500);
+  border: 0.6px solid var(--border-default);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-10xs) var(--padding-3xs);
+  gap: 27.2px;
+  width: 100%;
+  height: 100%;
+}
+.container {
+  position: absolute;
+  top: 36px;
+  left: 38.6px;
+  width: 362.8px;
+  height: 45.3px;
+}
+.header {
+  align-self: stretch;
+  height: 117.3px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+}
+.theProcess {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 2px;
+  line-height: 160%;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #7c705f;
+}
+.empowermentThrough {
+  margin: 0;
+}
+.empowermentThroughEducationContainer {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-11xl);
+  letter-spacing: -1px;
+  line-height: 100%;
+  font-weight: 600;
+  font-family: inherit;
+}
+.ourProcessEnsures {
+  flex: 1;
+  position: relative;
+  line-height: 170%;
+  font-weight: 600;
+}
+.websiteDescription {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px var(--padding-23xl);
+  font-size: 10px;
+}
+.processDescription {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-4xs);
+  max-width: 100%;
+}
+.process {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0px var(--padding-28xl) 56.1px;
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--background-primary);
+  font-family: var(--heading-h1-uppercase);
+}
+.featureCards {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-45xl);
+  max-width: 100%;
+}
+.features {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0px var(--padding-11xl) 79.2px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.backgroundImageIcon {
+  position: absolute;
+  height: calc(100% - 7.8px);
+  top: 3.9px;
+  bottom: 3.9px;
+  left: 189.3px;
+  max-height: 100%;
+  width: 445.1px;
+  object-fit: cover;
+  mix-blend-mode: lighten;
+}
+
+.kellyOhgee {
+  flex: 1;
+  position: relative;
+  line-height: 100%;
+}
+.footerName {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 41px;
+}
+.myMission {
+  position: relative;
+  font-size: var(--font-size-smi-4);
+  line-height: 150%;
+  font-weight: 500;
+}
+.socialLinks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 30.1px;
+  max-width: 100%;
+}
+.footerInfo {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0px var(--padding-20xl) var(--padding-17xl) var(--padding-21xl);
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: center;
+  font-size: 49.1px;
+  color: var(--background-primary);
+  font-family: var(--heading-h1-uppercase);
+}
+.kellyOhgee2025 {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 0.5px;
+  line-height: 180%;
+}
+.toTop {
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: none;
+}
+.badgeParent {
+  align-self: stretch;
+  width: 53px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-2xs);
+  cursor: pointer;
+}
+.frameBelowInner {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0px var(--padding-12xs) 0px 0px;
+  text-align: justify;
+  font-size: var(--text-meta-size);
+  color: var(--background-primary);
+  font-family: var(--text-meta);
+}
+.frameBelow {
+  align-self: stretch;
+  background-color: #181716;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 34.9px var(--padding-86xl) 67px;
+  gap: 21.1px;
+  z-index: 2;
+  text-align: center;
+  font-size: 23px;
+  color: var(--text-muted);
+  font-family: var(--heading-h1-uppercase);
+}
+.mobileView {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: var(--background-default);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: var(--font-size-5xs-2);
+  color: var(--background-primary);
+  font-family: var(--text-meta);
+}
+/* Mobile Top Navigation Bar styling */
+.topNav {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw; /* 90% of viewport width */
+  max-width: 400px; /* Maximum width */
+  margin: 10px auto; /* Add space from top and center horizontally */
+  background-color: rgba(39, 38, 37, 0.95);
+  border: 1px solid var(--border-default);
+  border-radius: 500px; /* Fully rounded corners */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 15px;
+  z-index: 9999;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.topNav.show {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+}
+
+.topNav.hide {
+  transform: translateY(-100%) translateX(-50%);
+  opacity: 0;
+}
+
+.topNavItem {
+  text-decoration: none;
+  color: var(--text-default);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.topNavItem span {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Add extra padding to the top of each page to accommodate the navbar */
+.mobileView, .about, .contact {
+  padding-top: 60px; /* Adjust based on your navbar height */
+}
+
+/* Hide Top Navbar on Desktop and Tablets - only show on mobile */
+@media screen and (min-width: 601px) {
+  .topNav {
+    display: none !important;
+  }
+}
+
+/* Make sure it's visible on mobile */
+@media screen and (max-width: 600px) {
+  .topNav {
+    display: flex;
+  }
+  
+  /* Remove the original bottom nav if it exists */
+  .bottomNav {
+    display: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 380px) {
+  .featureCards {
+    gap: var(--gap-13xl);
+  }
+}
+@media screen and (max-width: 360px) {
+  .socialLinks {
+    gap: var(--gap-mini);
+  }
+}
+@media screen and (max-width: 345px) {
+  .websiteDescription {
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+
+/* Prevents flash of unstyled content */
+html, body {
+  background-color: #22201D; /* Match this with your page color */
+  overscroll-behavior: none;
+  touch-action: pan-y;
+}
+html {
+  scroll-behavior: smooth; /* Ensures smooth rendering */
+  will-change: scroll-position;
+  transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
+}
+
+@media screen and (max-width: 768px) {
+  html, body {
+    background-color: #22201D; /* Match this with your page color */
+    overscroll-behavior: none;
+    touch-action: pan-y;
+  }
+  }

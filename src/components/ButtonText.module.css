@@ -1,0 +1,63 @@
+.pharrowUpRightLightIcon {
+  height: 18px;
+  width: 18px;
+  position: relative;
+}
+.buttonTextIcon {
+  width: 32px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-481xl);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs) var(--padding-xs);
+}
+.connect {
+  width: 57px;
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.buttonText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+  text-align: left;
+  font-size: var(--text-meta-size);
+  color: var(--text-default);
+  font-family: var(--text-meta);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 450px) {
+  .buttonTextIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .connect {
+    font-size: 10px;
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .buttonTextIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .connect {
+    font-size: 12px;
+    width: 55px;
+  }
+}

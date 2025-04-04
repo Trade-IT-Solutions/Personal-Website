@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.community {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+ 
+  background-color: #0E0E0E;
+  font-family: 'Inter', sans-serif;
+  color: #DAC5A7;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%; /* ✅ Ensures it does not touch the screen edges */
+  max-width: 1200px; /* ✅ Restricts it to a reasonable size */
+  padding: 20px;
+  border-radius: 12px; /* Adds smooth edges */
+  background-color: rgba(39, 38, 37, 0.8); /* Slightly muted background */
+}
+
+/* ✅ Styling the social links container */
+.socialLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* ✅ Parent containers for each social media section */
+.instagramParent, .youtubeParent, .tiktokParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ✅ Universal styling for social media icons */
+.instagram, .twitter, .youtube, .tiktok {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ Icon container */
+.rectangleParent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* ✅ Hover effect */
+.rectangleParent:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ✅ Universal icon styles */
+.instagramIcon, .twitterIcon, .youtubeIcon, .tiktokIcon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+/* ✅ Hover effect for icons */
+.instagramIcon:hover, .twitterIcon:hover, .youtubeIcon:hover, .tiktokIcon:hover {
+  transform: scale(1.2);
+}
+
+/* ✅ Follower count text */
+.kWrapper, .kContainer, .kFrame {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #DAC5A7;
+  margin-top: 5px;
+}
+
+/* ✅ Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .instagramParent, .youtubeParent {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .rectangleParent {
+    height: 45px;
+    width: 45px;
+  }
+
+  .instagramIcon, .twitterIcon, .youtubeIcon, .tiktokIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .container {
+    padding: 15px;
+  }
+
+  .instagramParent, .youtubeParent {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .rectangleParent {
+    height: 40px;
+    width: 40px;
+  }
+
+  .instagramIcon, .twitterIcon, .youtubeIcon, .tiktokIcon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .k, .k1 {
+    font-size: 16px;
+  }
+}
