@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./SectionStats.module.css";
 
-const CACHE_EXPIRY_TIME = 60 * 60 * 1000; // 1 hour in milliseconds
+const CACHE_EXPIRY_TIME = 12 * 60 * 60 * 1000; // 12 hours
+ // 1 hour in milliseconds
 
 const SectionStats = ({ className = "" }) => {
   const [youtubeSubscribers, setYoutubeSubscribers] = useState("Loading...");
