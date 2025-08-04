@@ -4,11 +4,12 @@ import styles from "./Community.module.css";
 
 const Community = ({ className = "" }) => {
   const [youtubeSubscribers, setYoutubeSubscribers] = useState("Loading...");
-  const [instagramFollowers, setInstagramFollowers] = useState("Loading...");
-  const [twitterFollowers, setTwitterFollowers] = useState("Loading...");
-  const tiktokFollowers = "224k+";
+  // Hardcoded values as requested
+  const instagramFollowers = "168.4k";
+  const twitterFollowers = "36.4k";
+  const tiktokFollowers = "223.2k";
 
-  // Fetch YouTube Subscribers
+  // Fetch YouTube Subscribers (keeping this dynamic as requested)
   useEffect(() => {
     const fetchYoutubeSubscribers = async () => {
       try {
@@ -36,126 +37,6 @@ const Community = ({ className = "" }) => {
     };
 
     fetchYoutubeSubscribers();
-  }, []);
-
-  // Fetch Instagram Followers (Corrected API Request)
-   useEffect(() => {
-     const fetchInstagramFollowers = async () => {
-       const cacheKey = "instagramFollowers";
-       const CACHE_EXPIRY_TIME = 60 * 60 * 1000; // 1 hour
-   
-       const isCacheValid = (key) => {
-         const cachedData = JSON.parse(localStorage.getItem(key));
-         return cachedData && Date.now() - cachedData.timestamp < CACHE_EXPIRY_TIME;
-       };
-   
-       const storeCache = (key, data) => {
-         localStorage.setItem(
-           key,
-           JSON.stringify({ value: data, timestamp: Date.now() })
-         );
-       };
-   
-       const getCachedData = (key) => {
-         const cachedData = JSON.parse(localStorage.getItem(key));
-         return cachedData ? cachedData.value : null;
-       };
-   
-       const formatNumber = (num) => {
-         if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B+";
-         if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M+";
-         if (num >= 1_000) return (num / 1_000).toFixed(1) + "k+";
-         return num.toString();
-       };
-   
-       if (isCacheValid(cacheKey)) {
-         setInstagramFollowers(getCachedData(cacheKey));
-         return;
-       }
-   
-       try {
-         const response = await fetch(
-           "https://rocketapi-for-developers.p.rapidapi.com/instagram/user/get_info",
-           {
-             method: "POST",
-             headers: {
-               "x-rapidapi-key": "70e512e8bdmshaaffc4d5a9623d3p16477cjsnd7d34b12bfd6",
-               "x-rapidapi-host": "rocketapi-for-developers.p.rapidapi.com",
-               "Content-Type": "application/json",
-             },
-             body: JSON.stringify({ username: "kellyohgee" }),
-           }
-         );
-   
-         if (!response.ok) {
-           const errorText = await response.text();
-           throw new Error(`API Error: ${response.status} - ${errorText}`);
-         }
-   
-         const data = await response.json();
-         const count = data?.response?.body?.data?.user?.edge_followed_by?.count;
-   
-         if (count !== undefined) {
-           const formatted = formatNumber(count);
-           setInstagramFollowers(formatted);
-           storeCache(cacheKey, formatted);
-         } else {
-           console.error("Instagram follower count not found.");
-           setInstagramFollowers("N/A");
-         }
-       } catch (error) {
-         console.error("Failed to fetch Instagram followers:", error);
-         setInstagramFollowers("Error");
-       }
-     };
-   
-     fetchInstagramFollowers();
-   }, []);
-   
-
-  // Fetch Twitter Followers
-  useEffect(() => {
-    const fetchTwitterFollowers = async () => {
-      try {
-        const url =
-          "https://twitter-followers.p.rapidapi.com/kellyohgee/profile"; // Correct endpoint for specific user
-        const headers = {
-          "x-rapidapi-key": "70e512e8bdmshaaffc4d5a9623d3p16477cjsnd7d34b12bfd6",
-          "x-rapidapi-host": "twitter-followers.p.rapidapi.com",
-        };
-
-        const response = await fetch(url, { method: "GET", headers });
-
-        if (!response.ok) {
-          const errorDetails = await response.text();
-          console.error("API Response Error Details:", errorDetails);
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Twitter API Response:", data); // Log response for debugging
-
-        // Parse follower count
-        const followerCount = data?.followersCount || 0;
-
-        if (followerCount) {
-          const formattedCount =
-            followerCount >= 1000000
-              ? `${(followerCount / 1000000).toFixed(1).replace(/\.0$/, "")}M+`
-              : followerCount >= 1000
-              ? `${(followerCount / 1000).toFixed(1).replace(/\.0$/, "")}k+`
-              : followerCount;
-          setTwitterFollowers(formattedCount);
-        } else {
-          setTwitterFollowers("N/A");
-        }
-      } catch (error) {
-        console.error("Error fetching Twitter followers:", error);
-        setTwitterFollowers("Error");
-      }
-    };
-
-    fetchTwitterFollowers();
   }, []);
 
   return (
@@ -259,11 +140,7 @@ const Community = ({ className = "" }) => {
       </div>
     </section>
   );
-  
 };
-
-
-
 
 Community.propTypes = {
   className: PropTypes.string,
