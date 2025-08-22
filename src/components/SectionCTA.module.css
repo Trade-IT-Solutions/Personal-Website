@@ -1,0 +1,91 @@
+.logoImage {
+  width: 80px; /* Adjust based on your design */
+  height: auto;
+  display: inline-block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+
+.line {
+  align-self: stretch;
+  position: relative;
+  background-color: var(--border-default);
+  height: 1px;
+}
+.bannerWord {
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+}
+.letsTalk {
+  height: 21px;
+  width: 79px;
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.grid {
+  align-self: stretch;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-tan-300);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-base) 0px;
+  gap: var(--gap-13xl);
+}
+.sectionBanner {
+  width: 1920px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.sectionCta {
+  align-self: stretch;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 1;
+  text-align: left;
+  font-size: var(--text-meta-size);
+  color: var(--text-default);
+  font-family: var(--text-meta);
+}
+
+@media screen and (max-width: 450px) {
+  .line {
+    height: 0.5px;
+  }
+
+  .sectionCta {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .line {
+    height: 0.75px;
+  }
+
+  .sectionCta {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .line {
+    height: 1px;
+  }
+
+  .sectionCta {
+    font-size: var(--text-meta-size);
+  }
+}

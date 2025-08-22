@@ -1,0 +1,67 @@
+
+.yTSpacer {
+  align-self: center;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 600px; /* Adjust this value for better centering */
+  margin: 0 auto;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.youtubeConnectRecreated {
+  align-self: stretch;
+  background-color: var(--background-default);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Changed from flex-start to center */
+  justify-content: center; /* Ensure vertical centering */
+  padding: var(--padding-6xs-9) var(--padding-4xl) var(--padding-20xl);
+  box-sizing: border-box;
+  gap: var(--gap-5xs-6);
+  max-width: 100%;
+  flex-shrink: 0;
+  text-align: center; /* Center text elements */
+  font-size: var(--font-size-lg);
+  color: var(--background-primary);
+  font-family: var(--heading-h1-uppercase);
+}
+
+.youtubeConnectRecreatedInner {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column; /* Changed from row to column */
+  align-items: center; /* Centered items */
+  justify-content: center;
+  padding: 0px var(--padding-10xs);
+  box-sizing: border-box;
+  max-width: 100%;
+  font-size: var(--heading-h5-size);
+}
+
+.connectWithKellyOnYoutubeWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center text */
+  padding: 0px;
+  width: 100%;
+}
+
+.lamboSurpriseWrapper {
+  height: auto;
+  width: auto;
+  border-radius: var(--br-12xs-5);
+  background-color: var(--color-gray-600);
+  border: 0.3px solid var(--border-default);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center the text inside */
+  justify-content: center;
+  padding: var(--padding-6xs) var(--padding-9xs);
+  max-width: 100%;
+}

@@ -1,0 +1,293 @@
+.grid-icon {
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+  top: 100px;
+  object-fit: cover;
+}
+
+.kelly-ohgee {
+  flex-direction: row;
+  font-size: 90px;
+  line-height: 10%;
+  font-weight: 300;
+  color: #E3D5C1;
+  max-width: 100%;
+  margin-bottom: -70px;
+}
+
+.my-mission-is {
+  font-size: var(--font-size-5xl);
+  line-height: 150%;
+  font-weight: 500;
+  color: var(--text-muted);
+  max-width: 750px;
+  word-spacing: -3px;
+}
+
+.grid1, .grid, .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+  max-width: 100%;
+}
+
+.about-me {
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  color: #E3D5C1;
+}
+
+.grid2 {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-smi);
+  font-size: var(--text-meta-size);
+  font-family: var(--text-meta);
+  padding-bottom: 20px;
+}
+
+.image-wrapper {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  border-radius: var(--br-11xs);
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--border-default);
+}
+
+.image-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.card {
+  width: 90%;
+  border-radius: var(--br-11xs);
+  color: #0E0E0E;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-30xl) var(--padding-20xl);
+  gap: var(--gap-21xl);
+  font-family: var(--heading-h5);
+  overflow: hidden;
+}
+
+.card h1 {
+  font-size: 2.5rem;
+  font-weight: 200;
+  text-align: left;
+  letter-spacing: 0.8px;
+  line-height: 1.3;
+  color: #E3D5C1;
+  font-family: "Inter", sans-serif;
+  padding-top: 50px;
+}
+
+.card p, h2 {
+  padding: 1px;
+  font-size: 1.08rem;
+  font-weight: 400;
+  text-align: justify;
+  line-height: 1.9;
+  color: #B8A898;
+  width: 100%;
+}
+
+.grid4, .grid5, .grid6, .grid8 {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-base);
+  max-width: 100%;
+}
+
+.card1, .card3 {
+  flex: 1;
+  border-radius: var(--br-11xs);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-sm) var(--padding-5xl);
+  min-width: 255px;
+}
+
+.grid3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-base);
+  max-width: 673px;
+  width: 100%;
+}
+
+.grid3 a {
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 10px;
+  border-radius: var(--br-11xs);
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+/* Responsive Grid Layout */
+.small-card-grid {
+  display: flex;
+  flex-direction: column; /* Stacked layout */
+  gap: 20px;
+  max-width: 900px; /* Set a reasonable width */
+  margin: 40px auto; /* Center the grid */
+  padding: 20px;
+}
+/* Stack into 2 columns for tablets */
+@media screen and (max-width: 1024px) {
+  .small-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Stack into 1 column for mobile */
+@media screen and (max-width: 600px) {
+  .small-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-base);
+  max-width: 100%;
+  font-size: var(--text-meta-size);
+  color: var(--text-muted);
+  margin: 0 auto 60px;
+}
+
+.small-card {
+  width: 100%;
+  min-height: 200px; /* Ensures cards aren’t too small, allows them to grow */
+  border-radius: var(--br-11xs);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to left */
+  justify-content: flex-start;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.small-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-color: #dac5a7;
+}
+
+.small-card h2 {
+  font-size: 20px; /* Adjusted for better fit */
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #DAC5A7;
+  margin-bottom: 8px;
+}
+
+.small-card p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #DAC5A7;
+  line-height: 1.5;
+  text-align: left;
+  
+}
+
+/* Ensure stacking on smaller screens */
+@media screen and (max-width: 430px) {
+  .text-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .small-card {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 380px;
+    min-height: 140px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .text-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .small-card {
+    max-width: 370px;
+    min-height: 150px;
+  }
+}
+
+/* Tablet: Stack into 2 columns */
+@media screen and (max-width: 1024px) {
+  .small-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: Stack into 1 column */
+@media screen and (max-width: 600px) {
+  .small-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: row; /* Aligns image and text side by side */
+  align-items: center; /* Aligns content vertically */
+  gap: 40px; /* Space between image and text */
+  max-width: 100%;
+}
+
+.right-column {
+  flex: 1; /* Makes the text section fill available space */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+
+.card h1,
+.card h2 {
+  margin-bottom: 5px; /* Reduce space below headings */
+  padding-bottom: 0;   /* Ensure no extra padding if previously applied */
+}
+
+.card p {
+  margin-top: 0;       /* Remove default margin on top */
+  padding-top: 0;      /* Ensure no padding if previously applied */
+}

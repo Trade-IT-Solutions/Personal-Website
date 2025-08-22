@@ -1,0 +1,333 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.kellyLogo1 {
+  position: absolute;
+  top: 24.9px;
+  left: 23.5px;
+  width: 115.1px;
+  height: 42.4px;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbarRight {
+  position: absolute;
+  top: 23px;
+  left: 171.1px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 100px;
+  max-width: 100%;
+}
+
+.navbarMenu {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 150px;
+  max-width: 100%;
+  margin-left: 130px;
+}
+
+.header {
+  width: 657.1px;
+  height: 87px;
+  position: absolute;
+  margin: 0 !important;
+  top: 39.1px;
+  left: calc(50% - 328.5px);
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-11xs);
+  background-color: #22201D;
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  max-width: 100%;
+  z-index: 10;
+  text-align: left;
+  font-size: var(--text-meta-size);
+  color: var(--text-default);
+  font-family: var(--text-meta);
+}
+
+.sectionContact {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 0px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  position: relative;
+  gap: var(--gap-base);
+  min-height: 1205px;
+  max-width: 100%;
+}
+
+.contact {
+  width: 100%;
+  position: relative;
+  background-color: var(--text-inverse);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.hamburger {
+  display: none; 
+}
+
+@media screen and (max-width: 1350px) {
+  .sectionContact {
+    padding-top: var(--padding-85xl);
+    padding-bottom: var(--padding-85xl);
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sectionContact {
+    margin-bottom: 100px; /* Adjust as needed for spacing */
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .navbarMenu {
+    display: none; 
+  }
+
+  .hamburger {
+    display: block; 
+  }
+
+  .sectionContact {
+    padding-top: 0px;
+    box-sizing: border-box;
+  }
+}
+
+.connect, 
+.work {
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  color: #DAC5A7;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.connect:hover,
+.work:hover {
+  transform: scale(1.4);
+}
+
+/* Mobile Top Navigation Bar styling */
+.topNav {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw; /* 90% of viewport width */
+  max-width: 400px; /* Maximum width */
+  margin: 10px auto; /* Add space from top and center horizontally */
+  background-color: rgba(39, 38, 37, 0.95);
+  border: 1px solid var(--border-default);
+  border-radius: 500px; /* Fully rounded corners */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 15px;
+  z-index: 9999;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.topNav.show {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+}
+
+.topNav.hide {
+  transform: translateY(-100%) translateX(-50%);
+  opacity: 0;
+}
+
+.topNavItem {
+  text-decoration: none;
+  color: var(--text-default);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.topNavItem span {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Add extra padding to the top of each page to accommodate the navbar */
+
+
+/* Hide Top Navbar on Desktop and Tablets - only show on mobile */
+@media screen and (min-width: 601px) {
+  .topNav {
+    display: none !important;
+  }
+}
+
+/* Make sure it's visible on mobile */
+@media screen and (max-width: 600px) {
+  .topNav {
+    display: flex;
+  }
+  
+  /* Remove the original bottom nav if it exists */
+  .bottomNav {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    display: none !important;
+    position: static !important;
+    top: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+/* MOBILE ONLY: clean top spacing and image alignment */
+@media screen and (max-width: 600px) {
+  .contact {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+  }
+
+  .sectionContact {
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-bottom: 400px !important; /* Increased to clear bottomNav height */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+  }
+
+  .header {
+    display: none !important;  /* hides top navbar in mobile view only */
+    position: static !important;
+    margin: 0 !important;
+    top: 0 !important;
+  }
+
+  .imageIcon,
+  .imageIcon1 {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Prevents flash of unstyled content */
+html, body {
+  background-color: #22201D; /* Match this with your page color */
+  overscroll-behavior: none;
+  touch-action: pan-y;
+}
+
+html {
+  scroll-behavior: smooth; /* Ensures smooth rendering */
+  will-change: scroll-position;
+  transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
+}
+
+@media screen and (max-width: 600px) {
+  .bottomNav {
+    display: flex;
+  }
+
+  .header {
+    display: none !important;
+    position: static !important;
+    top: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .bottomNav {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html, body {
+    background-color: #22201D; /* Match this with your page color */
+    overscroll-behavior: none;
+    touch-action: pan-y;
+  }
+}
+
+.messageSentOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background-color: rgba(0, 0, 0, 0.95); /* or match site theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeOutOverlay 3s ease forwards;
+  pointer-events: all;
+}
+
+.messageSentText {
+  color: var(--text-default);
+  font-size: clamp(1.5rem, 5vw, 2.8rem);
+  font-weight: bold;
+  text-align: center;
+  animation: scaleUp 0.4s ease-in-out;
+  padding: 0 20px;
+}
+
+@keyframes fadeOutOverlay {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
