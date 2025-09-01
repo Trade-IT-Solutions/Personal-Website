@@ -112,6 +112,10 @@ const Frontpage = () => {
                   <Link to="/about" className={styles.work}>
                     About
                   </Link>
+                    <Link to="/bookings" className={styles.work}>
+                    Bookings
+                  </Link>
+
                 </div>
               </nav>
             </header>

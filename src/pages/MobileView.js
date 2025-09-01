@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { FiHome, FiUser, FiMail } from "react-icons/fi";
+import { FiHome, FiUser, FiMail, FiCalendar } from "react-icons/fi";
 import Main from "../components/Main";
 import Community from "../components/Community";
 import YouTubeConnectRecreated from "../components/YouTubeConnectRecreated";
@@ -61,6 +61,10 @@ const MobileView = () => {
         <Link to="/contact" className={styles.topNavItem}>
           <FiMail size={20} />
           <span>Contact</span>
+        </Link>
+        <Link to="/bookings" className={styles.topNavItem}>
+          <FiCalendar size={20} />
+          <span>Bookings</span>
         </Link>
       </nav>
       
