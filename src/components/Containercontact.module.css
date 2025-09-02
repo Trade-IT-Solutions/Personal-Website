@@ -57,9 +57,7 @@
   }
 }
 
- 
- 
- .imageIcon {
+.imageIcon {
   width: 719px;
   position: relative;
   max-height: 100%;
@@ -70,17 +68,17 @@
 }
 .imageIcon1 {
   height: 821px;
-  flex: 1;
-  position: relative;
-  border-radius: var(--br-11xs) var(--br-11xs) 0px 0px;
+  border-radius: var(--br-11xs) var(--br-11xs) 0 0;
   max-width: 100%;
   overflow: hidden;
   object-fit: cover;
-  mix-blend-mode: lighten;
-  min-width: 471px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  object-fit: cover;
+
+  /* Let natural ratio decide */
 }
 .contact {
-  position: relative;
   letter-spacing: 1.5px;
   line-height: 160%;
   text-transform: uppercase;
@@ -143,22 +141,7 @@
   width: 16px;
   position: relative;
 }
-.card1 {
-  flex: 1;
-  backdrop-filter: var(--blur-default);
-  border-radius: var(--br-11xs);
-  background-color: var(--background-muted);
-  border: 1px solid var(--border-default);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--padding-sm) var(--padding-base);
-  min-width: 190px;
-  min-height: 56px;
-  gap: var(--gap-xl);
-}
+
 .socialMediaCards {
   align-self: stretch;
   display: flex;
@@ -184,21 +167,7 @@
   justify-content: flex-start;
   gap: var(--gap-mini);
 }
-.card3 {
-  height: 56px;
-  flex: 1;
-  backdrop-filter: var(--blur-default);
-  border-radius: var(--br-11xs);
-  background-color: var(--background-muted);
-  border: 1px solid var(--border-default);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--padding-base);
-  min-width: 190px;
-}
+
 .weeklyReport {
   display: flex;
   flex-direction: row;
@@ -232,33 +201,37 @@
   max-width: 100%;
 }
 .container {
-  width: 1400px;
+  width: auto;
+  max-width: 87.5rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0px 0px 0px 0px;
+  padding: 0px 0px 2rem 0px;
   box-sizing: border-box;
   gap: var(--gap-61xl);
-  max-width: 100%;
   text-align: left;
   font-size: var(--text-meta-size);
   color: var(--text-muted);
   font-family: var(--text-meta);
-  height: 100vh;
+  height: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-
-
+@media screen and (min-width: 1350px) {
+  .container {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 10rem 2rem 2rem 2rem;
+  }
+  .imageIcon1 {
+    height: 678.4px;
+  }
+}
 
 @media screen and (max-width: 1350px) {
-  .grid {
-    flex: 1;
-  }
+  /* .container {
 
-  .container {
-    flex-wrap: wrap;
-  }
+  } */
 }
 @media screen and (max-width: 925px) {
   .imageIcon1 {
@@ -268,12 +241,6 @@
   .letsGetIn {
     font-size: var(--font-size-19xl);
     line-height: 42px;
-  }
-
-  .card {
-    gap: var(--gap-base);
-    padding: var(--padding-11xl) var(--padding-4xl);
-    box-sizing: border-box;
   }
 
   .socialMediaCards {
@@ -297,7 +264,7 @@
   .container {
     gap: var(--gap-xl);
   }
-} 
+}
 
 @media screen and (max-width: 925px) {
   .imageIcon1 {
@@ -308,7 +275,8 @@
 }
 
 @media screen and (max-width: 450px) {
-  .imageIcon, .imageIcon1 {
+  .imageIcon,
+  .imageIcon1 {
     width: 100%;
     height: auto;
     object-fit: contain;

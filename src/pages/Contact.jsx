@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiHome, FiUser, FiMail } from "react-icons/fi";
+import { FiHome, FiUser, FiMail, FiCalendar } from "react-icons/fi";
 import Container from "../components/Containercontact.jsx";
 import Footer1 from "../components/Footer.js";
 import SectionCTA from "../components/SectionCTA.js";
 import styles from "./Contact.module.css";
 
 const Contact = () => {
-  const [isScrolling, setIsScrolling] = useState(true);
+  const [isScrolling, setIsScrolling] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   let scrollTimeout = null;
 
-  // Auto-hide top nav on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolling(true);
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false);
-      }, 2000);
-    };
+  // Auto-hide top nav on scroll  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsScrolling(true);
+  //     clearTimeout(scrollTimeout);
+  //     scrollTimeout = setTimeout(() => {
+  //       setIsScrolling(false);
+  //     }, 2000);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //     clearTimeout(scrollTimeout);
+  //   };
+  // }, []);
 
   // Disable scroll when overlay is active
   useEffect(() => {
@@ -35,7 +34,10 @@ const Contact = () => {
 
   return (
     <div className={styles.contact}>
-      <nav className={`${styles.topNav} ${isScrolling ? styles.show : styles.hide}`}>
+      <nav
+        className={`${styles.topNav} 
+        `}
+      >
         <Link to="/" className={styles.topNavItem}>
           <FiHome size={20} />
           <span>Home</span>
@@ -48,11 +50,13 @@ const Contact = () => {
           <FiMail size={20} />
           <span>Contact</span>
         </Link>
+        <Link to="/bookings" className={styles.topNavItem}>
+          <FiCalendar size={20} />
+          <span>bookings</span>
+        </Link>
       </nav>
-
       <section className={styles.sectionContact}>
         <Container setShowOverlay={setShowOverlay} />
-
         <header className={styles.header}>
           <Link to="/" className={styles.logoContainer}>
             <img
@@ -64,8 +68,15 @@ const Contact = () => {
           </Link>
           <nav className={styles.navbarRight}>
             <div className={styles.navbarMenu}>
-              <Link to="/contact" className={styles.connect}>Connect</Link>
-              <Link to="/about" className={styles.work}>About</Link>
+              <Link to="/contact" className={styles.navbarPageLink}>
+                Connect
+              </Link>
+              <Link to="/about" className={styles.navbarPageLink}>
+                About
+              </Link>
+              <Link to="/bookings" className={styles.navbarPageLink}>
+                Booking
+              </Link>
             </div>
           </nav>
         </header>
@@ -73,7 +84,6 @@ const Contact = () => {
 
       <SectionCTA />
       <Footer1 />
-
       {/* ✅ Full-screen overlay shown only on success */}
       {showOverlay && (
         <div className={styles.messageSentOverlay}>

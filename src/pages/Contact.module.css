@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import url("https://fonts.cdnfonts.com/css/satoshi");
 
 .kellyLogo1 {
   position: absolute;
@@ -13,36 +13,29 @@
 .navbarRight {
   position: absolute;
   top: 23px;
-  left: 171.1px;
-  display: flex;
+  left: 22%;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 100px;
-  max-width: 100%;
 }
 
 .navbarMenu {
   flex: 1;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 150px;
-  max-width: 100%;
+  width: 100%;
+  gap: 3rem;
   margin-left: 130px;
 }
 
 .header {
-  width: 657.1px;
   height: 87px;
-  position: absolute;
-  margin: 0 !important;
+  position: fixed;
   top: 39.1px;
-  left: calc(50% - 328.5px);
   backdrop-filter: var(--blur-default);
   border-radius: var(--br-11xs);
-  background-color: #22201D;
+  background-color: #22201d;
   border: 1px solid var(--border-default);
   box-sizing: border-box;
   max-width: 100%;
@@ -51,78 +44,52 @@
   font-size: var(--text-meta-size);
   color: var(--text-default);
   font-family: var(--text-meta);
+  padding-left: 15%;
 }
 
 .sectionContact {
-  align-self: stretch;
+  /* align-self: stretch; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   padding-top: 0px;
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
   box-sizing: border-box;
   position: relative;
   gap: var(--gap-base);
-  min-height: 1205px;
+  /* min-height: 75rem;
+  max-height: fit-content; */
+  height: auto;
   max-width: 100%;
 }
 
 .contact {
   width: 100%;
-  position: relative;
+  height: 100%;
+  /* position: relative; */
   background-color: var(--text-inverse);
   overflow: visible;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   line-height: normal;
   letter-spacing: normal;
 }
 
 .hamburger {
-  display: none; 
+  display: none;
 }
 
-@media screen and (max-width: 1350px) {
-  .sectionContact {
-    padding-top: var(--padding-85xl);
-    padding-bottom: var(--padding-85xl);
-    box-sizing: border-box;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .sectionContact {
-    margin-bottom: 100px; /* Adjust as needed for spacing */
-  }
-}
-
-@media screen and (max-width: 925px) {
-  .navbarMenu {
-    display: none; 
-  }
-
-  .hamburger {
-    display: block; 
-  }
-
-  .sectionContact {
-    padding-top: 0px;
-    box-sizing: border-box;
-  }
-}
-
-.connect, 
-.work {
-  font-family: 'Inter', sans-serif;
+.navbarPageLink {
+  font-family: "Inter", sans-serif;
   position: relative;
   letter-spacing: 1.5px;
   line-height: 160%;
   text-transform: uppercase;
   display: inline-block;
-  color: #DAC5A7;
+  color: #dac5a7;
   text-decoration: none;
   transition: transform 0.3s ease-in-out;
 }
@@ -182,7 +149,40 @@
 
 /* Add extra padding to the top of each page to accommodate the navbar */
 
+/* Prevents flash of unstyled content */
+html,
+body {
+  background-color: #22201d; /* Match this with your page color */
+  overscroll-behavior: none;
+  touch-action: pan-y;
+  height: 100%;
+}
 
+html {
+  scroll-behavior: smooth; /* Ensures smooth rendering */
+  will-change: scroll-position;
+  transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
+}
+
+@media screen and (max-width: 1350px) {
+  .sectionContact {
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sectionContact {
+    padding-top: 0px;
+    box-sizing: border-box;
+  }
+  .header {
+    max-width: 40rem;
+  }
+}
 /* Hide Top Navbar on Desktop and Tablets - only show on mobile */
 @media screen and (min-width: 601px) {
   .topNav {
@@ -195,34 +195,18 @@
   .topNav {
     display: flex;
   }
-  
-  /* Remove the original bottom nav if it exists */
-  .bottomNav {
-    display: none !important;
-  }
-}
 
-@media screen and (max-width: 600px) {
-  .header {
+  /* Remove the original bottom nav if it exists */
+  /* .bottomNav {
     display: none !important;
-    position: static !important;
-    top: 0 !important;
-    margin: 0 !important;
-  }
+  } */
 }
 
 /* MOBILE ONLY: clean top spacing and image alignment */
 @media screen and (max-width: 600px) {
-  .contact {
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow-x: hidden;
-  }
-
   .sectionContact {
     margin: 0 !important;
     padding: 0 !important;
-    padding-bottom: 400px !important; /* Increased to clear bottomNav height */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -232,33 +216,11 @@
   }
 
   .header {
-    display: none !important;  /* hides top navbar in mobile view only */
+    display: none !important; /* hides top navbar in mobile view only */
     position: static !important;
     margin: 0 !important;
     top: 0 !important;
   }
-
-  .imageIcon,
-  .imageIcon1 {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-}
-
-/* Prevents flash of unstyled content */
-html, body {
-  background-color: #22201D; /* Match this with your page color */
-  overscroll-behavior: none;
-  touch-action: pan-y;
-}
-
-html {
-  scroll-behavior: smooth; /* Ensures smooth rendering */
-  will-change: scroll-position;
-  transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
 }
 
 @media screen and (max-width: 600px) {
@@ -278,13 +240,23 @@ html {
   .bottomNav {
     display: none !important;
   }
+  .header {
+    width: 40rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  html, body {
-    background-color: #22201D; /* Match this with your page color */
+  html,
+  body {
+    background-color: #22201d; /* Match this with your page color */
     overscroll-behavior: none;
     touch-action: pan-y;
+  }
+  .header {
+    width: 35rem;
+  }
+  .navbarRight {
+    left: 18%;
   }
 }
 
@@ -313,8 +285,12 @@ html {
 }
 
 @keyframes fadeOutOverlay {
-  0% { opacity: 1; }
-  70% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
   100% {
     opacity: 0;
     pointer-events: none;

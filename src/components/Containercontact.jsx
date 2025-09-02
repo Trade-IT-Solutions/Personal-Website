@@ -5,7 +5,7 @@ import Button from "./Buttoncontact";
 import PropTypes from "prop-types";
 import styles from "./Containercontact.module.css";
 
-const Container = ({ className = "", setShowOverlay }) => {
+const Container = ({ setShowOverlay }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -61,7 +61,7 @@ const Container = ({ className = "", setShowOverlay }) => {
   };
 
   return (
-    <div className={[styles.container, className].join(" ")}>
+    <div className={styles.container}>
       <img className={styles.imageIcon1} alt="" src="/KellyTalks.png" />
       <div className={styles.grid}>
         <div className={styles.card}>
