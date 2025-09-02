@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiHome, FiUser, FiMail, FiCalendar } from "react-icons/fi";
 import Container from "../components/Containercontact.jsx";
-import Footer1 from "../components/Footer.js";
+import Footer from "../components/Footer.js";
 import SectionCTA from "../components/SectionCTA.js";
 import styles from "./Contact.module.css";
 
@@ -83,7 +83,7 @@ const Contact = () => {
       </section>
 
       <SectionCTA />
-      <Footer1 />
+      <Footer />
       {/* ✅ Full-screen overlay shown only on success */}
       {showOverlay && (
         <div className={styles.messageSentOverlay}>
