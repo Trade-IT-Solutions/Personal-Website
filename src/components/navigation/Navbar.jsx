@@ -28,31 +28,33 @@ const pages = [
 
 function NavbarDesktop() {
   return (
-    <div className={styles.container}>
-      <header className={`${styles.header}`}>
-        <Link to="/" className={styles.logoContainer}>
-          <img
-            className={styles.kellyLogo1}
-            alt="Kelly Logo"
-            src="/kelly-logo-11@2x.png"
-            loading="lazy"
-          />
-        </Link>
-        <nav className={styles.navbarDesktop}>
-          <div className={styles.navbarDesktopMenu}>
-            <Link to="/contact" className={styles.navbarDesktopLinks}>
-              Connect
-            </Link>
-            <Link to="/about" className={styles.navbarDesktopLinks}>
-              About
-            </Link>
-            <Link to="/bookings" className={styles.navbarDesktopLinks}>
-              Booking
-            </Link>
-          </div>
-        </nav>
-      </header>
-    </div>
+    // <div className={styles.container}>
+    <header className={`${styles.navbarDesktopHeader}`}>
+      <Link to="/" className={styles.logoContainer}>
+        <img
+          className={styles.kellyLogo1}
+          alt="Kelly Logo"
+          src="/kelly-logo-11@2x.png"
+          loading="lazy"
+        />
+      </Link>
+      <nav className={styles.navbarDesktop}>
+        <div className={styles.navbarDesktopMenu}>
+          {pages.map((page) => {
+            return (
+              <Link
+                to={page.href}
+                className={styles.navbarDesktopLinks}
+                key={page.label}
+              >
+                {page.label}
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+    </header>
+    // </div>
   );
 }
 
@@ -71,22 +73,6 @@ function NavbarTablet() {
             </Link>
           );
         })}
-        <Link to="/" className={styles.topNavItem}>
-          <FiHome size={20} />
-          <span>Home</span>
-        </Link>
-        <Link to="/about" className={styles.topNavItem}>
-          <FiUser size={20} />
-          <span>About</span>
-        </Link>
-        <Link to="/contact" className={styles.topNavItem}>
-          <FiMail size={20} />
-          <span>Contact</span>
-        </Link>
-        <Link to="/bookings" className={styles.topNavItem}>
-          <FiCalendar size={20} />
-          <span>bookings</span>
-        </Link>
       </nav>
     </>
   );
