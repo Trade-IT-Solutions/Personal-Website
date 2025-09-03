@@ -1,0 +1,263 @@
+@import url("https://fonts.cdnfonts.com/css/satoshi");
+
+.kellyLogo1 {
+  position: absolute;
+  top: 24.9px;
+  left: 23.5px;
+  width: 115.1px;
+  height: 42.4px;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbarDesktop {
+  position: absolute;
+  top: 23px;
+  left: 22%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.navbarDesktopMenu {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 3rem;
+  margin-left: 130px;
+}
+
+.header {
+  height: 87px;
+  position: fixed;
+  top: 39.1px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-11xs);
+  background-color: #22201d;
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  max-width: 100%;
+  z-index: 10;
+  text-align: left;
+  font-size: var(--text-meta-size);
+  color: var(--text-default);
+  font-family: var(--text-meta);
+  padding-left: 15%;
+}
+
+.container {
+  /* align-self: stretch; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: flex-end; */
+  padding-top: 0px;
+  /* padding-bottom: 40px; */
+  box-sizing: border-box;
+  position: relative;
+  gap: var(--gap-base);
+  /* min-height: 75rem;
+  max-height: fit-content; */
+  height: auto;
+  max-width: 100%;
+}
+
+.contact {
+  width: 100%;
+  height: 100%;
+  /* position: relative; */
+  background-color: var(--text-inverse);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.navbarDesktopLinks {
+  font-family: "Inter", sans-serif;
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  color: #dac5a7;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Mobile Top Navigation Bar styling */
+.topNav {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw; /* 90% of viewport width */
+  max-width: 400px; /* Maximum width */
+  margin: 10px auto; /* Add space from top and center horizontally */
+  background-color: rgba(39, 38, 37, 0.95);
+  border: 1px solid var(--border-default);
+  border-radius: 500px; /* Fully rounded corners */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 15px;
+  z-index: 9999;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.topNav.show {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+}
+
+.topNav.hide {
+  transform: translateY(-100%) translateX(-50%);
+  opacity: 0;
+}
+
+.topNavItem {
+  text-decoration: none;
+  color: var(--text-default);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.topNavItem span {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Add extra padding to the top of each page to accommodate the navbarDesktop */
+
+/* Prevents flash of unstyled content */
+
+@media screen and (max-width: 1350px) {
+  .sectionContact {
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sectionContact {
+    padding-top: 0px;
+    box-sizing: border-box;
+  }
+  .header {
+    max-width: 40rem;
+  }
+}
+/* Hide Top navbarDesktop on Desktop and Tablets - only show on mobile */
+@media screen and (min-width: 601px) {
+  .topNav {
+    display: none !important;
+  }
+}
+
+/* Make sure it's visible on mobile */
+@media screen and (max-width: 600px) {
+  .topNav {
+    display: flex;
+  }
+
+  /* Remove the original bottom nav if it exists */
+  /* .bottomNav {
+    display: none !important;
+  } */
+}
+
+/* MOBILE ONLY: clean top spacing and image alignment */
+@media screen and (max-width: 600px) {
+  .sectionContact {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+  }
+
+  .header {
+    display: none !important; /* hides top navbarDesktop in mobile view only */
+    position: static !important;
+    margin: 0 !important;
+    top: 0 !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .bottomNav {
+    display: flex;
+  }
+
+  .header {
+    display: none !important;
+    position: static !important;
+    top: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .bottomNav {
+    display: none !important;
+  }
+  .header {
+    width: 40rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    background-color: #22201d; /* Match this with your page color */
+    overscroll-behavior: none;
+    touch-action: pan-y;
+  }
+  .header {
+    width: 35rem;
+  }
+  .navbarDesktop {
+    left: 18%;
+  }
+}
+
+@keyframes fadeOutOverlay {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

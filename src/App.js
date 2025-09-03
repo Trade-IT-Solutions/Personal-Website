@@ -4,13 +4,14 @@ import {
   Route,
   Navigate,
   useNavigationType,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 
 import Frontpage from "./pages/Frontpage.js";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.js";
 import Bookings from "./pages/Bookings.jsx";
+import TestPage from "./pages/testPage.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -32,7 +33,8 @@ function App() {
     switch (pathname) {
       case "/":
         title = "Kelly Ohgee | Empowerment Through Education";
-        metaDescription = "Kelly Ohgee is a visionary speaker and entrepreneur reshaping the future of education. Empowering the next generation through purpose-driven learning and personal growth.";
+        metaDescription =
+          "Kelly Ohgee is a visionary speaker and entrepreneur reshaping the future of education. Empowering the next generation through purpose-driven learning and personal growth.";
         break;
       case "/contact":
         title = "Contact - Kelly Ohgee | Empowerment Through Education";
@@ -43,8 +45,10 @@ function App() {
         metaDescription = "Learn more about Kelly and Her mission.";
         break;
       case "/bookings":
-        title = "Book Kelly to Speak - Kelly Ohgee | Empowerment Through Education";
-        metaDescription = "Book Kelly Ohgee for keynotes, panels, workshops, podcasts and speaking engagements. Transform your event with purpose-driven education and inspiration.";
+        title =
+          "Book Kelly to Speak - Kelly Ohgee | Empowerment Through Education";
+        metaDescription =
+          "Book Kelly Ohgee for keynotes, panels, workshops, podcasts and speaking engagements. Transform your event with purpose-driven education and inspiration.";
         break;
       default:
         title = "Kelly Ohgee | Empowerment Through Education";
@@ -70,6 +74,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
       <Route path="/bookings" element={<Bookings />} />
+      <Route path="/test" element={<TestPage />} />
 
       {/* Redirect all other paths to the frontpage */}
       <Route path="*" element={<Navigate to="/" replace />} />
