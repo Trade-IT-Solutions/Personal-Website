@@ -61,7 +61,7 @@
   max-width: 100%;
 }
 
-.navbarDesktopLinks {
+.navbarLinks {
   font-family: "Inter", sans-serif;
   position: relative;
   letter-spacing: 1.5px;
@@ -73,7 +73,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-/* Mobile  */
+/* Tablet  */
 .topNav {
   position: fixed;
   top: 30.1px;
@@ -192,7 +192,7 @@
 .dropdownMenu {
   position: fixed;
   top: 0;
-  right: -320px;
+  right: 0;
   width: 320px;
   max-width: 80vw;
   height: 100vh;
@@ -202,10 +202,11 @@
   overflow-y: auto;
   padding: 80px 30px 30px;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+  transform: translatex(100%);
 }
 
 .dropdownMenu.open {
-  transform: translateX(-320px);
+  transform: translateX(0);
 }
 
 /* Logo */
@@ -225,6 +226,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 .navList li {
@@ -269,43 +271,20 @@
   }
 }
 
-/* Responsive adjustments */
-/* @media (max-width: 480px) {
-  .dropdownMenu {
-    width: 100vw;
-    right: -100vw;
-  } */
-
-/* .dropdownMenu.open {
-    transform: translateX(-100vw);
-  }
-} */
-
-/* Accessibility improvements */
-/* @media (prefers-reduced-motion: reduce) {
-  .hamburgerButton,
-  .hamburgerIcon span,
-  .overlay,
-  .dropdownMenu,
-  .navLink {
-    transition: none;
-    animation: none;
-  }
-} */
-
 /* Apply scale effect to navbar links */
-/* It selects every anchor tag within a 
-navbar that has the substring navbar with case insensitive (i)*/
-nav[class*="navbar" i] a {
+/* Select every non-active link that doesn't have an img tag as child and also
+ descents from a navbar that has the substring navbar without matter about case sensitivity (i)  */
+nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)) {
   transition: transform 0.3s ease-in-out;
 }
-nav[class*="navbar" i] a:hover {
+/* The same as about but with hover */
+nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)):hover {
   transform: scale(1.3);
 }
 /* Add active link color */
 nav[class*="navbar" i] a[class$="active"] {
+  /* For testing, i like the other one better */
   /* color: #e0b084; */
-  /* For testing, i like this better */
   color: #d4a67c;
 }
 

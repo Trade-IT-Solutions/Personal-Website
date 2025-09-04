@@ -1,9 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FiHome, FiUser, FiCalendar, FiMail } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import styles from "./Navbar.module.css";
 import { useEffect, useState, useRef } from "react";
-
 const pages = [
   {
     label: "home",
@@ -25,11 +24,6 @@ const pages = [
     href: "/bookings",
     mobileIcon: <FiCalendar size={20} />,
   },
-  // {
-  //   label: "test",
-  //   href: "/test",
-  //   mobileIcon: <FiCalendar size={20} />,
-  // },
 ];
 
 function NavbarDesktop() {
@@ -50,7 +44,7 @@ function NavbarDesktop() {
               return (
                 <NavLink
                   to={page.href}
-                  className={styles.navbarDesktopLinks}
+                  className={styles.navbarLinks}
                   key={page.label}
                 >
                   {page.label}
@@ -71,12 +65,10 @@ function NavbarTablet() {
   const controlNavbar = () => {
     if (isScrollingDown === false && window.scrollY > lastScrollY) {
       // Scrolling down → hide navbar
-      console.log("Scrolling down");
       setIsScrollingDown(true);
     }
     if (isScrollingDown === true && window.scrollY < lastScrollY) {
       // Scrolling up → show navbar
-      console.log("Scrolling up");
       setIsScrollingDown(false);
     }
     setLastScrollY(window.scrollY);
@@ -115,11 +107,11 @@ function NavbarTablet() {
 }
 
 const NavbarMobile = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [currentPath, setCurrentPath] = useState("/");
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
-
+  console.log(location);
   // Toggle menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -129,17 +121,6 @@ const NavbarMobile = () => {
   const closeMenu = () => {
     setIsOpen(false);
   };
-
-  // Simulate route change detection - replace with useLocation from react-router-dom
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setCurrentPath(window.location.pathname);
-      closeMenu();
-    };
-
-    window.addEventListener("popstate", handleRouteChange);
-    return () => window.removeEventListener("popstate", handleRouteChange);
-  }, []);
 
   // Handle Escape key press
   useEffect(() => {
@@ -165,7 +146,7 @@ const NavbarMobile = () => {
       document.body.style.position = "";
       document.body.style.width = "";
     }
-
+    // Cleanup call back to reset styles when component unmounts
     return () => {
       document.body.style.overflow = "";
       document.body.style.position = "";
@@ -220,7 +201,7 @@ const NavbarMobile = () => {
           <IoClose className={styles.closeIcon} />
         ) : (
           <div className={styles.hamburgerIcon}>
-            <span></span>
+            {/* <span></span> */}
             <span></span>
             <span></span>
           </div>
@@ -258,12 +239,14 @@ const NavbarMobile = () => {
         {/* Navigation Links */}
         <ul className={styles.navList}>
           {pages.map((page) => {
+            console.log(
+              location.pathname === page.href ? undefined : page.href
+            );
             return (
               <li key={page.label} role="none">
                 <NavLink
-                  to={page.href}
-                  className={styles.navbarDesktopLinks}
-                  // key={page.label}
+                  to={location.pathname === page.href ? undefined : page.href}
+                  className={styles.navbarLinks}
                 >
                   {page.label}
                 </NavLink>
