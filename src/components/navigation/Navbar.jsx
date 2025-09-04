@@ -39,21 +39,19 @@ function NavbarDesktop() {
         />
       </Link>
       <nav className={styles.navbarDesktop}>
-        <div>
-          <div className={styles.navbarDesktopMenu}>
-            {pages.map((page) => {
-              return (
-                <NavLink
-                  to={page.href}
-                  className={styles.navbarLinksZ}
-                  key={page.label}
-                >
-                  {page.label}
-                </NavLink>
-              );
-            })}
-          </div>
-        </div>
+        <ul className={styles.navbarDesktopMenu}>
+          {pages.map((page) => (
+            <li key={page.label} role="none">
+              <NavLink
+                to={page.href}
+                className={styles.navbarLinks}
+                key={page.label}
+              >
+                {page.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
   );
@@ -241,7 +239,7 @@ const NavbarMobile = () => {
           {pages.map((page) => {
             return (
               <li key={page.label} role="none">
-                <NavLink to={page.href} className={styles.navbarLinksZ}>
+                <NavLink to={page.href} className={styles.navbarLinks}>
                   {page.label}
                 </NavLink>
               </li>
