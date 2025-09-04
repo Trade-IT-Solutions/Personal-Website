@@ -1,8 +1,9 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FiHome, FiUser, FiCalendar, FiMail } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import styles from "./Navbar.module.css";
 import { useEffect, useState, useRef } from "react";
+
 const pages = [
   {
     label: "home",
@@ -44,7 +45,7 @@ function NavbarDesktop() {
               return (
                 <NavLink
                   to={page.href}
-                  className={styles.navbarLinks}
+                  className={styles.navbarLinksZ}
                   key={page.label}
                 >
                   {page.label}
@@ -107,11 +108,10 @@ function NavbarTablet() {
 }
 
 const NavbarMobile = () => {
-  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
-  console.log(location);
+
   // Toggle menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -239,15 +239,9 @@ const NavbarMobile = () => {
         {/* Navigation Links */}
         <ul className={styles.navList}>
           {pages.map((page) => {
-            console.log(
-              location.pathname === page.href ? undefined : page.href
-            );
             return (
               <li key={page.label} role="none">
-                <NavLink
-                  to={location.pathname === page.href ? undefined : page.href}
-                  className={styles.navbarLinks}
-                >
+                <NavLink to={page.href} className={styles.navbarLinksZ}>
                   {page.label}
                 </NavLink>
               </li>
