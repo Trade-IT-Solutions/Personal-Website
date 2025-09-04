@@ -171,16 +171,15 @@ body {
   --blur-default: blur(30px);
 }
 
+html,
 body {
   margin: 0;
   line-height: normal;
-}
-html,
-body {
-  background-color: #22201d; /* Match this with your page color */
   overscroll-behavior: none;
+  scroll-behavior: smooth;
   touch-action: pan-y;
 }
+
 :root {
   /* Fonts */
   --text-meta: Satoshi;

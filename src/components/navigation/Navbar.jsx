@@ -64,42 +64,52 @@ function NavbarDesktop() {
 }
 
 function NavbarTablet() {
-  // const [isScrolling, setIsScrolling] = useState(false);
-  // let lastScrollY = window.scrollY;
-  // // Auto-hide top nav on scroll
-  // window.addEventListener("scroll", () => {
-  //   const currentScrollY = window.scrollY;
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-  //   if (currentScrollY > lastScrollY) {
-  //     // User is scrolling down
-  //     console.log("Scrolling down!");
-  //     // Execute your desired code here
-  //   }
+  const controlNavbar = () => {
+    if (isScrollingDown === false && window.scrollY > lastScrollY) {
+      // Scrolling down → hide navbar
+      console.log("Scrolling down");
+      setIsScrollingDown(true);
+    }
+    if (isScrollingDown === true && window.scrollY < lastScrollY) {
+      // Scrolling up → show navbar
+      console.log("Scrolling up");
+      setIsScrollingDown(false);
+    }
+    setLastScrollY(window.scrollY);
+  };
 
-  //   // Update lastScrollY for the next scroll event
-  //   lastScrollY = currentScrollY;
-  // });
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
 
   return (
-    // <header>
-    <nav
-      className={`${styles.topNav} 
-        `}
-    >
-      {pages.map((page) => {
-        return (
-          <NavLink
-            to={page.href}
-            className={styles.topNavItem}
-            key={page.label}
-          >
-            {page.mobileIcon}
-            <span>{page.label}</span>
-          </NavLink>
-        );
-      })}
-    </nav>
-    // </header>
+    <header>
+      <nav
+        className={`${styles.topNav} ${
+          isScrollingDown ? styles.hide : styles.show
+        }`}
+      >
+        {pages.map((page) => {
+          return (
+            <NavLink
+              to={page.href}
+              className={styles.topNavItem}
+              key={page.label}
+            >
+              {page.mobileIcon}
+              <span>{page.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+    </header>
   );
 }
 
