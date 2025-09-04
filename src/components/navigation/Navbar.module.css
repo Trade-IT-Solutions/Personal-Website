@@ -32,7 +32,7 @@
 
 .navbarDesktopHeader {
   height: 87px;
-  position: fixed;
+  position: absolute;
   top: 30.1px;
   left: 50%;
   transform: translateX(-50%);
@@ -120,6 +120,178 @@
   font-size: 12px;
   margin-top: 2px;
 }
+
+/* Mobile styles */
+
+/* Hamburger Button */
+.hamburgerButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background-color: #22201d;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.hamburgerButton:hover {
+  opacity: 0.8;
+}
+
+.hamburgerButton:focus {
+  outline: 2px solid #d4a67c;
+  outline-offset: 2px;
+}
+
+/* Hamburger Icon */
+.hamburgerIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+}
+
+.hamburgerIcon span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #dac5a7;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Close Icon */
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  color: #dac5a7;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Dropdown Menu */
+.dropdownMenu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  max-width: 80vw;
+  height: 100vh;
+  background-color: #22201d;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  padding: 80px 30px 30px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.dropdownMenu.open {
+  transform: translateX(-320px);
+}
+
+/* Logo */
+.logoLink {
+  display: block;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.kellyLogo {
+  max-width: 150px;
+  height: auto;
+}
+
+/* Navigation List */
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navList li {
+  margin-bottom: 20px;
+}
+
+/* Navigation Links */
+.navLink {
+  color: #dac5a7;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+}
+
+.navLink:hover {
+  color: #d4a67c;
+  padding-left: 10px;
+}
+
+.navLink:focus {
+  outline: 2px solid #d4a67c;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.navLink.active {
+  color: #d4a67c;
+  border-bottom-color: #d4a67c;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+/* @media (max-width: 480px) {
+  .dropdownMenu {
+    width: 100vw;
+    right: -100vw;
+  } */
+
+/* .dropdownMenu.open {
+    transform: translateX(-100vw);
+  }
+} */
+
+/* Accessibility improvements */
+/* @media (prefers-reduced-motion: reduce) {
+  .hamburgerButton,
+  .hamburgerIcon span,
+  .overlay,
+  .dropdownMenu,
+  .navLink {
+    transition: none;
+    animation: none;
+  }
+} */
 
 /* Apply scale effect to navbar links */
 /* It selects every anchor tag within a 

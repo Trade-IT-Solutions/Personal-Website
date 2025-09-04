@@ -3,7 +3,6 @@ import Navbar from "../components/navigation/Navbar";
 function testPage() {
   return (
     <div>
-      <Navbar />
       <div style={{ height: "1000vh", background: "#d4a67c" }}></div>
     </div>
   );

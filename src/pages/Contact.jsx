@@ -7,25 +7,7 @@ import SectionCTA from "../components/SectionCTA.js";
 import styles from "./Contact.module.css";
 
 const Contact = () => {
-  const [isScrolling, setIsScrolling] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  let scrollTimeout = null;
-
-  // Auto-hide top nav on scroll  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsScrolling(true);
-  //     clearTimeout(scrollTimeout);
-  //     scrollTimeout = setTimeout(() => {
-  //       setIsScrolling(false);
-  //     }, 2000);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //     clearTimeout(scrollTimeout);
-  //   };
-  // }, []);
 
   // Disable scroll when overlay is active
   useEffect(() => {
@@ -34,52 +16,8 @@ const Contact = () => {
 
   return (
     <div className={styles.contact}>
-      <nav
-        className={`${styles.topNav} 
-        `}
-      >
-        <Link to="/" className={styles.topNavItem}>
-          <FiHome size={20} />
-          <span>Home</span>
-        </Link>
-        <Link to="/about" className={styles.topNavItem}>
-          <FiUser size={20} />
-          <span>About</span>
-        </Link>
-        <Link to="/contact" className={styles.topNavItem}>
-          <FiMail size={20} />
-          <span>Contact</span>
-        </Link>
-        <Link to="/bookings" className={styles.topNavItem}>
-          <FiCalendar size={20} />
-          <span>bookings</span>
-        </Link>
-      </nav>
       <section className={styles.sectionContact}>
         <Container setShowOverlay={setShowOverlay} />
-        <header className={styles.header}>
-          <Link to="/" className={styles.logoContainer}>
-            <img
-              className={styles.kellyLogo1}
-              alt="Kelly Logo"
-              src="/kelly-logo-11@2x.png"
-              loading="lazy"
-            />
-          </Link>
-          <nav className={styles.navbarRight}>
-            <div className={styles.navbarMenu}>
-              <Link to="/contact" className={styles.navbarPageLink}>
-                Connect
-              </Link>
-              <Link to="/about" className={styles.navbarPageLink}>
-                About
-              </Link>
-              <Link to="/bookings" className={styles.navbarPageLink}>
-                Booking
-              </Link>
-            </div>
-          </nav>
-        </header>
       </section>
 
       <SectionCTA />

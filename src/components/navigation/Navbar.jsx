@@ -1,7 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { FiHome, FiUser, FiCalendar, FiMail } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
 import styles from "./Navbar.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const pages = [
   {
@@ -24,11 +25,11 @@ const pages = [
     href: "/bookings",
     mobileIcon: <FiCalendar size={20} />,
   },
-  {
-    label: "test",
-    href: "/test",
-    mobileIcon: <FiCalendar size={20} />,
-  },
+  // {
+  //   label: "test",
+  //   href: "/test",
+  //   mobileIcon: <FiCalendar size={20} />,
+  // },
 ];
 
 function NavbarDesktop() {
@@ -113,32 +114,167 @@ function NavbarTablet() {
   );
 }
 
-function NavbarMobile() {
+const NavbarMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredButton, setHoveredButton] = useState(false);
+  const [currentPath, setCurrentPath] = useState("/");
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
+  // Toggle menu
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Close menu
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  // Simulate route change detection - replace with useLocation from react-router-dom
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isOpen && !event.target.closest("[data-navbar]")) {
-        setIsOpen(false);
+    const handleRouteChange = () => {
+      setCurrentPath(window.location.pathname);
+      closeMenu();
+    };
+
+    window.addEventListener("popstate", handleRouteChange);
+    return () => window.removeEventListener("popstate", handleRouteChange);
+  }, []);
+
+  // Handle Escape key press
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        closeMenu();
+        buttonRef.current?.focus();
       }
     };
 
-    const handleNavClick = (item, event) => {
-      event.preventDefault();
-      //   onNavClick(item);
-      setIsOpen(false);
-    };
-
-    const toggleMobileMenu = () => {
-      setIsOpen(!isOpen);
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen]);
-  return <>MOBILE</>;
-}
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+    };
+  }, [isOpen]);
+
+  // Focus trap
+  useEffect(() => {
+    if (isOpen && menuRef.current) {
+      const focusableElements = menuRef.current.querySelectorAll(
+        'a[href], button, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      const handleTab = (e) => {
+        if (e.key === "Tab") {
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      };
+
+      document.addEventListener("keydown", handleTab);
+      firstElement?.focus();
+
+      return () => document.removeEventListener("keydown", handleTab);
+    }
+  }, [isOpen]);
+
+  return (
+    <>
+      {/* Hamburger Button */}
+      <button
+        ref={buttonRef}
+        className={styles.hamburgerButton}
+        onClick={toggleMenu}
+        aria-controls="mobile-menu"
+        aria-expanded={isOpen}
+        aria-label="Toggle navigation menu"
+      >
+        {isOpen ? (
+          <IoClose className={styles.closeIcon} />
+        ) : (
+          <div className={styles.hamburgerIcon}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
+      </button>
+
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className={styles.overlay}
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Dropdown Menu */}
+      <nav
+        ref={menuRef}
+        id="mobile-menu"
+        className={`${styles.dropdownMenu} ${isOpen ? styles.open : ""}`}
+        role="menu"
+        aria-hidden={!isOpen}
+      >
+        {/* Logo */}
+        <NavLink to="/" onClick={closeMenu} className={styles.logoLink}>
+          <img
+            className={styles.kellyLogo}
+            alt="Kelly Logo"
+            src="/kelly-logo-11@2x.png"
+            loading="lazy"
+            key={"logo"}
+          />
+        </NavLink>
+
+        {/* Navigation Links */}
+        <ul className={styles.navList}>
+          {pages.map((page) => {
+            return (
+              <li key={page.label} role="none">
+                <NavLink
+                  to={page.href}
+                  className={styles.navbarDesktopLinks}
+                  // key={page.label}
+                >
+                  {page.label}
+                </NavLink>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
+  );
+};
 
 function Navbar() {
   const [screenSize, setScreenSize] = useState();

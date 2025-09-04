@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   Routes,
   Route,
@@ -12,6 +12,7 @@ import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.js";
 import Bookings from "./pages/Bookings.jsx";
 import TestPage from "./pages/testPage.jsx";
+import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -69,16 +70,18 @@ function App() {
   }, [pathname]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Frontpage />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/bookings" element={<Bookings />} />
-      <Route path="/test" element={<TestPage />} />
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Frontpage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/test" element={<TestPage />} />
 
-      {/* Redirect all other paths to the frontpage */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        {/* Redirect all other paths to the frontpage */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
   );
 }
 
