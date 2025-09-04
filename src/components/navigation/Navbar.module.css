@@ -33,8 +33,9 @@
 .navbarDesktopHeader {
   height: 87px;
   position: fixed;
-  top: 0px;
+  top: 30.1px;
   left: 50%;
+  transform: translateX(-50%);
   backdrop-filter: var(--blur-default);
   background-color: #22201d;
   border: 1px solid var(--border-default);
@@ -46,6 +47,7 @@
   color: var(--text-default);
   font-family: var(--text-meta);
   padding-left: 15%;
+  width: 44rem;
 }
 
 .DesktopContainer {
@@ -73,16 +75,18 @@
 
 /* Mobile  */
 .topNav {
+  transform: none;
+  transition-property: none;
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 90vw; /* 90% of viewport width */
-  max-width: 400px; /* Maximum width */
-  margin: 10px auto; /* Add space from top and center horizontally */
+  width: 90vw;
+  max-width: 400px;
+  margin: 10px auto;
   background-color: rgba(39, 38, 37, 0.95);
   border: 1px solid var(--border-default);
-  border-radius: 500px; /* Fully rounded corners */
+  border-radius: 500px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -91,7 +95,7 @@
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   transform: translateY(0) translateX(-50%);
   opacity: 1;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .topNav.show {
@@ -119,19 +123,20 @@
   margin-top: 2px;
 }
 
-/* Desktop */
-@media screen and (min-width: 1024px) {
-  .navbarDesktopHeader {
-    width: 44rem;
-  }
-}
-
 /* Apply scale effect to navbar links */
+/* It selects every anchor tag within a 
+navbar that has the substring navbar with case insensitive (i)*/
 nav[class*="navbar" i] a {
   transition: transform 0.3s ease-in-out;
 }
 nav[class*="navbar" i] a:hover {
   transform: scale(1.3);
+}
+/* Add active link color */
+nav[class*="navbar" i] a[class$="active"] {
+  /* color: #e0b084; */
+  /* For testing, i like this better */
+  color: #d4a67c;
 }
 
 @keyframes fadeOutOverlay {

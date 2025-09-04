@@ -19,13 +19,13 @@ const root = createRoot(container);
 
 root.render(
   <BrowserRouter>
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={muiTheme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </StyledEngineProvider>
-  </BrowserRouter>,
+    {/* <StyledEngineProvider injectFirst> */}
+    {/* <ThemeProvider theme={muiTheme}> */}
+    {/* <CssBaseline /> */}
+    <App />
+    {/* </ThemeProvider> */}
+    {/* </StyledEngineProvider> */}
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

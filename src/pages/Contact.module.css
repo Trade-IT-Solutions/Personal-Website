@@ -150,19 +150,6 @@
 /* Add extra padding to the top of each page to accommodate the navbar */
 
 /* Prevents flash of unstyled content */
-html,
-body {
-  background-color: #22201d; /* Match this with your page color */
-  overscroll-behavior: none;
-  touch-action: pan-y;
-  height: 100%;
-}
-
-html {
-  scroll-behavior: smooth; /* Ensures smooth rendering */
-  will-change: scroll-position;
-  transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
-}
 
 @media screen and (max-width: 1350px) {
   .sectionContact {

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FiHome, FiUser, FiCalendar, FiMail } from "react-icons/fi";
 import styles from "./Navbar.module.css";
 import { useEffect, useState } from "react";
@@ -24,11 +24,15 @@ const pages = [
     href: "/bookings",
     mobileIcon: <FiCalendar size={20} />,
   },
+  {
+    label: "test",
+    href: "/test",
+    mobileIcon: <FiCalendar size={20} />,
+  },
 ];
 
 function NavbarDesktop() {
   return (
-    // <div className={styles.container}>
     <header className={`${styles.navbarDesktopHeader}`}>
       <Link to="/" className={styles.logoContainer}>
         <img
@@ -39,42 +43,63 @@ function NavbarDesktop() {
         />
       </Link>
       <nav className={styles.navbarDesktop}>
-        <div className={styles.navbarDesktopMenu}>
-          {pages.map((page) => {
-            return (
-              <Link
-                to={page.href}
-                className={styles.navbarDesktopLinks}
-                key={page.label}
-              >
-                {page.label}
-              </Link>
-            );
-          })}
+        <div>
+          <div className={styles.navbarDesktopMenu}>
+            {pages.map((page) => {
+              return (
+                <NavLink
+                  to={page.href}
+                  className={styles.navbarDesktopLinks}
+                  key={page.label}
+                >
+                  {page.label}
+                </NavLink>
+              );
+            })}
+          </div>
         </div>
       </nav>
     </header>
-    // </div>
   );
 }
 
 function NavbarTablet() {
+  // const [isScrolling, setIsScrolling] = useState(false);
+  // let lastScrollY = window.scrollY;
+  // // Auto-hide top nav on scroll
+  // window.addEventListener("scroll", () => {
+  //   const currentScrollY = window.scrollY;
+
+  //   if (currentScrollY > lastScrollY) {
+  //     // User is scrolling down
+  //     console.log("Scrolling down!");
+  //     // Execute your desired code here
+  //   }
+
+  //   // Update lastScrollY for the next scroll event
+  //   lastScrollY = currentScrollY;
+  // });
+
   return (
-    <>
-      <nav
-        className={`${styles.topNav} 
+    // <header>
+    <nav
+      className={`${styles.topNav} 
         `}
-      >
-        {pages.map((page) => {
-          return (
-            <Link to={page.href} className={styles.topNavItem} key={page.label}>
-              {page.mobileIcon}
-              <span>{page.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
-    </>
+    >
+      {pages.map((page) => {
+        return (
+          <NavLink
+            to={page.href}
+            className={styles.topNavItem}
+            key={page.label}
+          >
+            {page.mobileIcon}
+            <span>{page.label}</span>
+          </NavLink>
+        );
+      })}
+    </nav>
+    // </header>
   );
 }
 
