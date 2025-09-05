@@ -1,4 +1,3 @@
-
 .container {
   position: relative;
   display: flex;
@@ -9,11 +8,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 0;
-  transform: translateX(65px); 
+  transform: translateX(65px);
 }
 
 .container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 200px; /* Start the gold line at the top */
   left: 50%; /* Center the gold line */
@@ -23,22 +22,25 @@
   background-color: var(--border-default); /* Gold color */
   background: linear-gradient(
     to bottom,
-   
 
-    var(--border-default) 0.4%, var(--border-default) 10%, /* Resume line */
-    transparent 22%, transparent 29%,  /* Leave gap at badge 2 */
-    var(--border-default) 0.5%, var(--border-default) 43%, /* Resume line */
-    transparent 21%, transparent 55%,  /* Leave gap at badge 3 */
-    var(--border-default) 50%, var(--border-default) 66%, /* Resume line */
-    transparent 70%, transparent 82%,  /* Adjusted gap at badge 4 */
-    var(--border-default) 0%, var(--border-default) 0% /* Final segment */
-    
-);
+    var(--border-default) 0.4%,
+    var(--border-default) 10%,
+    /* Resume line */ transparent 22%,
+    transparent 29%,
+    /* Leave gap at badge 2 */ var(--border-default) 0.5%,
+    var(--border-default) 43%,
+    /* Resume line */ transparent 21%,
+    transparent 55%,
+    /* Leave gap at badge 3 */ var(--border-default) 50%,
+    var(--border-default) 66%,
+    /* Resume line */ transparent 70%,
+    transparent 82%,
+    /* Adjusted gap at badge 4 */ var(--border-default) 0%,
+    var(--border-default) 0% /* Final segment */
+  );
 
   z-index: 0;
 }
-
-
 
 .grid {
   display: flex;
@@ -91,7 +93,7 @@
   transform: translateX(-50%);
   background-color: var(--background-muted); /* Match badge color with card */
   color: var(--text-muted); /* Match text color of badge with card text */
-  font-family: 'Satoshi', sans-serif; /* Font for badge numbers */
+  font-family: "Satoshi", sans-serif; /* Font for badge numbers */
   font-size: 16px;
   font-weight: bold;
   display: flex;
@@ -129,11 +131,11 @@
 
 /* Card Header Styles */
 .card h2 {
-  font-family: 'Inter'; /* Font for headers */
+  font-family: "Inter"; /* Font for headers */
   font-weight: 300; /* Thin font weight */
   font-size: 24px; /* Size for headers */
   text-transform: uppercase; /* Full uppercase */
-  color: #DAC5A7; /* Color for headers */
+  color: #dac5a7; /* Color for headers */
   margin: 0; /* Remove extra margin */
   text-align: center; /* Center the text */
   width: 100%; /* Ensure full width */
@@ -141,12 +143,32 @@
 
 /* Card Text Styles */
 .card p {
-  font-family: 'Inter'; /* Font for card text */
+  font-family: "Inter"; /* Font for card text */
   font-weight: 300; /* Thin font weight */
   font-size: 16px; /* Size for card text */
-  color: #DAC5A7; /* Color for card text */
+  color: #dac5a7; /* Color for card text */
   line-height: 1.5; /* Improve readability */
   margin: 0; /* Remove extra margin */
+}
+
+@media screen and (max-width: 1300px) {
+  .container {
+    max-width: max-content;
+    margin: 0 auto; /* Center the container */
+  }
+  .card {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .container {
+   padding-right: 2rem;
+  }
+   .container::before {
+    content: none !important;
+  }
+ 
 }
 
 /* Mobile View */
@@ -242,13 +264,12 @@
     align-items: flex-start;
   }
 
-
   @media screen and (max-width: 480px) {
     .container {
       padding: 10px;
       transform: translateX(0);
     }
-  
+
     .grid {
       flex-direction: row;
       align-items: flex-start;
@@ -257,13 +278,13 @@
       box-sizing: border-box;
       max-width: 100%;
     }
-  
+
     .grid:nth-child(odd) {
       justify-content: flex-start;
       padding: 0px 0px var(--padding-15xl);
       text-align: left;
     }
-  
+
     .grid:nth-child(even) {
       flex: 1 1;
       flex-direction: column;
@@ -273,7 +294,7 @@
       gap: var(--gap-45xl);
       max-width: 100%;
     }
-  
+
     /* Card styling for mobile */
     .card {
       width: 318px;
@@ -295,7 +316,7 @@
       color: var(--text-default);
       font-family: var(--font-inter);
     }
-  
+
     .grid:nth-child(odd) .card {
       align-self: stretch;
       display: flex;
@@ -306,7 +327,7 @@
       gap: var(--gap-45xl);
       text-align: left;
     }
-  
+
     .grid:nth-child(even) .card {
       align-self: stretch;
       display: flex;
@@ -322,7 +343,7 @@
       color: var(--text-default);
       font-family: var(--font-inter);
     }
-  
+
     /* Adjust the line positioning */
     .line {
       margin-left: -118px;
@@ -332,7 +353,7 @@
       justify-content: flex-start;
       position: relative;
     }
-  
+
     .line1 {
       height: 79px;
       width: 1px;
@@ -342,7 +363,7 @@
       left: -50.5px;
       background-color: var(--border-default);
     }
-  
+
     .grid:nth-child(odd) .line {
       width: 1px;
       height: 79px;
@@ -352,7 +373,7 @@
       right: -62.5px;
       background-color: var(--border-default);
     }
-  
+
     .grid:nth-child(even) .line {
       height: 79px;
       width: 1px;
@@ -363,13 +384,13 @@
       background-color: var(--border-default);
     }
   }
-  
+
   @media screen and (max-width: 340px) {
     .grid {
       flex-wrap: wrap;
       justify-content: center;
     }
-  
+
     .grid .card {
       width: 100%;
       padding: var(--padding-11xl);

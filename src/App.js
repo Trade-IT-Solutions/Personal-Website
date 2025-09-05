@@ -10,6 +10,7 @@ import {
 import Frontpage from "./pages/Frontpage.js";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.js";
+import Bookings from "./pages/Bookings.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -41,6 +42,10 @@ function App() {
         title = "About - Kelly Ohgee | Empowerment Through Education";
         metaDescription = "Learn more about Kelly and Her mission.";
         break;
+      case "/bookings":
+        title = "Book Kelly to Speak - Kelly Ohgee | Empowerment Through Education";
+        metaDescription = "Book Kelly Ohgee for keynotes, panels, workshops, podcasts and speaking engagements. Transform your event with purpose-driven education and inspiration.";
+        break;
       default:
         title = "Kelly Ohgee | Empowerment Through Education";
     }
@@ -64,6 +69,7 @@ function App() {
       <Route path="/" element={<Frontpage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
+      <Route path="/bookings" element={<Bookings />} />
 
       {/* Redirect all other paths to the frontpage */}
       <Route path="*" element={<Navigate to="/" replace />} />

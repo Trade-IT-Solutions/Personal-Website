@@ -54,14 +54,13 @@
 
 .empoweringGenerations {
   margin: 0 auto;
-  ;
   font-weight: 300;
   font-family: inherit;
   text-align: center;
   width: 100%;
   max-width: 100%;
   white-space: nowrap;
-  font-size: clamp(1.5rem, 8vw, var(--font-size-101xl));
+  font-size: clamp(1.5rem, 8vw, var(--font-size-81xl));
   display: block;
   padding: 0 10px;
   box-sizing: border-box;
@@ -131,9 +130,10 @@
   }
 
   .myMissionIs {
-    font-size: var(--font-size-19xl);
+    margin-top: 2%;
+    font-size: var(--font-size-9xl);
     line-height: 42px;
-    max-width: 80%;
+    max-width: 90vw;
   }
 }
 
@@ -158,7 +158,7 @@
   .myMissionIs {
     font-size: var(--font-size-lgi);
     line-height: 29px;
-    max-width: 85%;
+    max-width: 100vw;
   }
 }
 

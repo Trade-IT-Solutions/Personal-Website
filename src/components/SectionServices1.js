@@ -117,7 +117,7 @@ const SectionServices1 = ({ className = "" }) => {
             <div className={styles.grid1} />
             <h3 className={styles.bookKellyTo}>Book Kelly to Speak</h3>
             <div className={styles.grid4}>
-              <Link to="/contact" className={styles.gridChild}>
+              <Link to="/bookings" className={styles.gridChild}>
                 <div className={styles.bookLinkContent}>
                   <h1 className={styles.bookHere}>
                     Book here

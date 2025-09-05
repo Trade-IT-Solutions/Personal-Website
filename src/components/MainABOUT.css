@@ -6,14 +6,46 @@
   object-fit: cover;
 }
 
+@media (max-width: 1140px) {
+  .grid-icon {
+    display: block; /* make sure it's treated as a block */
+    margin: 0 auto; /* center horizontally */
+    left: 0; /* reset if you had left/right positioning */
+    right: 2%;
+  }
+}
+
 .kelly-ohgee {
   flex-direction: row;
   font-size: 90px;
   line-height: 10%;
   font-weight: 300;
-  color: #E3D5C1;
+  color: #e3d5c1;
   max-width: 100%;
   margin-bottom: -70px;
+}
+
+@media (max-width: 1140px) {
+  .kelly-ohgee {
+    text-align: center; /* centers the text */
+    margin: 60px auto 0 auto; /* centers the block if it has a set width */
+    display: flex;
+    justify-content: center; /* in case it's inside flex */
+    flex-wrap: nowrap;
+    gap: 20px;  
+    padding-left: 140px;
+  }
+}
+
+
+@media (max-width: 760px) {
+  .kelly-ohgee {
+    text-align: center; /* centers the text */
+    margin: 60px auto 0 auto; /* centers the block if it has a set width */
+    display: inline-block;
+    justify-content: center; 
+    padding-left: 0px;/* in case it's inside flex */
+  }
 }
 
 .my-mission-is {
@@ -25,7 +57,9 @@
   word-spacing: -3px;
 }
 
-.grid1, .grid, .profile {
+.grid1,
+.grid,
+.profile {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -38,7 +72,7 @@
   letter-spacing: 1.5px;
   line-height: 160%;
   text-transform: uppercase;
-  color: #E3D5C1;
+  color: #e3d5c1;
 }
 
 .grid2 {
@@ -71,7 +105,7 @@
 .card {
   width: 90%;
   border-radius: var(--br-11xs);
-  color: #0E0E0E;
+  color: #0e0e0e;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -88,29 +122,34 @@
   text-align: left;
   letter-spacing: 0.8px;
   line-height: 1.3;
-  color: #E3D5C1;
+  color: #e3d5c1;
   font-family: "Inter", sans-serif;
   padding-top: 50px;
 }
 
-.card p, h2 {
+.card p,
+h2 {
   padding: 1px;
   font-size: 1.08rem;
   font-weight: 400;
   text-align: justify;
   line-height: 1.9;
-  color: #B8A898;
+  color: #b8a898;
   width: 100%;
 }
 
-.grid4, .grid5, .grid6, .grid8 {
+.grid4,
+.grid5,
+.grid6,
+.grid8 {
   display: flex;
   align-items: center;
   gap: var(--gap-base);
   max-width: 100%;
 }
 
-.card1, .card3 {
+.card1,
+.card3 {
   flex: 1;
   border-radius: var(--br-11xs);
   background-color: var(--background-muted);
@@ -200,17 +239,16 @@
   font-size: 20px; /* Adjusted for better fit */
   font-weight: 600;
   text-transform: uppercase;
-  color: #DAC5A7;
+  color: #dac5a7;
   margin-bottom: 8px;
 }
 
 .small-card p {
   font-size: 16px;
   font-weight: 400;
-  color: #DAC5A7;
+  color: #dac5a7;
   line-height: 1.5;
   text-align: left;
-  
 }
 
 /* Ensure stacking on smaller screens */
@@ -284,10 +322,10 @@ h1 {
 .card h1,
 .card h2 {
   margin-bottom: 5px; /* Reduce space below headings */
-  padding-bottom: 0;   /* Ensure no extra padding if previously applied */
+  padding-bottom: 0; /* Ensure no extra padding if previously applied */
 }
 
 .card p {
-  margin-top: 0;       /* Remove default margin on top */
-  padding-top: 0;      /* Ensure no padding if previously applied */
+  margin-top: 0; /* Remove default margin on top */
+  padding-top: 0; /* Ensure no padding if previously applied */
 }
