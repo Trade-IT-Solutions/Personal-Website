@@ -56,7 +56,7 @@ const MobileView = () => {
       <ContactForm />
       <section className={styles.process}>
         <div className={styles.processDescription}>
-          <div className={styles.theProcess}>THe PRocess</div>
+          <div className={styles.theProcess}>The Process</div>
           <h1 className={styles.empowermentThroughEducationContainer}>
             <p
               className={styles.empowermentThrough}
