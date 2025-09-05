@@ -261,6 +261,7 @@
 .navLink.active {
   color: #d4a67c;
   border-bottom-color: #d4a67c;
+  text-decoration: underline;
 }
 
 /* Animations */
@@ -290,6 +291,7 @@ nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)):hover {
 nav[class*="navbar" i] a[class$="active"] {
   /* For testing, i like the other one better */
   /* color: #e0b084; */
+  text-decoration: underline;
   color: #d4a67c;
 }
 

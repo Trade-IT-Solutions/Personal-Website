@@ -68,55 +68,55 @@ const Container = ({ setShowOverlay }) => {
           <div className={styles.grid1}>
             <h1 className={styles.letsGetIn}>Connect With Kelly!</h1>
           </div>
-          <form onSubmit={handleSubmit} className={styles.grid2}>
-            <Input1
-              style="Default"
-              name1="Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              maxLength={50}
-            />
-            <Input1
-              style="Default"
-              name1="Email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              maxLength={100}
-            />
-            <Input1
-              name="phone"
-              name1="Phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              maxLength={15}
-            />
-            <Input1
-              style="Default"
-              name1="Message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              maxLength={500}
-              isTextArea={true}
-            />
+          {/* <form onSubmit={handleSubmit} className={styles.grid2}> */}
+          <Input1
+            style="Default"
+            name1="Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            maxLength={50}
+          />
+          <Input1
+            style="Default"
+            name1="Email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            maxLength={100}
+          />
+          <Input1
+            name="phone"
+            name1="Phone"
+            type="tel"
+            value={formData.phone}
+            onChange={handleChange}
+            maxLength={15}
+          />
+          <Input1
+            style="Default"
+            name1="Message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            maxLength={500}
+            isTextArea={true}
+          />
 
-            {statusMessage && (
-              <div className={styles.errorMessage}>{statusMessage}</div>
-            )}
+          {statusMessage && (
+            <div className={styles.errorMessage}>{statusMessage}</div>
+          )}
 
-            <Button
-              icon="None"
-              size="Small"
-              style="Primary"
-              buttonAlignSelf="stretch"
-              button="Send Message"
-              type="submit"
-            />
-          </form>
+          <Button
+            icon="None"
+            size="Small"
+            style="Primary"
+            buttonAlignSelf="stretch"
+            button="Send Message"
+            type="submit"
+          />
+          {/* </form> */}
         </div>
       </div>
     </div>

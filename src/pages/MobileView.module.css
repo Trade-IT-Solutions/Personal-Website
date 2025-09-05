@@ -332,7 +332,9 @@
 }
 
 /* Add extra padding to the top of each page to accommodate the navbar */
-.mobileView, .about, .contact {
+.mobileView,
+.about,
+.contact {
   padding-top: 60px; /* Adjust based on your navbar height */
 }
 
@@ -348,19 +350,12 @@
   .topNav {
     display: flex;
   }
-  
+
   /* Remove the original bottom nav if it exists */
   .bottomNav {
     display: none !important;
   }
 }
-
-
-
-
-
-
-
 
 @media screen and (max-width: 380px) {
   .featureCards {
@@ -379,12 +374,3 @@
     box-sizing: border-box;
   }
 }
-
-
-@media screen and (max-width: 768px) {
-  html, body {
-    background-color: #22201D; /* Match this with your page color */
-    overscroll-behavior: none;
-    touch-action: pan-y;
-  }
-  }

@@ -233,12 +233,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  html,
-  body {
-    background-color: #22201d; /* Match this with your page color */
-    overscroll-behavior: none;
-    touch-action: pan-y;
-  }
   .header {
     width: 35rem;
   }

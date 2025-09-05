@@ -185,7 +185,7 @@ const NavbarMobile = () => {
   }, [isOpen]);
 
   return (
-    <>
+    <header>
       {/* Hamburger Button */}
       <button
         ref={buttonRef}
@@ -239,7 +239,11 @@ const NavbarMobile = () => {
           {pages.map((page) => {
             return (
               <li key={page.label} role="none">
-                <NavLink to={page.href} className={styles.navbarLinks}>
+                <NavLink
+                  to={page.href}
+                  onClick={closeMenu}
+                  className={styles.navbarLinks}
+                >
                   {page.label}
                 </NavLink>
               </li>
@@ -247,7 +251,7 @@ const NavbarMobile = () => {
           })}
         </ul>
       </nav>
-    </>
+    </header>
   );
 };
 
@@ -270,7 +274,8 @@ function Navbar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  console.log(screenSize);
+  console.log("the screen size", window.innerWidth);
   return (
     <>
       {screenSize === "mobile" && <NavbarMobile />}
