@@ -65,11 +65,9 @@
 
 .navbarLinks {
   font-family: "Inter", sans-serif;
-  position: relative;
   letter-spacing: 1.5px;
   line-height: 160%;
   text-transform: uppercase;
-  display: inline-block;
   color: #dac5a7;
   text-decoration: none;
   transition: transform 0.3s ease-in-out;
@@ -235,35 +233,6 @@
   margin-bottom: 20px;
 }
 
-/* Navigation Links */
-.navLink {
-  color: #dac5a7;
-  text-decoration: none;
-  font-size: 18px;
-  display: block;
-  padding: 10px 0;
-  transition: all 0.3s ease;
-  border-bottom: 2px solid transparent;
-  font-weight: 500;
-}
-
-.navLink:hover {
-  color: #d4a67c;
-  padding-left: 10px;
-}
-
-.navLink:focus {
-  outline: 2px solid #d4a67c;
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.navLink.active {
-  color: #d4a67c;
-  border-bottom-color: #d4a67c;
-  text-decoration: underline;
-}
-
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -288,10 +257,9 @@ nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)):hover {
   transform: scale(1.3);
 }
 /* Add active link color */
-nav[class*="navbar" i] a[class$="active"] {
-  /* For testing, i like the other one better */
-  /* color: #e0b084; */
-  text-decoration: underline;
+nav[class*="navbar" i] a[class^="active"] {
+  border-bottom: 2px solid #d4a67c;
+  padding-bottom: 2px;
   color: #d4a67c;
 }
 

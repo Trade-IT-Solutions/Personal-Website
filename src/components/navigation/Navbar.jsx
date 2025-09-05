@@ -44,7 +44,11 @@ function NavbarDesktop() {
             <li key={page.label} role="none">
               <NavLink
                 to={page.href}
-                className={styles.navbarLinks}
+                className={({ isActive }) =>
+                  isActive
+                    ? `active ${styles.navbarLinks}`
+                    : `${styles.navbarLinks}`
+                }
                 key={page.label}
               >
                 {page.label}
@@ -92,7 +96,11 @@ function NavbarTablet() {
           return (
             <NavLink
               to={page.href}
-              className={styles.topNavItem}
+              className={({ isActive }) =>
+                isActive
+                  ? `active ${styles.topNavItem}`
+                  : `${styles.topNavItem}`
+              }
               key={page.label}
             >
               {page.mobileIcon}
@@ -242,7 +250,11 @@ const NavbarMobile = () => {
                 <NavLink
                   to={page.href}
                   onClick={closeMenu}
-                  className={styles.navbarLinks}
+                  className={({ isActive }) =>
+                    isActive
+                      ? `active ${styles.navbarLinks}`
+                      : `${styles.navbarLinks}`
+                  }
                 >
                   {page.label}
                 </NavLink>
@@ -274,8 +286,6 @@ function Navbar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  console.log(screenSize);
-  console.log("the screen size", window.innerWidth);
   return (
     <>
       {screenSize === "mobile" && <NavbarMobile />}
