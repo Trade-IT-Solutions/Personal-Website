@@ -13,7 +13,9 @@ import Card2 from "../components/Card2";
 import FooterLinks from "../components/FooterLinks";
 import Footer3 from "../components/Footer";
 import Badge from "../components/Badge";
+
 import styles from "./MobileView.module.css";
+import Navbar from "../components/navigation/Navbar";
 
 const MobileView = () => {
   const [isScrolling, setIsScrolling] = useState(true); // Always visible initially
@@ -23,9 +25,9 @@ const MobileView = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(true);
-      
+
       clearTimeout(scrollTimeout);
-      
+
       // Hide navbar after 2 seconds of no scrolling
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
@@ -48,41 +50,23 @@ const MobileView = () => {
 
   return (
     <div className={styles.mobileView}>
-      {/* Top Navigation Bar - Only Visible on Mobile with Auto-Hide */}
-      <nav className={`${styles.topNav} ${isScrolling ? styles.show : styles.hide}`}>
-        <Link to="/" className={styles.topNavItem}>
-          <FiHome size={20} />
-          <span>Home</span>
-        </Link>
-        <Link to="/about" className={styles.topNavItem}>
-          <FiUser size={20} />
-          <span>About</span>
-        </Link>
-        <Link to="/contact" className={styles.topNavItem}>
-          <FiMail size={20} />
-          <span>Contact</span>
-        </Link>
-        <Link to="/bookings" className={styles.topNavItem}>
-          <FiCalendar size={20} />
-          <span>Bookings</span>
-        </Link>
-      </nav>
-      
       <Main />
       <Community />
       <YouTubeConnectRecreated />
       <ContactForm />
-      <Booking />
       <section className={styles.process}>
         <div className={styles.processDescription}>
           <div className={styles.theProcess}>THe PRocess</div>
           <h1 className={styles.empowermentThroughEducationContainer}>
-            <p className={styles.empowermentThrough}>{`Empowerment Through `}</p>
+            <p
+              className={styles.empowermentThrough}
+            >{`Empowerment Through `}</p>
             <p className={styles.empowermentThrough}>Education in 5 Steps</p>
           </h1>
           <div className={styles.websiteDescription}>
             <div className={styles.ourProcessEnsures}>
-            Kelly believes that your presence should be filled with purpose. Here are some ways she practices that.
+              Kelly believes that your presence should be filled with purpose.
+              Here are some ways she practices that.
             </div>
           </div>
         </div>
@@ -99,9 +83,9 @@ const MobileView = () => {
         <div className={styles.socialLinks}>
           <div className={styles.footerName}>
             <div className={styles.kellyOhgee}>
-              <img 
-                src="/kelly-logo-11@2x.png" 
-                alt="Kelly Ohgee Logo" 
+              <img
+                src="/kelly-logo-11@2x.png"
+                alt="Kelly Ohgee Logo"
                 className={styles.kellyLogo}
               />
             </div>

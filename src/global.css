@@ -4,12 +4,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-/* General Styles */
-body {
-  margin: 0;
-  line-height: normal;
-}
-
 :root {
   /* Fonts */
   --text-meta: Satoshi;
@@ -171,11 +165,18 @@ body {
   --blur-default: blur(30px);
 }
 
-
-body {
+html,
+body,
+#root {
   margin: 0;
+  height: 100% !important;
   line-height: normal;
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
+  touch-action: pan-y;
 }
+
+/* I can't understand why all this is used by the home page  */
 :root {
   /* Fonts */
   --text-meta: Satoshi;

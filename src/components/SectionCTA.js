@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./SectionCTA.module.css";
 
-const SectionCTA = ({ className = "" }) => {
-  const repeatCount = 12; // Number of "Let's talk" + "+++" pairs
+const SectionCTA = () => {
+  const repeatCount = 14; // Number of "Let's talk" + "+++" pairs
 
   return (
-    <section className={[styles.sectionCta, className].join(" ")}>
+    <section className={styles.sectionCta}>
       <div className={styles.sectionBanner}>
         <div className={styles.line} />
         <div className={styles.grid}>

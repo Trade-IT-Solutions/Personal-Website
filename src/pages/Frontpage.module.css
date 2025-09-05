@@ -124,23 +124,6 @@
 }
 
 
-html, body {
-  overscroll-behavior: none; /* Disables bounce effect */
-  
-}
-
-
-/* Prevents flash of unstyled content */
-html, body {
-  background-color: #22201D; /* Match this with your page color */
-  overscroll-behavior: none;
-  touch-action: pan-y;
-}
-html {
-  scroll-behavior: smooth; /* Ensures smooth rendering */
-  will-change: scroll-position;
-  transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
-}
 /* ✅ Preloader Styling */
 .preloader {
   position: fixed;
