@@ -54,7 +54,6 @@ const MobileView = () => {
       <Community />
       <YouTubeConnectRecreated />
       <ContactForm />
-      <Booking />
       <section className={styles.process}>
         <div className={styles.processDescription}>
           <div className={styles.theProcess}>THe PRocess</div>
