@@ -238,35 +238,6 @@ nav[class*="topnav" i] a[class^="active"] {
   margin-bottom: 20px;
 }
 
-/* Navigation Links */
-.navLink {
-  color: #dac5a7;
-  text-decoration: none;
-  font-size: 18px;
-  display: block;
-  padding: 10px 0;
-  transition: all 0.3s ease;
-  border-bottom: 2px solid transparent;
-  font-weight: 500;
-}
-
-.navLink:hover {
-  color: #d4a67c;
-  padding-left: 10px;
-}
-
-.navLink:focus {
-  outline: 2px solid #d4a67c;
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.navLink.active {
-  color: #d4a67c;
-  border-bottom-color: #d4a67c;
-  text-decoration: underline;
-}
-
 /* Animations */
 @keyframes fadeIn {
   from {
