@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 
-
 // Import MobileView component
 import MobileView from "./MobileView";
 
@@ -12,13 +11,17 @@ import styles from "./Frontpage.module.css";
 const SectionHero = lazy(() => import("../components/SectionHero.js"));
 const SectionStats = lazy(() => import("../components/SectionStats.js"));
 const SectionServices = lazy(() => import("../components/SectionServices.js"));
-const SectionServices1 = lazy(() => import("../components/SectionServices1.js"));
+const SectionServices1 = lazy(() =>
+  import("../components/SectionServices1.js")
+);
 const SectionWork = lazy(() => import("../components/SectionWork.js"));
 const SectionProcess = lazy(() => import("../components/SectionProcess.js"));
 const SectionProcess1 = lazy(() => import("../components/SectionProcess1.js"));
 const SectionAbout = lazy(() => import("../components/SectionAbout.js"));
 const SectionCTA = lazy(() => import("../components/SectionCTA.js"));
 const Footer = lazy(() => import("../components/Footer.js"));
+// const Navbar = lazy(() => import("../components/navigation/Navbar.jsx"));
+import Navbar from "../components/navigation/Navbar.jsx";
 
 const Frontpage = () => {
   // State to track mobile viewport
@@ -42,10 +45,10 @@ const Frontpage = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(true);
-      
+
       // Clear previous timeout
       clearTimeout(scrollTimeout);
-      
+
       // Hide navbar after 2 seconds of no scrolling
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
@@ -87,41 +90,27 @@ const Frontpage = () => {
 
   return (
     <div className="minimal-frame">
-      <div className={styles.wrapper} style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <div
+        className={styles.wrapper}
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
         {loading ? (
           // ✅ Preloader that waits until everything is fully loaded
-          <div className={`${styles.preloader} ${fadeOut ? styles.fadeOut : ""}`}>
-            <img src="/kelly-logo-11@2x.png" alt="Loading..." className={styles.preloaderLogo} />
+          <div
+            className={`${styles.preloader} ${fadeOut ? styles.fadeOut : ""}`}
+          >
+            <img
+              src="/kelly-logo-11@2x.png"
+              alt="Loading..."
+              className={styles.preloaderLogo}
+            />
           </div>
         ) : (
           <div className={styles.frontpage}>
-            <header className={styles.header}>
-              <Link to="/" className={styles.logoContainer}>
-                <img 
-                  className={styles.kellyLogo1}
-                  alt="Kelly Logo"
-                  src="/kelly-logo-11@2x.png"
-                  loading="lazy" 
-                />
-              </Link>
-              <nav className={styles.navbarRight}>
-                <div className={styles.navbarMenu}>
-                  <Link to="/contact" className={styles.connect}>
-                    Connect
-                  </Link>
-                  <Link to="/about" className={styles.work}>
-                    About
-                  </Link>
-                    <Link to="/bookings" className={styles.work}>
-                    Bookings
-                  </Link>
-
-                </div>
-              </nav>
-            </header>
-
             <main className={styles.mainContent}>
-              <Suspense fallback={<div className={styles.loading}>Loading...</div>}>
+              <Suspense
+                fallback={<div className={styles.loading}>Loading...</div>}
+              >
                 <div className={styles.container}>
                   <SectionHero />
                 </div>
@@ -152,12 +141,13 @@ const Frontpage = () => {
               </Suspense>
             </main>
 
-            <Suspense fallback={<div className={styles.loading}>Loading Footer...</div>}>
+            <Suspense
+              fallback={<div className={styles.loading}>Loading Footer...</div>}
+            >
               <Footer />
             </Suspense>
 
             {/* ✅ Bottom Navbar that appears on scroll and hides when idle */}
-
           </div>
         )}
       </div>
@@ -165,4 +155,4 @@ const Frontpage = () => {
   );
 };
 
-export default Frontpage; 
+export default Frontpage;

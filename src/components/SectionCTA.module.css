@@ -6,12 +6,9 @@
   flex-shrink: 0;
 }
 
-
 .line {
-  align-self: stretch;
-  position: relative;
   background-color: var(--border-default);
-  height: 1px;
+  width: inherit;
 }
 .bannerWord {
   position: relative;
@@ -38,16 +35,17 @@
   justify-content: flex-start;
   padding: var(--padding-base) 0px;
   gap: var(--gap-13xl);
+  width: inherit;
 }
 .sectionBanner {
-  width: 1920px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 .sectionCta {
-  align-self: stretch;
+  /* align-self: stretch; */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -58,6 +56,7 @@
   font-size: var(--text-meta-size);
   color: var(--text-default);
   font-family: var(--text-meta);
+  width: 100%;
 }
 
 @media screen and (max-width: 450px) {

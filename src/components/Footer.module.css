@@ -14,17 +14,31 @@
   font-size: var(--text-meta-size);
   color: var(--text-default);
   font-family: var(--text-meta);
+ 
+}
+
+@media (max-width: 1140px) {
+  .footer {
+    padding: 20px 10px; /* reduce top/bottom and left/right padding */
+  }
+}
+
+
+@media (max-width: 700px) {
+  .footer {
+    padding: 10px 10px; /* reduce top/bottom and left/right padding */
+  }
 }
 
 /* Footer Content Wrapper */
 .container {
   width: 100%;
-  max-width: 1200px; /* Adjust for better responsiveness */
+  max-width: 50rem; /* Adjust for better responsiveness */
   display: flex;
   flex-direction: column;
   align-items: center; /* Center all items */
   justify-content: center;
-  padding: 20px;
+  /* padding: 20px; */
   box-sizing: border-box;
 }
 
@@ -111,12 +125,12 @@
   .grid1 {
     gap: 10px; /* Reduce spacing for tablets */
   }
-  
+
   .nav {
     flex-direction: row;
     gap: 15px;
   }
-  
+
   .kellyLogo {
     width: 100px; /* Adjust logo size for tablets */
   }
@@ -140,11 +154,6 @@
 }
 
 @media screen and (max-width: 450px) {
-  .grid1 {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .nav {
     flex-direction: column;
     gap: 8px;

@@ -18,81 +18,81 @@ const SectionWork = ({ className = "" }) => {
       const cacheKey = "yt_latest_video_sectionWork";
       const cacheTimeKey = "yt_latest_video_sectionWork_time";
       const twelveHours = 12 * 60 * 60 * 1000;
-    
+
       const cachedVideo = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(cacheTimeKey);
-    
+
       if (cachedVideo && cachedTime && Date.now() - parseInt(cachedTime) < twelveHours) {
         setLatestVideoId(cachedVideo);
         return;
       }
-      
+
       // Fallback video in case of API failure
       const fallbackVideoId = "dQw4w9WgXcQ";
-      
+
       try {
         // Using a more efficient method: channels + playlistItems (costs 2 units instead of 100)
         // Step 1: Get the channel's uploads playlist ID
         const channelResponse = await fetch(
           `https://www.googleapis.com/youtube/v3/channels?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&id=UCM84WjkyLm1_sa17G8DYzRg&part=contentDetails&maxResults=1`
         );
-        
+
         if (!channelResponse.ok) {
           throw new Error(`Channel API responded with status: ${channelResponse.status}`);
         }
-        
+
         const channelData = await channelResponse.json();
-        
+
         if (!channelData.items || channelData.items.length === 0) {
           throw new Error("Channel not found");
         }
-        
+
         // Extract the uploads playlist ID
         const uploadsPlaylistId = channelData.items[0]?.contentDetails?.relatedPlaylists?.uploads;
-        
+
         if (!uploadsPlaylistId) {
           throw new Error("Uploads playlist not found");
         }
-        
+
         // Step 2: Get the latest video from the uploads playlist
         const playlistResponse = await fetch(
           `https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=1`
         );
-        
+
         if (!playlistResponse.ok) {
           throw new Error(`Playlist API responded with status: ${playlistResponse.status}`);
         }
-        
+
         const playlistData = await playlistResponse.json();
-        
+
         if (!playlistData.items || playlistData.items.length === 0) {
           throw new Error("No videos found in uploads playlist");
         }
-        
+
         // Extract the video ID from the playlist item
         const videoId = playlistData.items[0]?.snippet?.resourceId?.videoId;
-        
+
         if (!videoId) {
           throw new Error("Video ID not found in playlist response");
         }
-        
+
         setLatestVideoId(videoId);
         localStorage.setItem(cacheKey, videoId);
         localStorage.setItem(cacheTimeKey, Date.now().toString());
       } catch (error) {
         console.error("YouTube fetch failed:", error);
-        
+
         // Fallback to original search method if channels+playlists approach fails
         try {
           const response = await fetch(
             `https://www.googleapis.com/youtube/v3/search?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&channelId=UCM84WjkyLm1_sa17G8DYzRg&part=snippet,id&order=date&maxResults=1&type=video`
           );
-      
+
           if (!response.ok) throw new Error(`API error ${response.status}`);
-      
+
           const data = await response.json();
           const videoId = data.items?.[0]?.id?.videoId;
-      
+
           if (videoId) {
             setLatestVideoId(videoId);
             localStorage.setItem(cacheKey, videoId);
@@ -102,7 +102,7 @@ const SectionWork = ({ className = "" }) => {
         } catch (searchError) {
           console.error("Search method also failed:", searchError);
         }
-        
+
         // If all else fails, use fallback video
         setLatestVideoId(fallbackVideoId);
         localStorage.setItem(cacheKey, fallbackVideoId);
@@ -156,9 +156,8 @@ const SectionWork = ({ className = "" }) => {
                   <iframe
                     ref={videoRef}
                     className={styles.imageIcon}
-                    src={`https://www.youtube.com/embed/${latestVideoId}?rel=0&enablejsapi=1&autoplay=${
-                      shouldPlay ? 1 : 0
-                    }&controls=1&showinfo=0&mute=1`}
+                    src={`https://www.youtube.com/embed/${latestVideoId}?rel=0&enablejsapi=1&autoplay=${shouldPlay ? 1 : 0
+                      }&controls=1&showinfo=0&mute=1`}
                     title="Latest Video"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -92,17 +92,16 @@
   width: 568px;
 }
 .myMissionIs {
+  max-width: 95vw;
   margin: 0;
-  position: absolute;
-  top: 978.1px;
-  left: calc(50% - 530.4px);
+  position: relative;
+  top: 80%;
   font-size: var(--heading-h4-uppercase-size);
   line-height: 150%;
   font-weight: 500;
   font-family: inherit;
   color: var(--text-muted);
   display: inline-block;
-  width: 1050.8px;
   margin-top: 80px;
   margin-left: 30px;
 }
@@ -134,8 +133,28 @@
   .myMissionIs {
     font-size: var(--font-size-sm);
     line-height: 120%;
+
     width: 90%;
     left: 5%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .myMissionIs {
+    max-width: 96vw;
+    margin: 0;
+    position: relative;
+    top: 80%;
+    font-size: var(--heading-h4-uppercase-size);
+    line-height: 150%;
+    font-weight: 500;
+    font-family: inherit;
+    color: var(--text-muted);
+    display: inline-block;
+    width: 1050.8px;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -146,8 +165,26 @@
   }
 
   .myMissionIs {
-    font-size: var(--font-size-md);
-    width: 95%;
-    left: 2.5%;
+    font-size: var(--font-size-9xl);
+    max-width: 96vw;
+    margin: 0 auto;
+    height: 576.75px;
+  }
+
+   .myMissionIs {
+    max-width: 96vw;
+    margin: 0;
+    position: relative;
+    top: 80%;
+    font-size: var(--heading-h4-uppercase-size);
+    line-height: 150%;
+    font-weight: 500;
+    font-family: inherit;
+    color: var(--text-muted);
+    display: inline-block;
+    width: 1050.8px;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

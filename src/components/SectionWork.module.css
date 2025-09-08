@@ -183,14 +183,14 @@
 }
 
 /* Responsive styles */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1260px) {
   .container {
     width: 85%;
     padding: 60px 0;
   }
 
   .imageWrapper {
-    max-width: 1000px;
+    max-width: 90vw;
   }
 }
 
@@ -205,7 +205,7 @@
   }
 
   .imageWrapper {
-    max-width: 800px;
+    max-width: 90vw;
   }
 
   .grid4 {
@@ -226,6 +226,7 @@
 
   .grid {
     padding: 0px var(--padding-xs) var(--padding-xs);
+    margin: 1rem 0;
   }
 
   .grid4 {

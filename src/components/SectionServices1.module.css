@@ -164,7 +164,7 @@
 
 .receive {
   position: relative;
-  height: 100%;
+  height: auto;
   border-radius: var(--br-xl);
   background-color: var(--text-default);
   border: 1px solid var(--border-default);
@@ -231,7 +231,6 @@
   position: relative;
   text-align: center;
   white-space: nowrap;
-  
 }
 
 .pharrowUpRightLightIcon {
@@ -273,7 +272,7 @@
 
 .receive1 {
   position: relative;
-  height: 100%;
+  height: auto;
   border-radius: var(--br-xl);
   background-color: var(--text-default);
   border: 1px solid var(--border-default);
@@ -410,43 +409,47 @@
 }
 
 /* Desktop and larger tablets */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
   .grid {
-    height: 280px;
+    height: 314px;
     gap: 20px;
   }
 
-  .receive, .receive1 {
-    max-width: 45%;
+  .receive,
+  .receive1 {
+    max-width: 45vw;
+    height: auto;
   }
-  
+
   .receiveAPersonal {
     font-size: clamp(1.3rem, 2.5vw, var(--font-size-11xl));
     width: 90%;
   }
-  
+
   .bookKellyTo {
     font-size: clamp(1.2rem, 2vw, var(--heading-h5-size));
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   .gridChild {
     width: 300px;
     height: 80px;
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   .bookHere {
     font-size: clamp(1.2rem, 2vw, var(--font-size-16xl));
   }
-  
+
   .pharrowUpRightLightIcon {
     left: 210px;
   }
-  
-  .receiveChild, .contact, .receiveItem {
+
+  .receiveChild,
+  .contact,
+  .receiveItem {
     width: 90%;
     left: 5%;
   }
@@ -455,34 +458,41 @@
 /* Tablets */
 @media screen and (max-width: 992px) {
   .grid {
-    height: 250px;
+    height: 314px;
   }
 
-  .receive, .receive1 {
-    max-width: 45%;
-    min-height: 250px;
+  .receive,
+  .receive1 {
+    max-width: 45vw;
+    height: auto;
   }
-  
-  .grid1, .grid4 {
+
+  .grid1,
+  .grid4 {
     width: 90%;
     left: 5%;
   }
-  
+
   .receiveAPersonal {
-    font-size: clamp(1.2rem, 4vw, var(--font-size-11xl));
+    font-size: clamp(1.2rem, 4vw, var(--font-size-4xl-2));
     top: -10px;
   }
-  
+
+  .bookKellyTo {
+    top: 3rem;
+    font-size: clamp(0.9rem, 2.5vw, var(--heading-h5-size));
+  }
+
   .gridChild {
     width: 80%;
     max-width: 280px;
     height: 75px;
   }
-  
+
   .bookHere {
     font-size: clamp(1.1rem, 3vw, var(--font-size-16xl));
   }
-  
+
   .pharrowUpRightLightIcon {
     left: 190px;
   }
@@ -498,61 +508,66 @@
   }
 
   .container {
-    width: 95%;
+    max-width: 95%;
     padding: 0;
   }
-  
+
   .sectionServices {
     padding: var(--padding-33xl) 10px 0;
   }
-  
-  .receive, .receive1 {
-    min-height: 220px;
+
+  .receive,
+  .receive1 {
+    height: 300px;
+    max-width: 45vw;
   }
-  
+
+  .receiveAPersonal {
+    font-size: clamp(0.9rem, 2.5vw, var(--font-size-11xl));
+    width: 100%;
+    padding-top: 2rem;
+  }
+
   .grid1 {
     top: 25px;
     height: auto;
     width: 90%;
     left: 5%;
   }
-  
-  .receiveAPersonal {
-    font-size: clamp(0.9rem, 2.5vw, var(--font-size-11xl));
-    width: 100%;
-  }
-  
-  .receiveChild, .contact, .receiveItem {
+
+  .receiveChild,
+  .contact,
+  .receiveItem {
     width: 90%;
     left: 5%;
     height: 32px;
   }
-  
+
   .submit {
     width: 90px;
     height: 28px;
   }
-  
+
   .bookKellyTo {
-    top: 20px;
+    top: 3rem;
     font-size: clamp(0.9rem, 2.5vw, var(--heading-h5-size));
   }
-  
+
   .gridChild {
     width: 90%;
     max-width: 240px;
     height: 65px;
   }
-  
+
   .bookHere {
     font-size: clamp(0.9rem, 3vw, var(--font-size-16xl));
   }
-  
+
   .pharrowUpRightLightIcon {
     height: 16px;
     width: 16px;
   }
-  
+
   .inputField {
     padding: 8px 10px;
     font-size: 14px;
@@ -567,69 +582,72 @@
     gap: 10px;
   }
 
-  .receive, .receive1 {
-    min-height: 180px;
+  .receive,
+  .receive1 {
+    height: auto;
   }
-  
+
   .grid1 {
     top: 15px;
   }
-  
+
   .receiveAPersonal {
     font-size: clamp(0.75rem, 2vw, var(--font-size-lg));
     line-height: 1.2;
   }
-  
+
   .inputField {
     font-size: 12px;
     height: 30px;
   }
-  
-  .receiveChild, .contact, .receiveItem {
+
+  .receiveChild,
+  .contact,
+  .receiveItem {
     height: 30px;
     top: 90px;
   }
-  
+
   .receiveChild {
     top: 70px;
   }
-  
+
   .contact {
     top: 105px;
   }
-  
+
   .receiveItem {
     top: 140px;
   }
-  
+
   .submit {
     width: 80px;
     height: 26px;
     top: 175px;
   }
-  
+
   .submit1 {
     font-size: 10px;
     top: 5px;
     left: 18px;
   }
-  
+
   .bookKellyTo {
     font-size: clamp(0.75rem, 2vw, var(--font-size-base));
     top: 15px;
   }
-  
+
   .gridChild {
     width: 90%;
     max-width: 200px;
     height: 55px;
     top: 70px;
   }
-  
+
   .bookHere {
     font-size: clamp(0.75rem, 2.5vw, var(--font-size-lg));
   }
-  
+
   .pharrowUpRightLightIcon {
     height: 14px;
     width: 14px;
@@ -643,29 +661,30 @@
     gap: 8px;
   }
 
-  .receive, .receive1 {
+  .receive,
+  .receive1 {
     min-height: 160px;
   }
-  
+
   .receiveAPersonal {
     font-size: clamp(0.7rem, 1.8vw, var(--font-size-base));
   }
-  
+
   .bookKellyTo {
     font-size: clamp(0.7rem, 1.8vw, var(--font-size-base));
     top: 10px;
   }
-  
+
   .gridChild {
     max-width: 180px;
     height: 50px;
     top: 60px;
   }
-  
+
   .bookHere {
     font-size: clamp(0.7rem, 2vw, var(--font-size-base));
   }
-  
+
   .pharrowUpRightLightIcon {
     height: 12px;
     width: 12px;
@@ -674,5 +693,5 @@
 
 .inputField::placeholder {
   color: #000; /* black */
-  opacity: 1;  /* ensure it's fully visible */
+  opacity: 1; /* ensure it's fully visible */
 }
