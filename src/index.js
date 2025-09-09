@@ -3,15 +3,15 @@ import { createRoot } from "react-dom/client";
 import App from "./App.js";
 import reportWebVitals from "./reportWebVitals.js";
 import { BrowserRouter } from "react-router-dom";
-import {
-  CssBaseline,
+import {// eslint-disable-next-line 
+  CssBaseline,// eslint-disable-next-line 
   ThemeProvider,
-  createTheme,
+  createTheme,// eslint-disable-next-line 
   StyledEngineProvider,
 } from "@mui/material";
 
 import "./global.css";
-
+// eslint-disable-next-line 
 const muiTheme = createTheme();
 
 const container = document.getElementById("root");

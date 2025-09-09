@@ -7,11 +7,13 @@ const SectionServices = ({ className = "" }) => {
     <section className={[styles.sectionServices, className].join(" ")}>
       <a
         className={styles.tradeitPill}
-        href="#tradeit-program"
+        href="https://www.tradeitsolutions.com"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Join TradeIT our 60-day residency program
+        Join TradeIT, the First University Style Education System for Trading
+        <p className={styles.smallerPart}>TradeIT is on a mission to revolutionize financial education as a whole and provide solutions to the scarce understanding of the finance world.
+        </p>
       </a>
       <div className={styles.join}>
         <div className={styles.join1}>

@@ -11,7 +11,7 @@
 .imageIcon1 {
   position: absolute;
   top: -9px;
-  left: 100px;
+  left: 350px;
   width: 1920px;
   height: 1000px;
   object-fit: cover;
@@ -30,7 +30,7 @@
   margin: 0;
   position: absolute;
   top: 836.6px;
-  left: 700px;
+  left: 38%;
   font-size: inherit;
   line-height: 100%;
   font-weight: 300;

@@ -30,7 +30,7 @@ const Bookings = () => {
     e.preventDefault();
 
     const serviceID = "service_8udmjzt";
-    const templateID = "template_a0fdrhk"; // You can create a specific booking template
+    const templateID = "template_ur0h4cr"; // You can create a specific booking template
     const publicKey = "xm_PgDq3DqQTHCiYS";
 
     const templateParams = {

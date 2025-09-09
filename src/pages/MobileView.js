@@ -1,11 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { FiHome, FiUser, FiMail, FiCalendar } from "react-icons/fi";
+import React, { useCallback } from "react";
 import Main from "../components/Main";
 import Community from "../components/Community";
 import YouTubeConnectRecreated from "../components/YouTubeConnectRecreated";
 import ContactForm from "../components/ContactForm";
-import Booking from "../components/Booking";
 import Card1 from "../components/Card1";
 import FrameComponent from "../components/FrameComponent";
 import FrameComponent1 from "../components/FrameComponent1";
@@ -15,32 +12,8 @@ import Footer3 from "../components/Footer";
 import Badge from "../components/Badge";
 
 import styles from "./MobileView.module.css";
-import Navbar from "../components/navigation/Navbar";
 
 const MobileView = () => {
-  const [isScrolling, setIsScrolling] = useState(true); // Always visible initially
-  let scrollTimeout = null;
-
-  // Detect scrolling and hide/show navbar accordingly
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolling(true);
-
-      clearTimeout(scrollTimeout);
-
-      // Hide navbar after 2 seconds of no scrolling
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false);
-      }, 2000);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, []);
-
   const onFrameContainerClick = useCallback(() => {
     const anchor = document.querySelector("[data-scroll-to='heroHamburger']");
     if (anchor) {
@@ -58,9 +31,7 @@ const MobileView = () => {
         <div className={styles.processDescription}>
           <div className={styles.theProcess}>The Process</div>
           <h1 className={styles.empowermentThroughEducationContainer}>
-            <p
-              className={styles.empowermentThrough}
-            >{`Empowerment Through `}</p>
+            <p className={styles.empowermentThrough}>{`Empowerment Through `}</p>
             <p className={styles.empowermentThrough}>Education in 5 Steps</p>
           </h1>
           <div className={styles.websiteDescription}>
@@ -123,8 +94,6 @@ const MobileView = () => {
           </div>
         </div>
       </section>
-
-      {/* Remove the bottom navigation as we've moved it to the top */}
     </div>
   );
 };

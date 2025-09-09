@@ -20,7 +20,7 @@ const Container = ({ setShowOverlay }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    if (e?.preventDefault) e.preventDefault();
 
     // Simple validation
     if (
@@ -68,7 +68,7 @@ const Container = ({ setShowOverlay }) => {
           <div className={styles.grid1}>
             <h1 className={styles.letsGetIn}>Connect With Kelly!</h1>
           </div>
-          {/* <form onSubmit={handleSubmit} className={styles.grid2}> */}
+
           <Input1
             style="Default"
             name1="Name"
@@ -114,9 +114,9 @@ const Container = ({ setShowOverlay }) => {
             style="Primary"
             buttonAlignSelf="stretch"
             button="Send Message"
-            type="submit"
+            type="button"
+            onClick={handleSubmit} // ✅ use handleSubmit to fix ESLint warning
           />
-          {/* </form> */}
         </div>
       </div>
     </div>

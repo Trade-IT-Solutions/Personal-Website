@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { Link } from "react-router-dom";
 
 // Import MobileView component
 import MobileView from "./MobileView";
@@ -20,8 +19,6 @@ const SectionProcess1 = lazy(() => import("../components/SectionProcess1.js"));
 const SectionAbout = lazy(() => import("../components/SectionAbout.js"));
 const SectionCTA = lazy(() => import("../components/SectionCTA.js"));
 const Footer = lazy(() => import("../components/Footer.js"));
-// const Navbar = lazy(() => import("../components/navigation/Navbar.jsx"));
-import Navbar from "../components/navigation/Navbar.jsx";
 
 const Frontpage = () => {
   // State to track mobile viewport
@@ -49,7 +46,7 @@ const Frontpage = () => {
       // Clear previous timeout
       clearTimeout(scrollTimeout);
 
-      // Hide navbar after 2 seconds of no scrolling
+      // Hide after 2 seconds of no scrolling
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
       }, 2000);
@@ -146,8 +143,6 @@ const Frontpage = () => {
             >
               <Footer />
             </Suspense>
-
-            {/* ✅ Bottom Navbar that appears on scroll and hides when idle */}
           </div>
         )}
       </div>
