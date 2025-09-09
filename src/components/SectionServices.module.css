@@ -38,6 +38,7 @@
   background-clip: padding-box;
   position: relative;
   overflow: hidden;
+  font-size: clamp(1.5rem, 4vw, var(--heading-h2-size));
 }
 
 .tradeitPill::before {
@@ -362,7 +363,7 @@
   }
 
   .tradeitPill {
-    font-size: 15px;
+    font-size: clamp(1.5rem, 4vw, var(--heading-h2-size));
     padding: 14px 28px;
   }
 }

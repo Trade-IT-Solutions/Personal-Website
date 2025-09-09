@@ -108,97 +108,96 @@ const Main = ({ className = "" }) => {
             </div>
           </div>
         </div>
-
-        {/* ✅ Video Section Stays in right-column ✅ */}
-        <div className="image-wrapper">
-          {latestVideoId ? (
-            <div className="youtube-container">
-              <iframe
-                ref={videoRef}
-                className="image-icon"
-                src={`https://www.youtube.com/embed/${latestVideoId}?rel=0&enablejsapi=1&autoplay=${
-                  shouldPlay ? 1 : 0
-                }&controls=1&showinfo=0&mute=1`}
-                title="Latest Video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          ) : (
-            <p>Loading latest video...</p>
-          )}
-        </div>
       </div>
 
       {/* ✅ Cards Moved Below Video ✅ */}
       <div className="cards">
-        <h2 className="about-me">More About Kelly</h2>
         <div className="small-card-grid">
           <div className="card small-card">
             <h2>Background</h2>
             <p>
-              Kelly Ohgee, is a 23-year-old entrepreneur, philanthropist, life
-              speaker, and social media personality. Born on March 1, 2002, she
-              has Nigerian heritage and is one of four siblings. Her mission
-              centers on empowering individuals to unlock their full potential,
-              a passion that permeates her diverse endeavors.
+              Kelly Ohgee is a 23-year-old entrepreneur, philanthropist,
+              speaker, and digital media force. Born on March 1, 2002, with deep
+              Nigerian roots, she is one of four siblings and a passionate
+              builder of ideas that empower. Her mission centers on helping
+              people unlock clarity, live with purpose, and use their gifts to
+              create generational impact. Whether through education, content, or
+              community, Kelly brings a heart-led yet highly strategic approach
+              to every endeavor.
             </p>
           </div>
 
           <div className="card small-card">
             <h2>Career Beginnings</h2>
             <p>
-              Kelly's professional journey commenced in the trading industry,
-              where she quickly established herself as strategic in the
-              financial world. After famously gaining success in the stock
-              markets, she leveraged her success to found Cash Capital
-              Investment Group, a pioneering e-learning platform that empowered
-              over 50,000 aspiring traders to master proven strategies, increase
-              their financial literacy, and build wealth with purpose. As the
-              platform evolved, Kelly expanded it into TradeIT, a dynamic EdTech
-              company dedicated to transforming how individuals learn, grow, and
-              build wealth. Under her leadership, TradeIT now stands at the
-              intersection of innovation, education, and financial empowerment
-              to equip people to create generational impact and lead lives of
-              purpose.
+              Kelly’s professional journey began in the trading industry, where
+              she quickly distinguished herself as a sharp thinker and an early
+              disruptor. After achieving success in the stock market, she
+              channeled her knowledge into founding Cash Capital Investment
+              Group, a pioneering e-learning platform that reached over 50,000
+              traders worldwide. As her influence and vision grew, she launched
+              TradeIT Solutions, a modern financial education company built for
+              the next generation. TradeIT merges practical trading skills with
+              intentional learning and real-world strategy offering an
+              exclusive, high-performance residency that helps people not only
+              trade better, but live better. It now stands at the intersection
+              of fintech, education, and impact.
             </p>
           </div>
 
           <div className="card small-card">
-            <h2>Personal Development</h2>
+            <h2>CREATIVE & CONTENT WORK</h2>
             <p>
-              Driven by a mission to create lasting impact, Kelly has emerged as
-              a respected authority in both the trading world and the broader
-              realm of financial education. Expanding her focus beyond the
-              charts, she champions a holistic approach that integrates personal
-              development with financial empowerment. As the founder of a
-              transformational educational platform, Kelly cultivates a
-              high-performance community where individuals learn diverse
-              wealth-building strategies, master the principles of stewardship,
-              and form meaningful, growth-centered connections. She emphasizes
-              that true financial success isn’t measured by personal indulgence,
-              but by how wealth is used to empower others, create opportunities,
-              and drive purpose-driven change to ultimately contribute to a more
-              equitable and inspired world.
+              In addition to her work in finance and education, Kelly is a
+              multifaceted creator and brand strategist. As the founder of Naza
+              Haus, a creative strategy agency, she helps public figures,
+              influencers, and purpose-driven brands scale their voice, visuals,
+              and value with integrity. Her personal content spans YouTube,
+              Instagram, and Patreon, where she believes in the power of sharing
+              her learned lessons and behind-the-scenes of brand building. Every
+              piece of content is built to educate, entertain, or empower the
+              soul.
+            </p>
+          </div>
+
+          <div className="card small-card">
+            <h2>PERSONAL DEVELOPMENT & PHILOSOPHY</h2>
+            <p>
+              Driven by a desire to create lasting change, Kelly integrates
+              faith, stewardship, and personal growth into everything she
+              builds. She believes financial success means little if it isn’t
+              used to uplift others and that real impact starts with inner
+              alignment. Through her platforms, she teaches not just how to
+              build wealth, but how to build character, vision, and a life that
+              gives back. She champions a holistic approach that prioritizes
+              resilience, integrity, and community, helping others see that it’s
+              possible to grow your income and your impact at the same time.
             </p>
           </div>
 
           <div className="card small-card">
             <h2>Vision and Impact</h2>
             <p>
-              Kelly has reached and inspired millions through her transformative
-              content across platforms like Instagram and YouTube, becoming a
-              trusted voice in financial literacy, personal growth, and
-              intentional living. Her vision is to reshape how people engage
-              with education to foster a culture of resilience, intentionality,
-              and purpose-driven wealth. More than just helping individuals make
-              money, Kelly empowers them to use their resources as a force for
-              good—to serve others, uplift communities, and create meaningful,
-              lasting change. She remains deeply committed to building a world
-              where financial success is measured not by what we keep, but by
-              what we give, and where personal growth leads to collective
-              impact.
+              Kelly’s content and platforms have touched over 20 million people,
+              making her one of the most authentic voices in digital education,
+              entrepreneurship, and personal transformation today. But her goal
+              isn’t fame. It’s freedom for herself and others. Her long-term
+              mission is to rebuild trust in education, especially in the
+              financial space, by setting new standards of clarity, ethics, and
+              excellence. She’s currently leading the launch of TradeIT’s
+              Ivy-League-style residency, releasing a viral docuseries on the
+              broken state of the trading industry, and producing purpose-driven
+              content to reach new generations with truth, strategy, and grace.
+              <br />
+              <br />
+              She remains deeply committed to building a world where:
+              <ul>
+                <li>
+                  Wealth is measured by what we give, not just what we keep
+                </li>
+                <li>Growth is both purpose-driven and strategic</li>
+                <li>Success uplifts more than just ourselves</li>
+              </ul>
             </p>
           </div>
         </div>

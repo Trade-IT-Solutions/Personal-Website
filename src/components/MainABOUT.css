@@ -185,7 +185,7 @@ h2 {
   flex-direction: column; /* Stacked layout */
   gap: 20px;
   max-width: 900px; /* Set a reasonable width */
-  margin: 40px auto; /* Center the grid */
+  margin: 0px auto; /* Center the grid */
   padding: 20px;
 }
 /* Stack into 2 columns for tablets */
