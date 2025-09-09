@@ -1,0 +1,292 @@
+.connectWithKelly {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 110%;
+  font-weight: 300;
+  font-family: inherit;
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid {
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px var(--padding-13xl) var(--padding-13xl);
+  box-sizing: border-box;
+  gap: var(--gap-xl);
+}
+
+.imageIcon {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--border-default);
+  border-radius: var(--br-11xs);
+  overflow: hidden;
+  background: transparent;
+  z-index: 1;
+}
+
+.noiseIcon {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lamboSurprise {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  letter-spacing: 1px;
+  line-height: 130%;
+  font-weight: 300;
+  font-family: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.youtubeVideo {
+  width: 118px;
+  position: relative;
+  font-size: var(--text-meta-size);
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  font-family: var(--text-meta);
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid4 {
+  position: relative;
+  width: 100%;
+  margin-top: 15px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-11xs);
+  background-color: var(--color-gray-300);
+  border: 1px solid var(--color-gray-200);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-3xs) var(--padding-base);
+  min-height: 55px;
+  gap: var(--gap-xl);
+  max-width: 100%;
+  z-index: 3;
+}
+
+.imageWrapper {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  background-color: var(--color-gray-300);
+}
+
+.grid3 {
+  border-radius: var(--br-11xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.grid2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.grid1 {
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-13xl);
+  padding-top: 20px;
+  font-size: var(--heading-h4-uppercase-size);
+}
+
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionWork {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: var(--heading-h2-size);
+  color: var(--text-default);
+  font-family: var(--heading-h5);
+}
+
+/* Loading state styles */
+.loadingText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-default);
+  font-family: var(--text-meta);
+  font-size: var(--text-meta-size);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1260px) {
+  .container {
+    width: 85%;
+    padding: 60px 0;
+  }
+
+  .imageWrapper {
+    max-width: 90vw;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    width: 90%;
+    padding: 50px 0;
+  }
+
+  .connectWithKelly {
+    font-size: clamp(1.5rem, 4vw, var(--heading-h2-size));
+  }
+
+  .imageWrapper {
+    max-width: 90vw;
+  }
+
+  .grid4 {
+    min-height: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 40px 0;
+  }
+
+  .connectWithKelly {
+    font-size: var(--font-size-19xl);
+    line-height: 42px;
+  }
+
+  .grid {
+    padding: 0px var(--padding-xs) var(--padding-xs);
+    margin: 1rem 0;
+  }
+
+  .grid4 {
+    flex-wrap: wrap;
+    padding: var(--padding-2xs) var(--padding-xs);
+    min-height: 45px;
+  }
+
+  .lamboSurprise {
+    font-size: clamp(1rem, 3vw, var(--heading-h4-uppercase-size));
+  }
+
+  .youtubeVideo {
+    width: 110px;
+    font-size: clamp(0.7rem, 2vw, var(--text-meta-size));
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .connectWithKelly {
+    font-size: var(--font-size-10xl);
+    line-height: 32px;
+  }
+
+  .grid4 {
+    padding: var(--padding-3xs) var(--padding-xs);
+    min-height: 40px;
+  }
+
+  .lamboSurprise {
+    font-size: var(--font-size-lgi);
+    line-height: 25px;
+  }
+
+  .youtubeVideo {
+    width: 100px;
+    font-size: calc(var(--text-meta-size) - 1px);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .container {
+    padding: 30px 0;
+  }
+
+  .connectWithKelly {
+    font-size: clamp(1.2rem, 5vw, var(--font-size-10xl));
+  }
+
+  .grid4 {
+    padding: var(--padding-3xs) var(--padding-xs);
+    min-height: 36px;
+  }
+
+  .lamboSurprise {
+    font-size: clamp(0.8rem, 4vw, var(--font-size-lgi));
+  }
+
+  .youtubeVideo {
+    width: 90px;
+    font-size: clamp(0.65rem, 2.5vw, var(--text-meta-size));
+  }
+}

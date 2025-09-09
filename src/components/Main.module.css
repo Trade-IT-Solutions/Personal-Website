@@ -1,0 +1,148 @@
+.kellyLogo1 {
+  height: 36.4px;
+  width: 73.8px;
+  position: relative;
+  object-fit: cover;
+}
+.services {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 41px;
+}
+.work {
+  position: absolute;
+  top: 0px;
+  left: 54.9px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 25px;
+}
+.about {
+  position: absolute;
+  top: 0px;
+  left: 90.4px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 30px;
+}
+.blog {
+  position: absolute;
+  top: 0px;
+  left: 128.7px;
+  letter-spacing: 0.83px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 23px;
+}
+.servicesParent {
+  height: 12px;
+  width: 150.7px;
+  position: relative;
+  display: none;
+}
+
+
+
+.heroTopIcon {
+  width: 443.2px;
+  height: 243.2px;
+  position: absolute;
+  top: 30%; /* Center vertically */
+  left: 55%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust to keep exact center */
+  object-fit: cover;
+  z-index: 1;
+}
+.empowering {
+  margin: 0;
+}
+.empoweringGenerations {
+  flex: 1;
+  position: relative;
+  letter-spacing: -3.1px;
+  line-height: 100%;
+  font-weight: 600;
+  z-index: 2;
+}
+.empoweringGenerationsWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px var(--padding-11xl) 0px var(--padding-10xl);
+}
+.myMissionIs {
+  position: relative;
+  font-size: var(--font-size-smi-4);
+  line-height: 150%;
+  font-weight: 500;
+}
+.frameParent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-2xs-6);
+  max-width: 100%;
+}
+.missionStatement {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0px var(--padding-5xs) 0px var(--padding-12xs);
+  box-sizing: border-box;
+  max-width: 100%;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--font-size-34xl-1);
+  font-family: var(--heading-h1-uppercase);
+}
+.heroHamburger {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--padding-17xl) var(--padding-19xl) var(--padding-14xl)
+    var(--padding-4xl);
+  box-sizing: border-box;
+  position: relative;
+  gap: var(--gap-192xl-4);
+  max-width: 100%;
+}
+.main {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 0px var(--padding-10xl);
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--font-size-5xs-2);
+  color: var(--background-primary);
+  font-family: var(--text-meta);
+}
+
+@media screen and (max-width: 430px) and (min-width: 430px) {
+  .heroTopIcon {
+    top: 30%; /* Adjust vertical position */
+    left: 50%; /* Adjust horizontal position */
+    transform: translate(-50%, -40%);
+  }
+}

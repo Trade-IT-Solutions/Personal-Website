@@ -1,0 +1,23 @@
+.pharrowDownLightIcon {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+.root {
+  width: 46px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-481xl);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  height: 46px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs) var(--padding-xs);
+}
+.root[data-size="Small"][data-style="Default"] .pharrowDownLightIcon {
+  width: 16px;
+  height: 16px;
+}

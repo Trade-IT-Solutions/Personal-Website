@@ -1,0 +1,111 @@
+.sectionStats {
+  align-self: stretch;
+  position: relative;
+  max-width: 100%;
+  z-index: 8;
+  text-align: center;
+  font-size: var(--text-meta-size);
+  color: var(--text-muted);
+  font-family: var(--text-meta);
+  padding: 60px 20px; /* Increased vertical padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  display: none; /* Hide the original stats section */
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Limit max width */
+  padding: 0 20px; /* Add side padding */
+  gap: 80px; /* Increased space between icons */
+}
+
+.socialIcons a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+.socialIcons a:hover {
+  transform: scale(1.05);
+}
+
+.socialIcons a img {
+  width: 72px; /* Larger icon size */
+  height: 72px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+.socialIcons a:hover img {
+  opacity: 1;
+}
+
+.socialIcons a span {
+  font-size: 24px; /* Much larger text */
+  font-weight: 700;
+  color: var(--text-default);
+  letter-spacing: 0.5px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
+  .socialIcons {
+    gap: 70px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .socialIcons {
+    gap: 60px;
+  }
+
+  .socialIcons a img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .socialIcons a span {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .socialIcons {
+    gap: 50px;
+  }
+
+  .socialIcons a img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .socialIcons a span {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .socialIcons {
+    gap: 40px;
+  }
+
+  .socialIcons a img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .socialIcons a span {
+    font-size: 18px;
+  }
+}

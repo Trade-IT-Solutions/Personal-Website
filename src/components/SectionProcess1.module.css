@@ -1,0 +1,399 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 0;
+  transform: translateX(65px);
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 200px; /* Start the gold line at the top */
+  left: 50%; /* Center the gold line */
+  transform: translateX(-50%);
+  width: 0.8px; /* Thickness of the gold line */
+  height: 1485px; /* Full height of the container */
+  background-color: var(--border-default); /* Gold color */
+  background: linear-gradient(
+    to bottom,
+
+    var(--border-default) 0.4%,
+    var(--border-default) 10%,
+    /* Resume line */ transparent 22%,
+    transparent 29%,
+    /* Leave gap at badge 2 */ var(--border-default) 0.5%,
+    var(--border-default) 43%,
+    /* Resume line */ transparent 21%,
+    transparent 55%,
+    /* Leave gap at badge 3 */ var(--border-default) 50%,
+    var(--border-default) 66%,
+    /* Resume line */ transparent 70%,
+    transparent 82%,
+    /* Adjusted gap at badge 4 */ var(--border-default) 0%,
+    var(--border-default) 0% /* Final segment */
+  );
+
+  z-index: 0;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 50px 0; /* Space between each block */
+  position: relative;
+}
+
+.card {
+  flex: 0.84;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-11xs);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align content horizontally */
+  justify-content: center; /* Center-align content vertically */
+  padding: var(--padding-27xl) var(--padding-28xl);
+  position: relative;
+  gap: var(--gap-13xl);
+  max-width: 40%; /* Card width */
+  color: var(--text-muted);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+  text-align: center; /* Center-align text inside cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly increase size on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  border-color: #dac5a7; /* Optional: Highlight border on hover */
+}
+
+.cardLeft {
+  margin-right: auto;
+}
+
+.cardRight {
+  margin-left: auto;
+}
+
+/* Badge Styles */
+.badge {
+  position: absolute; /* Place badges along the gold line */
+  left: 50%; /* Center-align badges */
+  transform: translateX(-50%);
+  background-color: var(--background-muted); /* Match badge color with card */
+  color: var(--text-muted); /* Match text color of badge with card text */
+  font-family: "Satoshi", sans-serif; /* Font for badge numbers */
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 50px; /* Increase badge width for padding */
+  height: 50px; /* Increase badge height for padding */
+  border: 1px solid var(--border-default);
+  z-index: 2;
+  padding: 5px; /* Add padding around the badge content */
+  box-shadow: 0 0 0 5px var(--background-muted); /* Add spacing effect between gold line and badge */
+}
+
+/* Badge positions */
+.grid:nth-child(1) .badge {
+  top: 0px; /* Align to Block 1 */
+}
+
+.grid:nth-child(2) .badge {
+  top: 100px; /* Adjusted alignment for Block 2 */
+}
+
+.grid:nth-child(3) .badge {
+  top: 100px; /* Adjusted alignment for Block 3 */
+}
+
+.grid:nth-child(4) .badge {
+  top: 100px; /* Adjusted alignment for Block 4 */
+}
+
+.grid:nth-child(5) .badge {
+  top: 200px; /* Adjusted alignment for Block 5 */
+}
+
+/* Card Header Styles */
+.card h2 {
+  font-family: "Inter"; /* Font for headers */
+  font-weight: 300; /* Thin font weight */
+  font-size: 24px; /* Size for headers */
+  text-transform: uppercase; /* Full uppercase */
+  color: #dac5a7; /* Color for headers */
+  margin: 0; /* Remove extra margin */
+  text-align: center; /* Center the text */
+  width: 100%; /* Ensure full width */
+}
+
+/* Card Text Styles */
+.card p {
+  font-family: "Inter"; /* Font for card text */
+  font-weight: 300; /* Thin font weight */
+  font-size: 16px; /* Size for card text */
+  color: #dac5a7; /* Color for card text */
+  line-height: 1.5; /* Improve readability */
+  margin: 0; /* Remove extra margin */
+}
+
+@media screen and (max-width: 1300px) {
+  .container {
+    max-width: max-content;
+    margin: 0 auto; /* Center the container */
+  }
+  .card {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .container {
+   padding-right: 2rem;
+  }
+   .container::before {
+    content: none !important;
+  }
+ 
+}
+
+/* Mobile View */
+/* Mobile View - Matching Your Desired Look */
+@media screen and (max-width: 680px) {
+  .container {
+    padding: 10px;
+    transform: translateX(0);
+  }
+
+  .grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .line {
+    width: 1px;
+    height: 79px;
+    position: absolute;
+    margin: 0 !important;
+    top: 0.1px;
+    left: -50.5px;
+    background-color: var(--border-default);
+  }
+
+  .badge {
+    width: 40px;
+    height: 40px;
+    backdrop-filter: var(--blur-default);
+    border-radius: var(--br-481xl);
+    background-color: var(--color-tan-300);
+    border: 1px solid var(--border-default);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-4xs) var(--padding-4xs) var(--padding-4xs)
+      var(--padding-xs);
+  }
+
+  .card {
+    width: 318px;
+    backdrop-filter: var(--blur-default);
+    border-radius: var(--br-11xs);
+    background-color: var(--color-tan-300);
+    border: 1px solid var(--border-default);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-27xl) var(--padding-29xl) var(--padding-10xl);
+    position: relative;
+    gap: var(--gap-base);
+    text-align: left;
+    font-size: var(--font-size-3xl);
+    color: var(--text-default);
+    font-family: var(--font-inter);
+  }
+
+  .card h2 {
+    font-size: 18px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .card p {
+    font-size: 14px;
+    text-align: left;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .line1 {
+    height: 79px;
+    width: 1px;
+    position: absolute;
+    margin: 0 !important;
+    top: 58.1px;
+    left: 19.5px;
+    background-color: var(--border-default);
+  }
+
+  .grid:nth-child(odd) .card {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .grid:nth-child(even) .card {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  @media screen and (max-width: 480px) {
+    .container {
+      padding: 10px;
+      transform: translateX(0);
+    }
+
+    .grid {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0px var(--padding-11xl) 79.2px;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    .grid:nth-child(odd) {
+      justify-content: flex-start;
+      padding: 0px 0px var(--padding-15xl);
+      text-align: left;
+    }
+
+    .grid:nth-child(even) {
+      flex: 1 1;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      grid-gap: var(--gap-45xl);
+      gap: var(--gap-45xl);
+      max-width: 100%;
+    }
+
+    /* Card styling for mobile */
+    .card {
+      width: 318px;
+      backdrop-filter: var(--blur-default);
+      border-radius: var(--br-11xs);
+      background-color: var(--color-tan-300);
+      border: 1px solid var(--border-default);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-27xl) var(--padding-29xl) var(--padding-10xl);
+      position: relative;
+      grid-gap: var(--gap-base);
+      gap: var(--gap-base);
+      text-align: left;
+      font-size: var(--font-size-3xl);
+      color: var(--text-default);
+      font-family: var(--font-inter);
+    }
+
+    .grid:nth-child(odd) .card {
+      align-self: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0px 0px var(--padding-53xl);
+      gap: var(--gap-45xl);
+      text-align: left;
+    }
+
+    .grid:nth-child(even) .card {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-27xl) var(--padding-29xl) var(--padding-31xl);
+      position: relative;
+      grid-gap: var(--gap-59xl);
+      gap: var(--gap-59xl);
+      text-align: center;
+      font-size: var(--font-size-2xs);
+      color: var(--text-default);
+      font-family: var(--font-inter);
+    }
+
+    /* Adjust the line positioning */
+    .line {
+      margin-left: -118px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    .line1 {
+      height: 79px;
+      width: 1px;
+      position: absolute;
+      margin: 0 !important;
+      bottom: 146.9px;
+      left: -50.5px;
+      background-color: var(--border-default);
+    }
+
+    .grid:nth-child(odd) .line {
+      width: 1px;
+      height: 79px;
+      position: absolute;
+      margin: 0 !important;
+      top: 0.1px;
+      right: -62.5px;
+      background-color: var(--border-default);
+    }
+
+    .grid:nth-child(even) .line {
+      height: 79px;
+      width: 1px;
+      position: absolute;
+      margin: 0 !important;
+      right: 19.5px;
+      bottom: 46.9px;
+      background-color: var(--border-default);
+    }
+  }
+
+  @media screen and (max-width: 340px) {
+    .grid {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .grid .card {
+      width: 100%;
+      padding: var(--padding-11xl);
+    }
+  }
+}
