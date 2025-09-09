@@ -5,14 +5,14 @@ import styles from "./SectionServices.module.css";
 const SectionServices = ({ className = "" }) => {
   return (
     <section className={[styles.sectionServices, className].join(" ")}>
-      <a
-        className={styles.tradeitPill}
-        href="#tradeit-program"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Join TradeIT our 60-day residency program
-      </a>
+<a
+  className={styles.tradeitPill}
+  href="https://www.tradeitsolutions.com"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Join TradeIT our 60-day residency program
+</a>
       <div className={styles.join}>
         <div className={styles.join1}>
           <div className={styles.grid}>
