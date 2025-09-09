@@ -1,74 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
 import Badge from "./BadgeABOUT.jsx";
 import PropTypes from "prop-types";
 import "./MainABOUT.css";
 
 const Main = ({ className = "" }) => {
-  const [latestVideoId, setLatestVideoId] = useState("");
-  const [shouldPlay, setShouldPlay] = useState(false);
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const fetchLatestVideo = async () => {
-      const cacheKey = "yt_latest_video_main";
-      const cacheTimeKey = "yt_latest_video_main_time";
-      const twelveHours = 12 * 60 * 60 * 1000;
-
-      const cachedVideo = localStorage.getItem(cacheKey);
-      const cachedTime = localStorage.getItem(cacheTimeKey);
-
-      if (
-        cachedVideo &&
-        cachedTime &&
-        Date.now() - parseInt(cachedTime) < twelveHours
-      ) {
-        setLatestVideoId(cachedVideo);
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&channelId=UCezPMn09jcmgJ8Lo_JD-iEg&part=snippet,id&order=date&maxResults=1`
-        );
-
-        if (!response.ok) throw new Error(`API error ${response.status}`);
-
-        const data = await response.json();
-        const videoId = data.items?.[0]?.id?.videoId;
-
-        if (videoId) {
-          setLatestVideoId(videoId);
-          localStorage.setItem(cacheKey, videoId);
-          localStorage.setItem(cacheTimeKey, Date.now());
-        }
-      } catch (error) {
-        console.error("YouTube fetch failed:", error);
-        setLatestVideoId("dQw4w9WgXcQ"); // Optional fallback
-      }
-    };
-
-    fetchLatestVideo();
-  }, []);
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setShouldPlay(entry.isIntersecting);
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(videoRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
     <div className={`main ${className}`}>
       <img
