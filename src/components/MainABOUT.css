@@ -32,19 +32,18 @@
     display: flex;
     justify-content: center; /* in case it's inside flex */
     flex-wrap: nowrap;
-    gap: 20px;  
+    gap: 20px;
     padding-left: 140px;
   }
 }
-
 
 @media (max-width: 760px) {
   .kelly-ohgee {
     text-align: center; /* centers the text */
     margin: 60px auto 0 auto; /* centers the block if it has a set width */
     display: inline-block;
-    justify-content: center; 
-    padding-left: 0px;/* in case it's inside flex */
+    justify-content: center;
+    padding-left: 0px; /* in case it's inside flex */
   }
 }
 
@@ -55,6 +54,9 @@
   color: var(--text-muted);
   max-width: 750px;
   word-spacing: -3px;
+}
+.grid1 {
+  margin-right: 1rem;
 }
 
 .grid1,
@@ -282,6 +284,7 @@ h2 {
 @media screen and (max-width: 1024px) {
   .small-card-grid {
     grid-template-columns: repeat(2, 1fr);
+    margin-right: 1rem;
   }
 }
 
@@ -289,6 +292,7 @@ h2 {
 @media screen and (max-width: 600px) {
   .small-card-grid {
     grid-template-columns: 1fr;
+    margin-right: 2rem;
   }
 }
 
