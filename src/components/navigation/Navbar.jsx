@@ -117,6 +117,28 @@ const NavbarMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    if (isScrollingDown === false && window.scrollY > lastScrollY) {
+      // Scrolling down → hide navbar
+      setIsScrollingDown(true);
+    }
+    if (isScrollingDown === true && window.scrollY < lastScrollY) {
+      // Scrolling up → show navbar
+      setIsScrollingDown(false);
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
 
   // Toggle menu
   const toggleMenu = () => {
@@ -197,7 +219,9 @@ const NavbarMobile = () => {
       {/* Hamburger Button */}
       <button
         ref={buttonRef}
-        className={styles.hamburgerButton}
+        className={`${styles.hamburgerButton} ${
+          isScrollingDown ? styles.hide : styles.show
+        }`}
         onClick={toggleMenu}
         aria-controls="mobile-menu"
         aria-expanded={isOpen}

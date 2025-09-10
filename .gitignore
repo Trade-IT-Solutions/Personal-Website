@@ -1,4 +1,6 @@
+.vscode/
 .qodo
-node_modules
-/build
-/.env
+node_modules/
+**/build/**
+/build/**
+dist/
