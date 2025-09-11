@@ -12,26 +12,11 @@ const CtaBooking = ({
   onBookingClick = () => console.log("Booking clicked"),
 }) => {
   const [isClicked, setIsClicked] = useState(false);
-  const containerRef = useRef(null);
 
   const handleBooking = () => {
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 150);
     onBookingClick();
-  };
-
-  const handleMouseMove = (e) => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const rect = container.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Optional: Add interactive background effects based on mouse position
-    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-      // You can add dynamic styling here if needed
-    }
   };
 
   return (
