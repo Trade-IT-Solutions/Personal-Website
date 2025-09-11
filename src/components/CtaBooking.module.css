@@ -1,0 +1,244 @@
+/* Global animation keyframes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Main container */
+.ctaContainer {
+  position: relative;
+  background: linear-gradient(135deg, #22201d 0%, #272625f2 50%, #1a1a2e 100%);
+  border: 1px solid #dac5a726;
+  border-radius: 24px;
+  padding: 48px;
+  max-width: 1200px;
+  width: 90vw;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(34, 32, 29, 0.4);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.ctaContainer:hover {
+  /* transform: translateY(-4px); */
+  box-shadow: 0 30px 60px rgba(34, 32, 29, 0.5);
+  border-color: #dac5a7;
+}
+
+.ctaContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #ffffff1a 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Floating elements */
+.floatingElements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floatingCircle {
+  position: absolute;
+  background: #ffffff1a;
+  border: 1px solid #ffffff26;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle1 {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  right: -40px;
+  animation-delay: 0s;
+}
+
+.circle2 {
+  width: 120px;
+  height: 120px;
+  bottom: -60px;
+  left: -60px;
+  animation-delay: 2s;
+}
+
+.circle3 {
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  right: 20px;
+  animation-delay: 4s;
+}
+
+/* Avatar */
+.kellyAvatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #dac5a7, #d4a67c);
+  border: 2px solid #dac5a726;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #22201d;
+  box-shadow: 0 8px 24px rgba(218, 197, 167, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.kellyAvatar::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(135deg, #dac5a7, #ffd277, #d4a67c);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Typography */
+.mainHeading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+}
+
+.subHeading {
+  font-size: 16px;
+  color: #ffffffb3;
+  margin-bottom: 32px;
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+}
+
+/* CTA Button */
+.ctaButton {
+  background: linear-gradient(135deg, #dac5a7, #d4a67c);
+  color: #0e0e0e;
+  border: 1px solid #dac5a726;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  min-width: 200px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 24px rgba(218, 197, 167, 0.3);
+}
+
+.ctaButton:hover {
+  background: linear-gradient(135deg, #d4a67c, #dac5a7);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(218, 197, 167, 0.5);
+  border-color: #dac5a7;
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+}
+
+/* Trust indicators */
+.trustIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+/* # 8b5cf6 # 9333ea  */
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffffcc;
+  font-size: 14px;
+}
+
+.trustIcon {
+  width: 16px;
+  height: 16px;
+  background: #dac5a71a;
+  border: 1px solid #dac5a726;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dac5a7;
+  font-size: 10px;
+}
+
+/* Availability badge */
+.availabilityBadge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #22201d 0%, #3e3932 100%);
+  border: 1px solid #dac5a726;
+  color: #dac5a7;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(218, 197, 167, 0.2);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .ctaContainer {
+    padding: 32px 24px;
+    margin: 0 16px;
+  }
+
+  .mainHeading {
+    font-size: 24px;
+  }
+
+  .trustIndicators {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
