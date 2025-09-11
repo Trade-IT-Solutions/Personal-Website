@@ -20,12 +20,16 @@
   white-space: nowrap;
 }
 
+.smallerPart {
+  font-size: var(--font-size-3xl);
+}
+
 .tradeitPill {
   display: inline-block;
   background: linear-gradient(135deg, #8b5cf6, #a855f7, #9333ea);
   color: white;
   padding: 16px 32px;
-  border-radius: 50px;
+  border-radius: 20px;
   font-size: 16px;
   font-weight: 600;
   text-transform: none;
@@ -34,11 +38,11 @@
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
   transition: all 0.3s ease;
   text-decoration: none;
-  border: 2px solid transparent;
   background-clip: padding-box;
   position: relative;
   overflow: hidden;
-  font-size: clamp(1.5rem, 4vw, var(--heading-h2-size));
+  font-size: clamp(1.5rem, 4vw, var(--font-size-19xl));
+  width: 70vw;
 }
 
 .tradeitPill::before {
@@ -302,6 +306,10 @@
 }
 
 @media screen and (max-width: 1250px) {
+  .tradeitPill {
+    width: 70vw;
+    font-size: clamp(1.5rem, 4vw, var(--font-size-19xl));
+  }
   .sectionServices {
     padding-left: var(--padding-13xl);
     padding-right: var(--padding-13xl);
@@ -365,6 +373,7 @@
   .tradeitPill {
     font-size: clamp(1.5rem, 4vw, var(--heading-h2-size));
     padding: 14px 28px;
+    width: 70vw;
   }
 }
 
