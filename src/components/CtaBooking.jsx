@@ -15,8 +15,10 @@ const CtaBooking = ({
 
   const handleBooking = () => {
     setIsClicked(true);
-    setTimeout(() => setIsClicked(false), 150);
-    onBookingClick();
+    setTimeout(() => {
+      setIsClicked(false);
+      onBookingClick();
+    }, 250);
   };
 
   return (
