@@ -176,10 +176,6 @@
 }
 
 .bookKellyTo {
-  margin: 0;
-  position: absolute;
-  top: 73px;
-  left: calc(50% - 145.4px);
   font-size: inherit;
   letter-spacing: 2px;
   line-height: 120%;
@@ -193,10 +189,7 @@
   text-overflow: ellipsis;
 }
 
-.gridChild {
-  position: absolute;
-  top: 86.1px;
-  right: 10px;
+.ctaBooking {
   box-shadow: 0px 12.6px 12.6px rgba(0, 0, 0, 0.25);
   border-radius: var(--br-43xl-9);
   background-color: var(--color-gray-100);
@@ -239,6 +232,7 @@
   position: var(--icon-position, relative);
   top: var(--icon-top, 0);
   left: var(--icon-left, 0);
+  color: white;
 }
 
 .buttonTextIcon {
@@ -259,26 +253,21 @@
   padding: var(--padding-7xs);
 }
 
-.grid4 {
-  position: absolute;
-  top: 48px;
-  left: 48px;
-  width: 446px;
-  height: 211px;
-  font-size: var(--font-size-16xl);
-  color: var(--text-default);
-  font-family: var(--text-meta);
+.buttonContainer {
+  width: auto;
+  height: auto;
 }
 
 .receive1 {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: auto;
   border-radius: var(--br-xl);
   background-color: var(--text-default);
   border: 1px solid var(--border-default);
   box-sizing: border-box;
-  width: 660px;
-  max-width: 48%;
+  width: 90vw;
   min-width: 300px;
   flex-shrink: 1;
   text-align: center;
@@ -417,7 +406,7 @@
 
   .receive,
   .receive1 {
-    max-width: 45vw;
+    max-width: 100%;
     height: auto;
   }
 
@@ -426,17 +415,9 @@
     width: 90%;
   }
 
-  .bookKellyTo {
-    font-size: clamp(1.2rem, 2vw, var(--heading-h5-size));
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .gridChild {
+  .ctaBooking {
     width: 300px;
     height: 80px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .bookHere {
@@ -457,20 +438,14 @@
 
 /* Tablets */
 @media screen and (max-width: 992px) {
-  .grid {
-    height: 314px;
-  }
-
   .receive,
   .receive1 {
-    max-width: 45vw;
+    max-width: 100%;
     height: auto;
   }
 
-  .grid1,
-  .grid4 {
+  .buttonContainer {
     width: 90%;
-    left: 5%;
   }
 
   .receiveAPersonal {
@@ -479,11 +454,10 @@
   }
 
   .bookKellyTo {
-    top: 3rem;
     font-size: clamp(0.9rem, 2.5vw, var(--heading-h5-size));
   }
 
-  .gridChild {
+  .ctaBooking {
     width: 80%;
     max-width: 280px;
     height: 75px;
@@ -553,7 +527,7 @@
     font-size: clamp(0.9rem, 2.5vw, var(--heading-h5-size));
   }
 
-  .gridChild {
+  .ctaBooking {
     width: 90%;
     max-width: 240px;
     height: 65px;
@@ -637,7 +611,7 @@
     top: 15px;
   }
 
-  .gridChild {
+  .ctaBooking {
     width: 90%;
     max-width: 200px;
     height: 55px;
@@ -675,7 +649,7 @@
     top: 10px;
   }
 
-  .gridChild {
+  .ctaBooking {
     max-width: 180px;
     height: 50px;
     top: 60px;
