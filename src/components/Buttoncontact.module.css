@@ -1,0 +1,31 @@
+
+.button {
+  height: 21px;
+  width: auto; /* Auto width to match text */
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.button1 {
+  border-radius: var(--br-11xs);
+  background-color: var(--text-default);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs) var(--padding-base);
+  text-align: center; /* Ensures text remains inline */
+  font-size: var(--text-meta-size);
+  color: var(--text-inverse);
+  font-family: var(--text-meta);
+  border: none; /* Removes default button border */
+  cursor: pointer; /* Indicates button is clickable */
+  transition: background 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.button1:hover {
+  background-color: var(--text-muted); /* Darkens on hover */
+}

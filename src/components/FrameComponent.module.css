@@ -1,0 +1,169 @@
+.financialEducation {
+  margin: 0;
+  align-self: center;
+  position: relative;
+  font-size: inherit;
+  letter-spacing: 1px;
+  line-height: 130%;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-family: inherit;
+  text-align: center;
+  margin-bottom: var(--gap-base);
+}
+.line {
+  width: 1px;
+  height: 79px;
+  position: absolute;
+  margin: 0 !important;
+  top: 0.1px;
+  left: -50.5px;
+  background-color: var(--border-default);
+}
+.div {
+  position: relative;
+  letter-spacing: 1.0px;
+  line-height: 160%;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 15px;
+}
+.badge {
+  width: 40px;
+  height: 40px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-481xl);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--gap-base);
+  align-self: center;
+}
+.throughHerUncutChannelSheWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-10xs-1) 0px 0px;
+}
+.throughHerUncutContainer {
+  width: 222px;
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 180%;
+  color: var(--text-muted);
+  text-align: left;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.line1 {
+  height: 79px;
+  width: 1px;
+  position: absolute;
+  margin: 0 !important;
+  top: 58.1px;
+  left: 19.5px;
+  background-color: var(--border-default);
+}
+.uncutDescription {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--font-size-base);
+}
+.card2 {
+  width: 318px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-11xs);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-27xl) var(--padding-29xl) var(--padding-10xl);
+  position: relative;
+  gap: var(--gap-base);
+  text-align: left;
+  font-size: var(--font-size-3xl);
+  color: var(--background-primary);
+  font-family: var(--heading-h1-uppercase);
+}
+.card2Wrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 0px var(--padding-15xl);
+}
+
+@media screen and (max-width: 410px) {
+  .uncutDescription {
+    flex-wrap: wrap;
+  }
+  .card2 {
+    padding-top: var(--padding-11xl);
+    padding-bottom: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 397px) {
+  .card2 {
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 340px) {
+  .uncutDescription {
+    gap: var(--gap-20xl);
+  }
+}
+
+/* Updated media queries */
+@media screen and (max-width: 430px) {
+  .card2 {
+    width: 100%;
+    height: auto;
+    padding: var(--padding-11xl) var(--padding-xl);
+    box-sizing: border-box;
+  }
+  
+  .uncutDescription {
+    margin-left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-base);
+    max-width: 100%;
+  }
+  
+  .financialEducation {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .throughHerUncutContainer {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .badge {
+    margin: 20px auto;
+  }
+  
+  .line, .line1 {
+    display: none;
+  }
+}

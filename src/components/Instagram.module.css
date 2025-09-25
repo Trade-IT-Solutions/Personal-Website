@@ -1,0 +1,108 @@
+Base styles
+.iconBackgrounds {
+  position: absolute;
+  height: calc(100% - 14px);
+  top: 6.7px;
+  bottom: 7.3px;
+  left: 0px;
+  border-radius: var(--br-3xs);
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-darkslategray-200);
+  box-sizing: border-box;
+  width: 56px;
+}
+.instagramIcon {
+  position: absolute;
+  top: 19px;
+  left: 12.3px;
+  width: 32px;
+  height: 32px;
+}
+.k {
+  position: absolute;
+  top: 0px;
+  left: 68.3px;
+  line-height: 110%;
+  text-transform: uppercase;
+  font-weight: 300;
+  display: inline-block;
+  width: 252px;
+}
+.instagram {
+  position: absolute;
+  top: 126.5px;
+  left: 261.2px;
+  width: 320.3px;
+  height: 70px;
+  text-align: left;
+  font-size: var(--heading-h1-uppercase-size);
+  color: var(--text-default);
+  font-family: var(--heading-h5);
+}
+
+/* Responsive sizing adjustments */
+@media screen and (max-width: 768px) {
+  .iconBackgrounds {
+    width: 48px;
+    height: calc(100% - 18px);
+  }
+  .instagramIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .iconBackgrounds {
+    width: 40px;
+    height: calc(100% - 20px);
+  }
+  .instagramIcon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* New media query for vertical list layout */
+@media screen and (max-width: 600px) {
+  /* Remove absolute positioning to allow stacking */
+  .iconBackgrounds,
+  .instagramIcon,
+  .k,
+  .instagram {
+    position: static;
+    margin: 10px auto;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+  }
+
+  /* Center the icon container elements */
+  .iconBackgrounds {
+    display: inline-block;
+    /* Adjust dimensions if needed for vertical layout */
+    width: 50px;
+    height: 50px;
+  }
+  .instagramIcon {
+    display: block;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+  }
+  /* Center text and remove fixed sizing */
+  .k {
+    display: block;
+    text-align: center;
+    width: auto;
+    margin: 0 0 10px 0;
+  }
+  .instagram {
+    display: block;
+    text-align: center;
+    width: auto;
+    margin: 0 0 10px 0;
+    font-size: calc(var(--heading-h1-uppercase-size) * 0.9);
+  }
+}
+
