@@ -1,5 +1,5 @@
 // BookingCTA.jsx
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styles from "./CtaBooking.module.css";
 import PropTypes from "prop-types";
 
