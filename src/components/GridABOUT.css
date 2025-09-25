@@ -1,0 +1,113 @@
+.project-in-mind {
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  font-family: var(--text-meta);
+  text-align: left;
+}
+.lets-make-your {
+  margin: 0;
+  position: relative;
+  font-size: var(--heading-large-size);
+  line-height: 100%;
+  font-weight: 300;
+  font-family: inherit;
+}
+.premium-web-design {
+  margin: 0;
+  width: 500px;
+  position: relative;
+  font-size: var(--heading-h5-size);
+  line-height: 170%;
+  font-weight: 400;
+  font-family: inherit;
+  color: var(--text-muted);
+  display: inline-block;
+}
+.project-in-mind-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.button3 {
+  position: relative;
+  font-size: var(--text-meta-size);
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  font-family: var(--text-meta);
+  color: var(--text-inverse);
+  text-align: left;
+}
+.pharrow-up-right-light-icon4 {
+  height: 18px;
+  width: 18px;
+  position: relative;
+}
+.button2 {
+  cursor: pointer;
+  border: none;
+  padding: var(--padding-3xs) var(--padding-base);
+  background-color: var(--background-primary);
+  border-radius: var(--br-11xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-5xs);
+}
+.grid10 {
+  align-self: stretch;
+  background-color: var(--background-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-141xl) var(--padding-29xl);
+  gap: var(--gap-13xl);
+  text-align: center;
+  font-size: var(--text-meta-size);
+  color: var(--background-primary);
+  font-family: var(--heading-h5);
+}
+
+@media screen and (max-width: 768px) {
+  .premium-web-design {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .lets-make-your {
+    font-size: 20px;
+  }
+  .premium-web-design {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .premium-web-design {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .button2 {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .lets-make-your {
+    font-size: 20px;
+  }
+  .premium-web-design {
+    font-size: 14px;
+  }
+}

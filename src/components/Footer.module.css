@@ -1,0 +1,165 @@
+/* Footer Container - Fully Responsive */
+.footer {
+  width: 100%;
+  background-color: var(--background-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center footer content */
+  text-align: center;
+  padding: var(--padding-45xl) var(--padding-base);
+  box-sizing: border-box;
+  max-width: 100%;
+  z-index: 0;
+  font-size: var(--text-meta-size);
+  color: var(--text-default);
+  font-family: var(--text-meta);
+ 
+}
+
+@media (max-width: 1140px) {
+  .footer {
+    padding: 20px 10px; /* reduce top/bottom and left/right padding */
+  }
+}
+
+
+@media (max-width: 700px) {
+  .footer {
+    padding: 10px 10px; /* reduce top/bottom and left/right padding */
+  }
+}
+
+/* Footer Content Wrapper */
+.container {
+  width: 100%;
+  max-width: 50rem; /* Adjust for better responsiveness */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center all items */
+  justify-content: center;
+  /* padding: 20px; */
+  box-sizing: border-box;
+}
+
+/* Social Media Icons - All in a Row */
+.grid1 {
+  display: flex;
+  flex-direction: row; /* Ensures icons are in a single line */
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
+  gap: 15px; /* Adjust spacing between icons */
+  width: 100%;
+  margin-bottom: 20px; /* Space below */
+}
+
+/* Individual Social Media Items */
+.grid2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Navigation Links - Horizontal on Desktop, Stacked on Mobile */
+.nav {
+  display: flex;
+  flex-direction: row; /* Default: horizontal */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 20px; /* Space between links */
+  width: 100%;
+}
+
+/* Bottom Footer Content - Centered */
+.grid6 {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center footer bottom text */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjust spacing */
+  text-align: center;
+}
+
+/* "To Top" Section */
+.grid7 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Social Media and Navigation Links */
+.socialText {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-default);
+  text-decoration: none;
+}
+
+.socialText:hover {
+  text-decoration: underline;
+}
+
+/* Kelly Logo Container */
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adds spacing from footer content */
+  width: 100%;
+}
+
+/* Kelly Logo Image */
+.kellyLogo {
+  width: 120px; /* Default for desktop */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .grid1 {
+    gap: 10px; /* Reduce spacing for tablets */
+  }
+
+  .nav {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .kellyLogo {
+    width: 100px; /* Adjust logo size for tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid1 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust spacing */
+  }
+
+  .nav {
+    flex-direction: column; /* Stack links vertically */
+    gap: 10px;
+  }
+
+  .kellyLogo {
+    width: 90px; /* Adjust logo size for mobile */
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .kellyLogo {
+    width: 80px; /* Smallest size for phones */
+  }
+}

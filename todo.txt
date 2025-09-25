@@ -1,0 +1,51 @@
+Overall:
+[] - Don't depend on props drealling, full automous component
+
+Mobile screens:
+[] - show the navbar and only hide it when the user scroll,
+other wise show it
+[] - scale up animation for links
+
+Tablet screens:
+[] - create a hamburger icon
+[] - when click on it, display the dropdown menu
+[] - the same content as the Desktop navbar but in vertical
+
+Desktop and beyonh screens:
+[]- fix and re-arrange the order of the link
+[] - Create a scale up animation for links 
+
+Task
+Diego task details
+Deadline - 4pm Cst Thursday
+Scope
+[X]- Reusable NavBar component with three responsive modes:
+[]- Mobile: hamburger icon opens a dropdown or drawer menu.
+[X]- Tablet: same layout as the existing hardcoded navbar,
+ including the hide on scroll feature.
+[X]- Desktop: full width normal navbar.
+[]- Finish Connect page responsiveness across common breakpoints.
+
+Acceptance criteria
+[]- Mobile width up to 639 px: hamburger icon present, menu opens and 
+closes correctly, focus trap for accessibility, body scroll locked when open.
+[]- Tablet 640 to 1023 px: navbar matches current design including hide
+ on scroll. No layout shifts when hiding or showing. Keyboard nav and 
+ ARIA attributes present.
+[]- Desktop 1024 px and up: full navbar with inline links. Hover and 
+active states follow our design tokens.
+[]- Connect page renders without horizontal scroll at 
+360, 390, 414, 768, 1024, 1280, 1440 px widths. Key sections 
+stack or wrap cleanly, images scale with max width 100 percent and height auto, and text maintains readable line length.
+[]- Implementation checklist
+[]- Extract links and CTA into a shared config so the component
+ is reusable.
+[]- Use a single source of truth for route paths.
+[]- Add hide on scroll using a scroll listener with
+ requestAnimationFrame to avoid jank.
+[]- Add aria controls and aria expanded on the hamburger
+ button, and role menu for the dropdown.
+[]- Close the menu on route change and on Escape key.
+[]- Add unit tests for hide on scroll logic and open or 
+close menu reducer if applicable.
+[]- Add Storybook stories for mobile, tablet, desktop.

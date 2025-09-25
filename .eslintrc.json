@@ -1,0 +1,22 @@
+{
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "no-unused-vars": ["warn", { "varsIgnorePattern": "^React$" }],
+      "react/no-unescaped-entities": "off"
+    }
+  }
+  
