@@ -69,7 +69,7 @@ const MobileView = () => {
 
           <h1 className={styles.mainHeading}>Ready to Connect with Kelly?</h1>
           <p className={styles.subHeading}>
-            Schedule your consultation today and let's discuss how we can work together to achieve your goals.
+            Kelly is on a mission to empower schools, churches, and specialized events with financial wisdom.
           </p>
 
           <button
@@ -79,7 +79,7 @@ const MobileView = () => {
               transform: isBookingClicked ? "translateY(2px)" : "translateY(-2px)",
             }}
           >
-            Book Your Session
+            Book Kelly to Speak
           </button>
         </div>
       </section>

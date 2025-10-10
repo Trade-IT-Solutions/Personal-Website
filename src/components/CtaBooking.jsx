@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 const CtaBooking = ({
   name = "Kelly",
   heading = "Ready to Connect with Kelly?",
-  subHeading = "Schedule your consultation today and let's discuss how we can work together to achieve your goals.",
-  buttonText = "Book Your Session",
+  subHeading = "Kelly is on a mission to empower schools, churches, and specialized events with financial wisdom.",
+  buttonText = "Book Kelly to Speak",
   isAvailable = true,
   onBookingClick = () => console.log("Booking clicked"),
 }) => {

@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { FiHome, FiUser, FiCalendar, FiMail } from "react-icons/fi";
+import { FiHome, FiUser, FiCalendar, FiMail, FiBook } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import styles from "./Navbar.module.css";
 import { useEffect, useState, useRef } from "react";
@@ -20,6 +20,13 @@ const pages = [
     href: "/contact",
     mobileIcon: <FiMail size={20} />,
   },
+
+  {
+    label: "resources",
+    href: "/resources",
+    mobileIcon: <FiBook size={20} />,
+  },
+  
   {
     label: "bookings",
     href: "/bookings",
@@ -67,11 +74,9 @@ function NavbarTablet() {
 
   const controlNavbar = () => {
     if (isScrollingDown === false && window.scrollY > lastScrollY) {
-      // Scrolling down → hide navbar
       setIsScrollingDown(true);
     }
     if (isScrollingDown === true && window.scrollY < lastScrollY) {
-      // Scrolling up → show navbar
       setIsScrollingDown(false);
     }
     setLastScrollY(window.scrollY);
@@ -122,11 +127,9 @@ const NavbarMobile = () => {
 
   const controlNavbar = () => {
     if (isScrollingDown === false && window.scrollY > lastScrollY) {
-      // Scrolling down → hide navbar
       setIsScrollingDown(true);
     }
     if (isScrollingDown === true && window.scrollY < lastScrollY) {
-      // Scrolling up → show navbar
       setIsScrollingDown(false);
     }
     setLastScrollY(window.scrollY);
@@ -140,17 +143,14 @@ const NavbarMobile = () => {
     };
   }, [lastScrollY]);
 
-  // Toggle menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Close menu
   const closeMenu = () => {
     setIsOpen(false);
   };
 
-  // Handle Escape key press
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape" && isOpen) {
@@ -163,7 +163,6 @@ const NavbarMobile = () => {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -174,7 +173,6 @@ const NavbarMobile = () => {
       document.body.style.position = "";
       document.body.style.width = "";
     }
-    // Cleanup call back to reset styles when component unmounts
     return () => {
       document.body.style.overflow = "";
       document.body.style.position = "";
@@ -182,112 +180,84 @@ const NavbarMobile = () => {
     };
   }, [isOpen]);
 
-  // Focus trap
   useEffect(() => {
-    if (isOpen && menuRef.current) {
-      const focusableElements = menuRef.current.querySelectorAll(
-        'a[href], button, [tabindex]:not([tabindex="-1"])'
-      );
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    };
 
-      const handleTab = (e) => {
-        if (e.key === "Tab") {
-          if (e.shiftKey) {
-            if (document.activeElement === firstElement) {
-              e.preventDefault();
-              lastElement.focus();
-            }
-          } else {
-            if (document.activeElement === lastElement) {
-              e.preventDefault();
-              firstElement.focus();
-            }
-          }
-        }
-      };
-
-      document.addEventListener("keydown", handleTab);
-      firstElement?.focus();
-
-      return () => document.removeEventListener("keydown", handleTab);
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
     }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [isOpen]);
 
   return (
-    <header>
-      {/* Hamburger Button */}
+    <>
       <button
         ref={buttonRef}
-        className={`${styles.hamburgerButton} ${
-          isScrollingDown ? styles.hide : styles.show
-        }`}
+        className={styles.hamburgerButton}
         onClick={toggleMenu}
-        aria-controls="mobile-menu"
+        aria-label="Toggle menu"
         aria-expanded={isOpen}
-        aria-label="Toggle navigation menu"
+        aria-controls="mobile-menu"
       >
         {isOpen ? (
           <IoClose className={styles.closeIcon} />
         ) : (
           <div className={styles.hamburgerIcon}>
-            {/* <span></span> */}
+            <span></span>
             <span></span>
             <span></span>
           </div>
         )}
       </button>
 
-      {/* Overlay */}
       {isOpen && (
-        <div
-          className={styles.overlay}
-          onClick={closeMenu}
-          aria-hidden="true"
-        />
+        <div className={styles.overlay} onClick={closeMenu}>
+          <nav
+            ref={menuRef}
+            id="mobile-menu"
+            className={`${styles.dropdownMenu} ${isOpen ? styles.open : ""}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Link to="/" className={styles.logoLink} onClick={closeMenu}>
+              <img
+                src="/kelly-logo-11@2x.png"
+                alt="Kelly Logo"
+                className={styles.kellyLogo}
+              />
+            </Link>
+            <ul className={styles.navList}>
+              {pages.map((page) => (
+                <li key={page.label}>
+                  <NavLink
+                    to={page.href}
+                    className={({ isActive }) =>
+                      isActive
+                        ? `active ${styles.navbarLinks}`
+                        : `${styles.navbarLinks}`
+                    }
+                    onClick={closeMenu}
+                  >
+                    {page.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       )}
-
-      {/* Dropdown Menu */}
-      <nav
-        ref={menuRef}
-        id="mobile-menu"
-        className={`${styles.dropdownMenu} ${isOpen ? styles.open : ""}`}
-        role="menu"
-        aria-hidden={!isOpen}
-      >
-        {/* Logo */}
-        <NavLink to="/" onClick={closeMenu} className={styles.logoLink}>
-          <img
-            className={styles.kellyLogo}
-            alt="Kelly Logo"
-            src="/kelly-logo-11@2x.png"
-            loading="lazy"
-            key={"logo"}
-          />
-        </NavLink>
-
-        {/* Navigation Links */}
-        <ul className={styles.navList}>
-          {pages.map((page) => {
-            return (
-              <li key={page.label} role="none">
-                <NavLink
-                  to={page.href}
-                  onClick={closeMenu}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `active ${styles.navbarLinks}`
-                      : `${styles.navbarLinks}`
-                  }
-                >
-                  {page.label}
-                </NavLink>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </header>
+    </>
   );
 };
 
@@ -310,6 +280,7 @@ function Navbar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <>
       {screenSize === "mobile" && <NavbarMobile />}

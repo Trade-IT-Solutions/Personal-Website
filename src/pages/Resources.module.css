@@ -1,0 +1,419 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.resources {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #1a1816;
+  color: #DAC5A7;
+  padding-top: 140px;
+  position: relative;
+}
+
+.resourcesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  text-align: center;
+}
+
+.mainTitle {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #DAC5A7;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #a89a82;
+  margin-bottom: 60px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.resourceCard {
+  background-color: #22201D;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(218, 197, 167, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.resourceCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(218, 197, 167, 0.15);
+}
+
+.imageContainer {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background-color: #2a2826;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resourceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.resourceCard:hover .resourceImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.resourceTitle {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #DAC5A7;
+  margin-bottom: 24px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.ctaButton {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #D4A67C 0%, #B8906A 100%);
+  color: #1a1816;
+  border: none;
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(212, 166, 124, 0.4);
+}
+
+.ctaButton:active {
+  transform: scale(0.98);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.modalContent {
+  background-color: #22201D;
+  border-radius: 20px;
+  padding: 48px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  border: 1px solid rgba(218, 197, 167, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #DAC5A7;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(218, 197, 167, 0.1);
+  transform: rotate(90deg);
+}
+
+.formTitle {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #DAC5A7;
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #DAC5A7;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.input {
+  font-family: 'Inter', sans-serif;
+  padding: 14px 16px;
+  font-size: 1rem;
+  background-color: #1a1816;
+  border: 1px solid rgba(218, 197, 167, 0.2);
+  border-radius: 8px;
+  color: #DAC5A7;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #D4A67C;
+  box-shadow: 0 0 0 3px rgba(212, 166, 124, 0.1);
+}
+
+.input::placeholder {
+  color: #6b6456;
+}
+
+.phoneInputContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.countryCodeSelect {
+  font-family: 'Inter', sans-serif;
+  padding: 14px 12px;
+  font-size: 1rem;
+  background-color: #1a1816;
+  border: 1px solid rgba(218, 197, 167, 0.2);
+  border-radius: 8px;
+  color: #DAC5A7;
+  cursor: pointer;
+  min-width: 130px;
+  transition: all 0.3s ease;
+}
+
+.countryCodeSelect:focus {
+  outline: none;
+  border-color: #D4A67C;
+  box-shadow: 0 0 0 3px rgba(212, 166, 124, 0.1);
+}
+
+.phoneInput {
+  flex: 1;
+  font-family: 'Inter', sans-serif;
+  padding: 14px 16px;
+  font-size: 1rem;
+  background-color: #1a1816;
+  border: 1px solid rgba(218, 197, 167, 0.2);
+  border-radius: 8px;
+  color: #DAC5A7;
+  transition: all 0.3s ease;
+}
+
+.phoneInput:focus {
+  outline: none;
+  border-color: #D4A67C;
+  box-shadow: 0 0 0 3px rgba(212, 166, 124, 0.1);
+}
+
+.phoneInput::placeholder {
+  color: #6b6456;
+}
+
+.submitButton {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #D4A67C 0%, #B8906A 100%);
+  color: #1a1816;
+  border: none;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 166, 124, 0.4);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.successMessage p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #DAC5A7;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.errorMessage p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #ff8a80;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .resources {
+    padding-top: 100px;
+  }
+
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .modalContent {
+    padding: 32px 24px;
+    max-height: 85vh;
+  }
+
+  .formTitle {
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+
+  .phoneInputContainer {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .countryCodeSelect {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mainTitle {
+    font-size: 2rem;
+  }
+
+  .resourceTitle {
+    font-size: 1.25rem;
+  }
+
+  .cardContent {
+    padding: 24px;
+  }
+
+  .modalContent {
+    padding: 24px 16px;
+  }
+}

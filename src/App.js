@@ -11,6 +11,7 @@ import Frontpage from "./pages/Frontpage.js";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.js";
 import Bookings from "./pages/Bookings.jsx";
+import Resources from "./pages/Resources.js";
 import TestPage from "./pages/testPage.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 
@@ -51,6 +52,11 @@ function App() {
         metaDescription =
           "Book Kelly Ohgee for keynotes, panels, workshops, podcasts and speaking engagements. Transform your event with purpose-driven education and inspiration.";
         break;
+      case "/resources":
+        title = "Resources - Kelly Ohgee | Empowerment Through Education";
+        metaDescription =
+          "Download exclusive resources from Kelly Ohgee including the WAM Method and learn how to read the markets like a story.";
+        break;
       default:
         title = "Kelly Ohgee | Empowerment Through Education";
     }
@@ -76,6 +82,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/bookings" element={<Bookings />} />
+        <Route path="/resources" element={<Resources />} />
         <Route path="/test" element={<TestPage />} />
 
         {/* Redirect all other paths to the frontpage */}
