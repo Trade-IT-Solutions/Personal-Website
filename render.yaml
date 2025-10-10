@@ -1,0 +1,38 @@
+services:
+  - type: static_site
+    name: personal-website
+    env: static
+    plan: free
+    buildCommand: npm install && npm run build
+    publishPath: build
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: max-age=0, no-cache, no-store, must-revalidate
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+
+  - type: web
+    name: personal-website-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: SMTP_HOST
+        fromSecret: smtp-host
+      - key: SMTP_PORT
+        fromSecret: smtp-port
+      - key: SMTP_USER
+        fromSecret: smtp-user
+      - key: SMTP_PASSWORD
+        fromSecret: smtp-password
+      - key: ADMIN_EMAIL
+        fromSecret: admin-email
+      - key: FROM_NAME
+        value: "Kelly Ohgee"
