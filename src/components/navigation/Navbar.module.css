@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 3rem;
+  gap: 2.5rem;
   margin-left: 130px;
 }
 
@@ -49,7 +49,7 @@
   color: var(--text-default);
   font-family: var(--text-meta);
   padding-left: 15%;
-  width: 44rem;
+  width: 52rem;
 }
 
 .DesktopContainer {
@@ -73,6 +73,7 @@
   color: #dac5a7;
   text-decoration: none;
   transition: transform 0.3s ease-in-out;
+  white-space: nowrap;
 }
 
 /* Tablet  */
@@ -81,8 +82,8 @@
   top: 30.1px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90vw;
-  max-width: 400px;
+  width: 92vw;
+  max-width: 500px;
   margin: 10px auto;
   background-color: rgba(39, 38, 37, 0.95);
   border: 1px solid var(--border-default);
@@ -90,7 +91,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 15px;
+  padding: 10px 12px;
   z-index: 9999;
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   transform: translateY(0) translateX(-50%);
@@ -111,19 +112,27 @@
 .topNavItem {
   text-decoration: none;
   color: var(--text-default);
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 6px;
+  flex: 1;
+  min-width: 0;
 }
+
 nav[class*="topnav" i] a[class^="active"] {
   color: #d4a67c;
 }
 
 .topNavItem span {
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 2px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Mobile styles */
@@ -198,7 +207,7 @@ nav[class*="topnav" i] a[class^="active"] {
   position: fixed;
   top: 0;
   right: 0;
-  width: 150px;
+  width: 200px;
   max-width: 80vw;
   height: 100vh;
   background-color: #22201d;
@@ -280,5 +289,61 @@ nav[class*="navbar" i]:not([class*="topnav" i]) a[class*="active"] {
   100% {
     opacity: 0;
     pointer-events: none;
+  }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1280px) {
+  .navbarDesktopHeader {
+    width: 50rem;
+  }
+  
+  .navbarDesktopMenu {
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .navbarDesktopHeader {
+    width: 46rem;
+  }
+  
+  .navbarDesktopMenu {
+    gap: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .navbarDesktopHeader {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topNav {
+    padding: 8px 8px;
+  }
+  
+  .topNavItem {
+    font-size: 11px;
+    padding: 0 4px;
+  }
+  
+  .topNavItem span {
+    font-size: 9px;
+  }
+  
+  .hamburgerButton {
+    right: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .topNavItem {
+    font-size: 10px;
+  }
+  
+  .topNavItem span {
+    font-size: 8px;
   }
 }
