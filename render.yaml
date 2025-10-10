@@ -1,37 +1,36 @@
-staticSites:
-  - name: personal-website
-    plan: free
-    buildCommand: npm install && npm run build
-    publishPath: build
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: max-age=0, no-cache, no-store, must-revalidate
-    envVars:
-      - key: NODE_VERSION
-        value: 18
-
 services:
-  - type: web_service
-    name: personal-website-backend
+  # Backend - SMTP Email Server
+  - type: web
+    name: kelly-website-backend
     env: node
-    plan: free
     rootDir: backend
     buildCommand: npm install
-    startCommand: node server.js
-    healthCheckPath: /api/health
+    startCommand: npm start
+    plan: free
     envVars:
-      - key: NODE_VERSION
-        value: 18
       - key: SMTP_HOST
-        fromSecret: smtp-host
+        value: smtp.gmail.com
       - key: SMTP_PORT
-        fromSecret: smtp-port
+        value: 587
       - key: SMTP_USER
-        fromSecret: smtp-user
+        sync: false
       - key: SMTP_PASSWORD
-        fromSecret: smtp-password
-      - key: ADMIN_EMAIL
-        fromSecret: admin-email
+        sync: false
       - key: FROM_NAME
-        value: "Kelly Ohgee"
+        value: Kelly Ohgee
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+  # Frontend - React Static Site
+  - type: web
+    name: kelly-website-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    plan: free
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
