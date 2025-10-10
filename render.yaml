@@ -1,7 +1,5 @@
-services:
-  - type: static_site
-    name: personal-website
-    env: static
+staticSites:
+  - name: personal-website
     plan: free
     buildCommand: npm install && npm run build
     publishPath: build
@@ -13,7 +11,8 @@ services:
       - key: NODE_VERSION
         value: 18
 
-  - type: web
+services:
+  - type: web_service
     name: personal-website-backend
     env: node
     plan: free
