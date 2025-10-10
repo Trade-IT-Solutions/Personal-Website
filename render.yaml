@@ -21,13 +21,3 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-
-  # Frontend - React Static Site
-  - type: static
-    name: kelly-website-frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./build
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
