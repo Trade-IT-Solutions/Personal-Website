@@ -8,8 +8,25 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// CORS configuration for production
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://personal-website-us3x.onrender.com',
+  'https://www.kellyohgee.com',
+  'https://kellyohgee.com'
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Create SMTP transporter
@@ -51,7 +68,7 @@ app.post('/api/send-resource', async (req, res) => {
     if (resourceType === 'wam') {
       pdfFileName = 'kellys-wam-method.pdf';
       pdfPath = path.join(__dirname, 'pdfs', pdfFileName);
-      resourceTitle = "Kelly's WAM Method For Trading";
+      resourceTitle = "Kelly's WAM Method";
     } else if (resourceType === 'markets') {
       pdfFileName = 'read-markets-like-story.pdf';
       pdfPath = path.join(__dirname, 'pdfs', pdfFileName);

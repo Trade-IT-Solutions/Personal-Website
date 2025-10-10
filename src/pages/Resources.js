@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import styles from "./Resources.module.css";
 import Footer from "../components/Footer.js";
 
+// Production backend URL
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://personal-website-backend-e74k.onrender.com'
+  : 'http://localhost:5000';
+
 const Resources = () => {
   const [showForm, setShowForm] = useState(null);
   const [formData, setFormData] = useState({
@@ -188,7 +193,7 @@ Kelly Ohgee Team`;
     setErrorMessage("");
 
     const resourceTitle = showForm === "wam" 
-      ? "Kelly's WAM Method For Trading" 
+      ? "Kelly's WAM Method" 
       : "How to Read the Markets Like a Story";
 
     // Generate email template
@@ -199,7 +204,7 @@ Kelly Ohgee Team`;
     );
 
     try {
-      const response = await fetch('http://localhost:5001/api/send-resource', {
+      const response = await fetch(`${API_URL}/api/send-resource`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -298,7 +303,7 @@ Kelly Ohgee Team`;
             </div>
             <div className={styles.cardContent}>
               <h2 className={styles.resourceTitle}>
-                Learn How To Read The Markets Like A Story Here
+                Learn how to read the markets like a story here
               </h2>
               <button
                 className={styles.ctaButton}
@@ -327,7 +332,7 @@ Kelly Ohgee Team`;
 
             <h2 className={styles.formTitle}>
               {showForm === "wam"
-                ? "Get Kelly's WAM Method For Trading"
+                ? "Get Kelly's WAM Method"
                 : "Learn How to Read the Markets"}
             </h2>
 
