@@ -279,7 +279,7 @@ Kelly Ohgee Team`;
             </div>
             <div className={styles.cardContent}>
               <h2 className={styles.resourceTitle}>
-                Get Kelly's WAM Method here
+                Get Kelly's WAM Method Here
               </h2>
               <button
                 className={styles.ctaButton}
@@ -303,13 +303,13 @@ Kelly Ohgee Team`;
             </div>
             <div className={styles.cardContent}>
               <h2 className={styles.resourceTitle}>
-                Learn how to read the markets like a story here
+                Learn How To Read The Markets Like A Story Here
               </h2>
               <button
                 className={styles.ctaButton}
                 onClick={() => handleCardClick("markets")}
               >
-                Click here!
+                Click Here!
               </button>
             </div>
           </div>
