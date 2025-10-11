@@ -47,7 +47,8 @@ const MobileView = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Join TradeIT, the First University Style Education System for Trading
+                           Join TradeIT, 
+          <p>the First University Style Education System for Trading</p>
           <p className={styles.smallerPart}>
             TradeIT is on a mission to revolutionize financial education as a whole and provide solutions to the scarce understanding of the finance world.
           </p>
