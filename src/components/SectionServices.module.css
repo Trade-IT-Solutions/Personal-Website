@@ -43,6 +43,7 @@
   overflow: hidden;
   font-size: clamp(1.5rem, 4vw, var(--font-size-19xl));
   width: 70vw;
+  text-align: center;
 }
 
 .tradeitPill::before {
