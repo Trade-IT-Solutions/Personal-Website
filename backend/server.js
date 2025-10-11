@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -12,8 +12,8 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:3000',
   'https://personal-website-us3x.onrender.com',
-  'https://www.kellyohgee.com',
-  'https://kellyohgee.com'
+  'https://www.kellyohgee.info',
+  'https://kellyohgee.info'
 ];
 
 app.use(cors({
@@ -29,25 +29,10 @@ app.use(cors({
 
 app.use(express.json());
 
-// Create SMTP transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: process.env.SMTP_PORT == 465, // true for 465, false for other ports
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD
-  }
-});
+// Set SendGrid API Key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Verify SMTP connection on startup
-transporter.verify(function(error, success) {
-  if (error) {
-    console.error('SMTP connection error:', error);
-  } else {
-    console.log('SMTP server is ready to send emails');
-  }
-});
+console.log('SendGrid configured:', !!process.env.SENDGRID_API_KEY);
 
 // Email sending endpoint
 app.post('/api/send-resource', async (req, res) => {
@@ -89,35 +74,41 @@ app.post('/api/send-resource', async (req, res) => {
       });
     }
 
-    // Prepare email with template from frontend
-    const mailOptions = {
-      from: {
-        name: process.env.FROM_NAME || 'Kelly Ohgee',
-        address: process.env.SMTP_USER
-      },
+    // Read PDF and convert to base64
+    const pdfBuffer = fs.readFileSync(pdfPath);
+    const pdfBase64 = pdfBuffer.toString('base64');
+
+    // Prepare email to user
+    const msg = {
       to: email,
+      from: {
+        email: process.env.SENDGRID_FROM_EMAIL,
+        name: process.env.FROM_NAME || 'Kelly Ohgee'
+      },
       subject: emailTemplate.subject,
       text: emailTemplate.text,
       html: emailTemplate.html,
       attachments: [
         {
+          content: pdfBase64,
           filename: pdfFileName,
-          path: pdfPath,
-          contentType: 'application/pdf'
+          type: 'application/pdf',
+          disposition: 'attachment'
         }
       ]
     };
 
     // Send email to user
-    await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
+    console.log(`Email sent successfully to ${email}`);
 
     // Send admin notification
-    const adminMailOptions = {
+    const adminNotification = {
+      to: process.env.ADMIN_EMAIL || process.env.SENDGRID_FROM_EMAIL,
       from: {
-        name: 'Kelly Website',
-        address: process.env.SMTP_USER
+        email: process.env.SENDGRID_FROM_EMAIL,
+        name: 'Kelly Website'
       },
-      to: process.env.ADMIN_EMAIL || process.env.SMTP_USER,
       subject: `New Resource Download: ${resourceTitle}`,
       text: `New resource request:\n\nName: ${name}\nEmail: ${email}\nPhone: ${countryCode} ${phone}\nResource: ${resourceTitle}\nTime: ${new Date().toLocaleString()}`,
       html: `
@@ -132,7 +123,8 @@ app.post('/api/send-resource', async (req, res) => {
       `
     };
 
-    await transporter.sendMail(adminMailOptions);
+    await sgMail.send(adminNotification);
+    console.log(`Admin notification sent`);
 
     // Return success response
     res.status(200).json({
@@ -142,6 +134,10 @@ app.post('/api/send-resource', async (req, res) => {
 
   } catch (error) {
     console.error('Error sending email:', error);
+    
+    if (error.response) {
+      console.error('SendGrid error details:', error.response.body);
+    }
     
     res.status(500).json({
       success: false,
@@ -153,11 +149,15 @@ app.post('/api/send-resource', async (req, res) => {
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'Server is running' });
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'Server is running',
+    sendgridConfigured: !!process.env.SENDGRID_API_KEY
+  });
 });
 
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`SMTP configured: ${!!process.env.SMTP_HOST}`);
+  console.log(`SendGrid API Key configured: ${!!process.env.SENDGRID_API_KEY}`);
 });
