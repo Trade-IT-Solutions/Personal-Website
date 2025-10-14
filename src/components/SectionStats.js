@@ -7,9 +7,9 @@ const CACHE_EXPIRY_TIME = 12 * 60 * 60 * 1000; // 12 hours
 const SectionStats = ({ className = "" }) => {
   const [youtubeSubscribers, setYoutubeSubscribers] = useState("Loading...");
   // Hardcoded values as requested
-  const instagramFollowers = "168.4k+";
-  const twitterFollowers = "36.2k+";
-  const tiktokFollowers = "222.8K+";
+  const instagramFollowers = "174k+";
+  const twitterFollowers = "36.1k+";
+  const tiktokFollowers = "224K+";
 
   // Function to check cache validity
   const isCacheValid = (key) => {
