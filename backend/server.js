@@ -9,23 +9,63 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS configuration for production
+// CORS configuration for global access
 const allowedOrigins = [
   'http://localhost:3000',
+  'http://localhost:3001',
   'https://personal-website-us3x.onrender.com',
   'https://www.kellyohgee.info',
   'https://kellyohgee.info'
 ];
 
+// In production, allow requests from the main domain and any subdomain
+const isProduction = process.env.NODE_ENV === 'production';
+const mainDomain = 'kellyohgee.info';
+
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    // Allow requests with no origin (like mobile apps, Postman, etc.)
+    if (!origin) {
+      return callback(null, true);
     }
+    
+    // Always allow localhost in development
+    if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+      return callback(null, true);
+    }
+    
+    // In production, allow main domain and subdomains
+    if (isProduction) {
+      try {
+        const url = new URL(origin);
+        // Allow exact matches
+        if (allowedOrigins.indexOf(origin) !== -1) {
+          return callback(null, true);
+        }
+        // Allow main domain and www subdomain
+        if (url.hostname === mainDomain || url.hostname === `www.${mainDomain}`) {
+          return callback(null, true);
+        }
+      } catch (e) {
+        // Invalid origin URL
+      }
+    }
+    
+    // Check against allowed origins list
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    
+    // In development, be more permissive
+    if (!isProduction) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 app.use(express.json());
@@ -40,8 +80,17 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   // Strict Transport Security (HTTPS only)
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  // Content Security Policy
-  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googleapis.com https://api.twitter.com https://graph.instagram.com https://api.tiktok.com; frame-src 'self' https://www.youtube.com;");
+  // Content Security Policy - Updated for global access
+  res.setHeader('Content-Security-Policy', 
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.google.com https://www.gstatic.com https://apis.google.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.cdnfonts.com; " +
+    "font-src 'self' https://fonts.gstatic.com https://fonts.cdnfonts.com data:; " +
+    "img-src 'self' data: https: http:; " +
+    "connect-src 'self' https://www.googleapis.com https://api.twitter.com https://graph.instagram.com https://graph.facebook.com https://api.tiktok.com https://www.tikhub.io https://*.rapidapi.com https://*.p.rapidapi.com; " +
+    "frame-src 'self' https://www.youtube.com https://youtube.com https://www.google.com; " +
+    "media-src 'self' https://www.youtube.com;"
+  );
   // Referrer Policy
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   // Permissions Policy
@@ -196,6 +245,36 @@ const isCacheValid = (platform) => {
   return cached && cached.value && (Date.now() - cached.timestamp < CACHE_EXPIRY);
 };
 
+// Helper function for API requests with timeout and global error handling
+const makeApiRequest = async (url, options = {}, timeout = 15000) => {
+  try {
+    const response = await axios.get(url, {
+      ...options,
+      timeout: timeout,
+      // Add headers for global compatibility
+      headers: {
+        'Accept': 'application/json',
+        'Accept-Language': '*',
+        'User-Agent': 'Mozilla/5.0 (compatible; KellyWebsite/1.0)',
+        ...options.headers
+      },
+      // Add retry configuration for better global reliability
+      validateStatus: function (status) {
+        return status >= 200 && status < 500; // Don't throw on 4xx errors
+      }
+    });
+    return response;
+  } catch (error) {
+    if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+      throw new Error('Request timeout - service may be unavailable in your region');
+    }
+    if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+      throw new Error('Service unavailable - may be restricted in your region');
+    }
+    throw error;
+  }
+};
+
 // Instagram Follower Count Endpoint
 app.get('/api/instagram-followers', async (req, res) => {
   try {
@@ -211,7 +290,7 @@ app.get('/api/instagram-followers', async (req, res) => {
     // Option 1: Instagram Graph API (requires access token)
     if (process.env.INSTAGRAM_ACCESS_TOKEN) {
       try {
-        const response = await axios.get(
+        const response = await makeApiRequest(
           `https://graph.instagram.com/me?fields=username,account_type&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`
         );
         
@@ -219,7 +298,7 @@ app.get('/api/instagram-followers', async (req, res) => {
         const userId = response.data.id;
         
         // Get insights (requires Instagram Business Account)
-        const insightsResponse = await axios.get(
+        const insightsResponse = await makeApiRequest(
           `https://graph.facebook.com/v18.0/${userId}?fields=followers_count&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`
         );
         
@@ -242,7 +321,7 @@ app.get('/api/instagram-followers', async (req, res) => {
     // Option 2: Third-party API (RapidAPI or similar)
     if (process.env.RAPIDAPI_KEY) {
       try {
-        const response = await axios.get(
+        const response = await makeApiRequest(
           'https://instagram-scraper-api2.p.rapidapi.com/userinfo/kellyohgee',
           {
             headers: {
@@ -299,7 +378,7 @@ app.get('/api/twitter-followers', async (req, res) => {
     // Twitter API v2
     if (process.env.TWITTER_BEARER_TOKEN) {
       try {
-        const response = await axios.get(
+        const response = await makeApiRequest(
           'https://api.twitter.com/2/users/by/username/kellyohgee?user.fields=public_metrics',
           {
             headers: {
@@ -326,7 +405,7 @@ app.get('/api/twitter-followers', async (req, res) => {
     // Alternative: Third-party API
     if (process.env.RAPIDAPI_KEY) {
       try {
-        const response = await axios.get(
+        const response = await makeApiRequest(
           'https://twitter-api45.p.rapidapi.com/user.php?username=kellyohgee',
           {
             headers: {
@@ -383,7 +462,7 @@ app.get('/api/tiktok-followers', async (req, res) => {
     // TikHub.io API
     if (process.env.TIKHUB_API_KEY) {
       try {
-        const response = await axios.get(
+        const response = await makeApiRequest(
           'https://www.tikhub.io/api/v1/user/info',
           {
             params: {
@@ -413,7 +492,7 @@ app.get('/api/tiktok-followers', async (req, res) => {
     // Alternative: RapidAPI TikTok
     if (process.env.RAPIDAPI_KEY) {
       try {
-        const response = await axios.get(
+        const response = await makeApiRequest(
           'https://tiktok-scraper2.p.rapidapi.com/user/info',
           {
             params: {
@@ -489,7 +568,7 @@ app.get('/api/youtube-latest-video', async (req, res) => {
 
     try {
       // Step 1: Get the channel's uploads playlist ID
-      const channelResponse = await axios.get(
+      const channelResponse = await makeApiRequest(
         `https://www.googleapis.com/youtube/v3/channels`,
         {
           params: {
@@ -512,7 +591,7 @@ app.get('/api/youtube-latest-video', async (req, res) => {
       }
 
       // Step 2: Get the latest video from the uploads playlist
-      const playlistResponse = await axios.get(
+      const playlistResponse = await makeApiRequest(
         `https://www.googleapis.com/youtube/v3/playlistItems`,
         {
           params: {
@@ -549,7 +628,7 @@ app.get('/api/youtube-latest-video', async (req, res) => {
       
       // Fallback to search method
       try {
-        const searchResponse = await axios.get(
+        const searchResponse = await makeApiRequest(
           `https://www.googleapis.com/youtube/v3/search`,
           {
             params: {
