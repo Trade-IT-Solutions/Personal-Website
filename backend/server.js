@@ -80,21 +80,31 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   // Strict Transport Security (HTTPS only)
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  // Content Security Policy - Updated for global access
+  // Content Security Policy - Tightened for better security
   res.setHeader('Content-Security-Policy', 
     "default-src 'self'; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.google.com https://www.gstatic.com https://apis.google.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.cdnfonts.com; " +
     "font-src 'self' https://fonts.gstatic.com https://fonts.cdnfonts.com data:; " +
-    "img-src 'self' data: https: http:; " +
-    "connect-src 'self' https://www.googleapis.com https://api.twitter.com https://graph.instagram.com https://graph.facebook.com https://api.tiktok.com https://www.tikhub.io https://*.rapidapi.com https://*.p.rapidapi.com; " +
+    "img-src 'self' data: https:; " +
+    "connect-src 'self' https://www.googleapis.com https://api.twitter.com https://graph.instagram.com https://graph.facebook.com https://api.tiktok.com https://www.tikhub.io https://*.rapidapi.com https://*.p.rapidapi.com https://personal-website-backend-e74k.onrender.com; " +
     "frame-src 'self' https://www.youtube.com https://youtube.com https://www.google.com; " +
-    "media-src 'self' https://www.youtube.com;"
+    "media-src 'self' https://www.youtube.com; " +
+    "base-uri 'self'; " +
+    "form-action 'self'; " +
+    "upgrade-insecure-requests;"
   );
   // Referrer Policy
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   // Permissions Policy
-  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()');
+  // Additional security headers
+  res.setHeader('X-DNS-Prefetch-Control', 'off');
+  res.setHeader('X-Download-Options', 'noopen');
+  res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   next();
 });
 

@@ -1,1 +1,6 @@
 /*    /index.html   200
+
+# Security headers via _redirects (if supported by hosting)
+# Force HTTPS
+# https://kellyohgee.info/*  https://kellyohgee.info/:splat  301!
+# http://kellyohgee.info/*   https://kellyohgee.info/:splat  301!
