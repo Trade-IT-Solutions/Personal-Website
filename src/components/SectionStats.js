@@ -4,12 +4,16 @@ import styles from "./SectionStats.module.css";
 
 const CACHE_EXPIRY_TIME = 12 * 60 * 60 * 1000; // 12 hours
 
+// Backend API URL
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://personal-website-backend-e74k.onrender.com'
+  : 'http://localhost:5000';
+
 const SectionStats = ({ className = "" }) => {
   const [youtubeSubscribers, setYoutubeSubscribers] = useState("Loading...");
-  // Hardcoded values as requested
-  const instagramFollowers = "174k+";
-  const twitterFollowers = "36.1k+";
-  const tiktokFollowers = "224K+";
+  const [instagramFollowers, setInstagramFollowers] = useState("Loading...");
+  const [twitterFollowers, setTwitterFollowers] = useState("Loading...");
+  const [tiktokFollowers, setTiktokFollowers] = useState("Loading...");
 
   // Function to check cache validity
   const isCacheValid = (key) => {
@@ -31,8 +35,9 @@ const SectionStats = ({ className = "" }) => {
     return cachedData ? cachedData.value : null;
   };
 
-  // Fetch YouTube Subscribers (keeping this dynamic)
+  // Fetch all social media follower counts
   useEffect(() => {
+    // Fetch YouTube Subscribers
     const fetchYoutubeSubscribers = async () => {
       const cacheKey = "youtubeSubscribers";
       if (isCacheValid(cacheKey)) {
@@ -62,7 +67,83 @@ const SectionStats = ({ className = "" }) => {
       }
     };
 
+    // Fetch Instagram Followers
+    const fetchInstagramFollowers = async () => {
+      const cacheKey = "instagramFollowers";
+      if (isCacheValid(cacheKey)) {
+        setInstagramFollowers(getCachedData(cacheKey));
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/instagram-followers`);
+        const data = await response.json();
+        
+        if (data.success && data.followers) {
+          setInstagramFollowers(data.followers);
+          storeCache(cacheKey, data.followers);
+        } else {
+          setInstagramFollowers("174k+"); // Fallback to previous value
+        }
+      } catch (error) {
+        console.error("Failed to fetch Instagram followers:", error);
+        setInstagramFollowers("174k+"); // Fallback to previous value
+      }
+    };
+
+    // Fetch Twitter Followers
+    const fetchTwitterFollowers = async () => {
+      const cacheKey = "twitterFollowers";
+      if (isCacheValid(cacheKey)) {
+        setTwitterFollowers(getCachedData(cacheKey));
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/twitter-followers`);
+        const data = await response.json();
+        
+        if (data.success && data.followers) {
+          setTwitterFollowers(data.followers);
+          storeCache(cacheKey, data.followers);
+        } else {
+          setTwitterFollowers("36.1k+"); // Fallback to previous value
+        }
+      } catch (error) {
+        console.error("Failed to fetch Twitter followers:", error);
+        setTwitterFollowers("36.1k+"); // Fallback to previous value
+      }
+    };
+
+    // Fetch TikTok Followers
+    const fetchTiktokFollowers = async () => {
+      const cacheKey = "tiktokFollowers";
+      if (isCacheValid(cacheKey)) {
+        setTiktokFollowers(getCachedData(cacheKey));
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/tiktok-followers`);
+        const data = await response.json();
+        
+        if (data.success && data.followers) {
+          setTiktokFollowers(data.followers);
+          storeCache(cacheKey, data.followers);
+        } else {
+          setTiktokFollowers("224K+"); // Fallback to previous value
+        }
+      } catch (error) {
+        console.error("Failed to fetch TikTok followers:", error);
+        setTiktokFollowers("224K+"); // Fallback to previous value
+      }
+    };
+
+    // Fetch all follower counts
     fetchYoutubeSubscribers();
+    fetchInstagramFollowers();
+    fetchTwitterFollowers();
+    fetchTiktokFollowers();
   }, []);
 
   return (

@@ -30,95 +30,27 @@ const YouTubeConnectRecreated = ({ className = "" }) => {
         return;
       }
 
-      // Set a fallback video ID to ensure something displays
-      const fallbackVideoId = "dQw4w9WgXcQ";
+      // Backend API URL
+      const API_URL = process.env.NODE_ENV === 'production' 
+        ? 'https://personal-website-backend-e74k.onrender.com'
+        : 'http://localhost:5000';
 
       try {
-        // Using uploads playlist approach instead of search API
-        // Step 1: Get the channel's uploads playlist ID (costs only 1 unit)
-        console.log("Fetching channel uploads playlist...");
-        const channelResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&id=UCM84WjkyLm1_sa17G8DYzRg&part=contentDetails&maxResults=1`
-        );
+        const response = await fetch(`${API_URL}/api/youtube-latest-video`);
+        const data = await response.json();
 
-        if (!channelResponse.ok) {
-          throw new Error(`Channel API responded with status: ${channelResponse.status}`);
+        if (data.success && data.videoId) {
+          console.log("Latest Video ID:", data.videoId);
+          setLatestVideoId(data.videoId);
+          localStorage.setItem(cacheKey, data.videoId);
+          localStorage.setItem(cacheTimeKey, Date.now().toString());
+        } else {
+          console.error("Failed to fetch latest video:", data.message);
+          // Don't set a fallback video - let it show loading state
         }
-
-        const channelData = await channelResponse.json();
-        console.log("Channel API Response:", channelData);
-
-        if (!channelData.items || channelData.items.length === 0) {
-          throw new Error("Channel not found");
-        }
-
-        // Extract the uploads playlist ID
-        const uploadsPlaylistId = channelData.items[0]?.contentDetails?.relatedPlaylists?.uploads;
-
-        if (!uploadsPlaylistId) {
-          throw new Error("Uploads playlist not found");
-        }
-
-        console.log("Uploads playlist ID:", uploadsPlaylistId);
-
-        // Step 2: Get the latest video from the uploads playlist (costs only 1 unit)
-        const playlistResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=1`
-        );
-
-        if (!playlistResponse.ok) {
-          throw new Error(`Playlist API responded with status: ${playlistResponse.status}`);
-        }
-
-        const playlistData = await playlistResponse.json();
-        console.log("Playlist API Response:", playlistData);
-
-        if (!playlistData.items || playlistData.items.length === 0) {
-          throw new Error("No videos found in uploads playlist");
-        }
-
-        // Extract the video ID from the playlist item
-        const videoId = playlistData.items[0]?.snippet?.resourceId?.videoId;
-
-        if (!videoId) {
-          throw new Error("Video ID not found in playlist response");
-        }
-
-        console.log("Latest Video ID:", videoId);
-        setLatestVideoId(videoId);
-
-        // Cache the video ID and timestamp
-        localStorage.setItem(cacheKey, videoId);
-        localStorage.setItem(cacheTimeKey, Date.now().toString());
       } catch (error) {
         console.error("Failed to fetch the latest video:", error);
-
-        // Use hardcoded fallback if necessary - try the channel ID from Main.js first
-        try {
-          const fallbackChannelResponse = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&channelId=UCezPMn09jcmgJ8Lo_JD-iEg&part=snippet,id&order=date&maxResults=1&type=video`
-          );
-
-          if (fallbackChannelResponse.ok) {
-            const fallbackData = await fallbackChannelResponse.json();
-            const fallbackVideoId = fallbackData.items?.[0]?.id?.videoId;
-
-            if (fallbackVideoId) {
-              console.log("Using video from alternative channel:", fallbackVideoId);
-              setLatestVideoId(fallbackVideoId);
-              localStorage.setItem(cacheKey, fallbackVideoId);
-              localStorage.setItem(cacheTimeKey, Date.now().toString());
-              return;
-            }
-          }
-        } catch (fallbackError) {
-          console.error("Fallback channel attempt failed:", fallbackError);
-        }
-
-        // If everything else fails, use the hardcoded fallback
-        setLatestVideoId(fallbackVideoId);
-        localStorage.setItem(cacheKey, fallbackVideoId);
-        localStorage.setItem(cacheTimeKey, Date.now().toString());
+        // Don't set a fallback video - let it show loading state
       }
     };
 

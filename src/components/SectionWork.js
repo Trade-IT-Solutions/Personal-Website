@@ -27,86 +27,26 @@ const SectionWork = ({ className = "" }) => {
         return;
       }
 
-      // Fallback video in case of API failure
-      const fallbackVideoId = "dQw4w9WgXcQ";
+      // Backend API URL
+      const API_URL = process.env.NODE_ENV === 'production' 
+        ? 'https://personal-website-backend-e74k.onrender.com'
+        : 'http://localhost:5000';
 
       try {
-        // Using a more efficient method: channels + playlistItems (costs 2 units instead of 100)
-        // Step 1: Get the channel's uploads playlist ID
-        const channelResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&id=UCM84WjkyLm1_sa17G8DYzRg&part=contentDetails&maxResults=1`
-        );
+        const response = await fetch(`${API_URL}/api/youtube-latest-video`);
+        const data = await response.json();
 
-        if (!channelResponse.ok) {
-          throw new Error(`Channel API responded with status: ${channelResponse.status}`);
+        if (data.success && data.videoId) {
+          setLatestVideoId(data.videoId);
+          localStorage.setItem(cacheKey, data.videoId);
+          localStorage.setItem(cacheTimeKey, Date.now().toString());
+        } else {
+          console.error("Failed to fetch latest video:", data.message);
+          // Don't set a fallback video - let it show loading state
         }
-
-        const channelData = await channelResponse.json();
-
-        if (!channelData.items || channelData.items.length === 0) {
-          throw new Error("Channel not found");
-        }
-
-        // Extract the uploads playlist ID
-        const uploadsPlaylistId = channelData.items[0]?.contentDetails?.relatedPlaylists?.uploads;
-
-        if (!uploadsPlaylistId) {
-          throw new Error("Uploads playlist not found");
-        }
-
-        // Step 2: Get the latest video from the uploads playlist
-        const playlistResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=1`
-        );
-
-        if (!playlistResponse.ok) {
-          throw new Error(`Playlist API responded with status: ${playlistResponse.status}`);
-        }
-
-        const playlistData = await playlistResponse.json();
-
-        if (!playlistData.items || playlistData.items.length === 0) {
-          throw new Error("No videos found in uploads playlist");
-        }
-
-        // Extract the video ID from the playlist item
-        const videoId = playlistData.items[0]?.snippet?.resourceId?.videoId;
-
-        if (!videoId) {
-          throw new Error("Video ID not found in playlist response");
-        }
-
-        setLatestVideoId(videoId);
-        localStorage.setItem(cacheKey, videoId);
-        localStorage.setItem(cacheTimeKey, Date.now().toString());
       } catch (error) {
         console.error("YouTube fetch failed:", error);
-
-        // Fallback to original search method if channels+playlists approach fails
-        try {
-          const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc&channelId=UCM84WjkyLm1_sa17G8DYzRg&part=snippet,id&order=date&maxResults=1&type=video`
-          );
-
-          if (!response.ok) throw new Error(`API error ${response.status}`);
-
-          const data = await response.json();
-          const videoId = data.items?.[0]?.id?.videoId;
-
-          if (videoId) {
-            setLatestVideoId(videoId);
-            localStorage.setItem(cacheKey, videoId);
-            localStorage.setItem(cacheTimeKey, Date.now().toString());
-            return;
-          }
-        } catch (searchError) {
-          console.error("Search method also failed:", searchError);
-        }
-
-        // If all else fails, use fallback video
-        setLatestVideoId(fallbackVideoId);
-        localStorage.setItem(cacheKey, fallbackVideoId);
-        localStorage.setItem(cacheTimeKey, Date.now().toString());
+        // Don't set a fallback video - let it show loading state
       }
     };
 
