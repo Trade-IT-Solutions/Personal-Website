@@ -1,0 +1,203 @@
+.kellyLogoIcon {
+  width: 133.5px;
+  height: 49.2px;
+  position: relative;
+  object-fit: cover;
+}
+.instagram {
+  position: relative;
+  letter-spacing: 1.74px;
+  line-height: 160%;
+  text-transform: uppercase;
+}
+.grid1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-lg-6);
+}
+.grid2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-lg-6);
+}
+.badgeIcon {
+  height: 44.1px;
+  width: 44.1px;
+  position: relative;
+  border-radius: var(--br-561xl);
+}
+.grid3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-lg-6);
+}
+.grid4 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-lg-6);
+}
+.grid {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px var(--padding-53xl) 0px 0px;
+  gap: var(--gap-lg-6);
+}
+.socialPages {
+  flex: 1;
+  border-radius: var(--br-lg-6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-lgi-7);
+}
+.socialInfo {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 0px var(--padding-xl-9);
+  font-size: var(--font-size-base-1);
+  color: var(--text-muted);
+}
+.utility {
+  width: 233px;
+  position: relative;
+  letter-spacing: 1.16px;
+  line-height: 140%;
+  display: inline-block;
+}
+.blogPosts {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 1.74px;
+  line-height: 160%;
+  text-transform: uppercase;
+}
+.footerPages {
+  width: 215.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg-9);
+  text-align: justify;
+  font-size: var(--font-size-base-1);
+  color: var(--text-muted);
+  font-family: var(--text-meta);
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 0px var(--padding-2xl-7);
+  gap: var(--gap-14xl-6);
+  text-align: left;
+  font-family: var(--heading-h1-uppercase);
+}
+.home {
+  width: 233px;
+  position: relative;
+  letter-spacing: 1.74px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.homeParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg-6);
+  font-size: var(--font-size-base-1);
+  color: var(--text-muted);
+  font-family: var(--text-meta);
+}
+.pagesParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-18xl-1);
+  font-family: var(--heading-h1-uppercase);
+}
+.button1 {
+  height: 24px;
+  width: 122px;
+  position: relative;
+  letter-spacing: 1.5px;
+  line-height: 160%;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.pharrowUpRightLightIcon {
+  width: 20.9px;
+  position: relative;
+  height: 20.9px;
+}
+.button {
+  border-radius: var(--br-10xs-3);
+  background-color: var(--background-primary);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-xs-6) var(--padding-lg-6);
+  gap: var(--gap-3xs-3);
+  z-index: 3;
+  font-size: var(--text-meta-size);
+  color: var(--background-default);
+}
+.footer {
+  width: 440px;
+  height: 100%;
+  background-color: var(--background-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-43xl-2) var(--padding-85xl) var(--padding-27xl-6);
+  box-sizing: border-box;
+  gap: var(--gap-18xl-1);
+  max-width: 90%;
+  overflow: auto;
+  z-index: 1;
+  text-align: justify;
+  font-size: var(--font-size-4xl-2);
+  color: var(--background-primary);
+  font-family: var(--text-meta);
+}
+
+@media screen and (max-width: 433px) {
+  .grid1 {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 415px) {
+  .grid3 {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 410px) {
+  .grid2 {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 397px) {
+  .grid4 {
+    flex-wrap: wrap;
+  }
+}

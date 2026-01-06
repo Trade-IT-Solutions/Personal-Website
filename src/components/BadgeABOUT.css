@@ -1,0 +1,34 @@
+.pharrow-down-light-icon {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+.root {
+  width: 46px;
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--br-481xl);
+  background-color: var(--background-muted);
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+  height: 46px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs) var(--padding-xs);
+}
+.root[data-size="Small"][data-style="Default"] .pharrow-down-light-icon {
+  width: 16px;
+  height: 16px;
+}
+@media screen and (max-width: 768px) {
+  .root {
+    width: 36px; /* Smaller badge */
+    height: 36px;
+  }
+  
+  .pharrow-down-light-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
