@@ -358,8 +358,8 @@ app.get('/api/instagram-followers', async (req, res) => {
       }
     }
 
-    // Fallback: Use accurate hardcoded value (174K+ from Instagram)
-    const fallbackValue = '174K+';
+    // Fallback: Use accurate hardcoded value (185K from Instagram)
+    const fallbackValue = '185K';
     followerCache.instagram = { value: fallbackValue, timestamp: Date.now() };
     
     return res.json({
@@ -371,7 +371,7 @@ app.get('/api/instagram-followers', async (req, res) => {
 
   } catch (error) {
     console.error('Instagram followers error:', error);
-    const fallbackValue = '174K+';
+    const fallbackValue = '185K';
     res.status(200).json({
       success: true,
       followers: fallbackValue,
@@ -447,8 +447,8 @@ app.get('/api/twitter-followers', async (req, res) => {
       }
     }
 
-    // Fallback: Use accurate hardcoded value (36.1K+ from X/Twitter)
-    const fallbackValue = '36.1K+';
+    // Fallback: Use accurate hardcoded value (35.7K from X/Twitter)
+    const fallbackValue = '35.7K';
     followerCache.twitter = { value: fallbackValue, timestamp: Date.now() };
     
     return res.json({
@@ -460,7 +460,7 @@ app.get('/api/twitter-followers', async (req, res) => {
 
   } catch (error) {
     console.error('Twitter followers error:', error);
-    const fallbackValue = '36.1K+';
+    const fallbackValue = '35.7K';
     res.status(200).json({
       success: true,
       followers: fallbackValue,
@@ -542,8 +542,8 @@ app.get('/api/tiktok-followers', async (req, res) => {
       }
     }
 
-    // Fallback: Use accurate hardcoded value (224K+ from TikTok)
-    const fallbackValue = '224K+';
+    // Fallback: Use accurate hardcoded value (226K from TikTok)
+    const fallbackValue = '226K';
     followerCache.tiktok = { value: fallbackValue, timestamp: Date.now() };
     
     return res.json({
@@ -555,7 +555,7 @@ app.get('/api/tiktok-followers', async (req, res) => {
 
   } catch (error) {
     console.error('TikTok followers error:', error);
-    const fallbackValue = '224K+';
+    const fallbackValue = '226K';
     res.status(200).json({
       success: true,
       followers: fallbackValue,
@@ -580,8 +580,8 @@ app.get('/api/youtube-subscribers', async (req, res) => {
     const CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID || 'UCM84WjkyLm1_sa17G8DYzRg';
 
     if (!API_KEY) {
-      // Fallback: Use accurate hardcoded value (447K+ from YouTube)
-      const fallbackValue = '447K+';
+      // Fallback: Use accurate hardcoded value (447K from YouTube)
+      const fallbackValue = '447K';
       followerCache.youtube = { value: fallbackValue, timestamp: Date.now() };
       
       return res.json({
@@ -618,7 +618,7 @@ app.get('/api/youtube-subscribers', async (req, res) => {
     } catch (error) {
       console.error('YouTube API error:', error.message);
       // Fallback to hardcoded value
-      const fallbackValue = '447K+';
+      const fallbackValue = '447K';
       followerCache.youtube = { value: fallbackValue, timestamp: Date.now() };
       
       return res.json({
@@ -631,7 +631,7 @@ app.get('/api/youtube-subscribers', async (req, res) => {
 
   } catch (error) {
     console.error('YouTube subscribers error:', error);
-    const fallbackValue = '447K+';
+    const fallbackValue = '447K';
     res.status(200).json({
       success: true,
       subscribers: fallbackValue,
