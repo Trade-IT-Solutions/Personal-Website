@@ -44,27 +44,18 @@ const Community = ({ className = "" }) => {
       }
 
       try {
-        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
-        const CHANNEL_ID = process.env.REACT_APP_YOUTUBE_CHANNEL_ID;
-        const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`
-        );
+        const response = await fetch(`${API_URL}/api/youtube-subscribers`);
         const data = await response.json();
-        const subscriberCount = data.items[0]?.statistics?.subscriberCount;
 
-        if (subscriberCount) {
-          const formattedCount =
-            subscriberCount >= 1000
-              ? `${(subscriberCount / 1000).toFixed(1).replace(/\.0$/, "")}k+`
-              : subscriberCount;
-          setYoutubeSubscribers(formattedCount);
-          storeCache(cacheKey, formattedCount);
+        if (data.success) {
+          setYoutubeSubscribers(data.subscribers);
+          storeCache(cacheKey, data.subscribers);
         } else {
-          setYoutubeSubscribers("N/A");
+          setYoutubeSubscribers("447K+");
         }
       } catch (error) {
         console.error("Failed to fetch YouTube subscribers:", error);
-        setYoutubeSubscribers("Error");
+        setYoutubeSubscribers("447K+");
       }
     };
 
