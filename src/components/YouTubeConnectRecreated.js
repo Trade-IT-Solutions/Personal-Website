@@ -43,7 +43,7 @@ const YouTubeConnectRecreated = ({ className = "" }) => {
           console.log("Latest Video ID:", data.videoId);
           setLatestVideoId(data.videoId);
           localStorage.setItem(cacheKey, data.videoId);
-          localStorage.setItem(cacheTimeKey, Date.now().toString());
+        localStorage.setItem(cacheTimeKey, Date.now().toString());
         } else {
           console.error("Failed to fetch latest video:", data.message);
           // Don't set a fallback video - let it show loading state
