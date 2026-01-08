@@ -15,12 +15,14 @@ const allowedOrigins = [
   'http://localhost:3001',
   'https://personal-website-us3x.onrender.com',
   'https://www.kellyohgee.info',
-  'https://kellyohgee.info'
+  'https://kellyohgee.info',
+  'https://www.kellyohgee.com',
+  'https://kellyohgee.com'
 ];
 
 // In production, allow requests from the main domain and any subdomain
 const isProduction = process.env.NODE_ENV === 'production';
-const mainDomain = 'kellyohgee.info';
+const mainDomains = ['kellyohgee.info', 'kellyohgee.com'];
 
 app.use(cors({
   origin: function(origin, callback) {
@@ -42,9 +44,11 @@ app.use(cors({
         if (allowedOrigins.indexOf(origin) !== -1) {
           return callback(null, true);
         }
-        // Allow main domain and www subdomain
-        if (url.hostname === mainDomain || url.hostname === `www.${mainDomain}`) {
-          return callback(null, true);
+        // Allow main domains and www subdomains
+        for (const domain of mainDomains) {
+          if (url.hostname === domain || url.hostname === `www.${domain}`) {
+            return callback(null, true);
+          }
         }
       } catch (e) {
         // Invalid origin URL
@@ -87,7 +91,7 @@ app.use((req, res, next) => {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.cdnfonts.com; " +
     "font-src 'self' https://fonts.gstatic.com https://fonts.cdnfonts.com data:; " +
     "img-src 'self' data: https:; " +
-    "connect-src 'self' https://www.googleapis.com https://api.twitter.com https://graph.instagram.com https://graph.facebook.com https://api.tiktok.com https://www.tikhub.io https://*.rapidapi.com https://*.p.rapidapi.com https://personal-website-backend-e74k.onrender.com; " +
+    "connect-src 'self' https://www.googleapis.com https://api.twitter.com https://graph.instagram.com https://graph.facebook.com https://api.tiktok.com https://www.tikhub.io https://*.rapidapi.com https://*.p.rapidapi.com https://personal-website-backend-e74k.onrender.com https://kellyohgee.info https://kellyohgee.com; " +
     "frame-src 'self' https://www.youtube.com https://youtube.com https://www.google.com; " +
     "media-src 'self' https://www.youtube.com; " +
     "base-uri 'self'; " +
@@ -356,11 +360,15 @@ app.get('/api/instagram-followers', async (req, res) => {
       }
     }
 
-    // If all methods fail, return error
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch Instagram followers. Please configure API keys.',
-      error: 'No valid API configuration found'
+    // If all methods fail, return fallback value
+    console.log('Using fallback Instagram value');
+    followerCache.instagram = { value: FALLBACK_STATS.instagram, timestamp: Date.now() };
+    
+    res.json({
+      success: true,
+      followers: FALLBACK_STATS.instagram,
+      cached: false,
+      fallback: true
     });
 
   } catch (error) {
@@ -440,11 +448,15 @@ app.get('/api/twitter-followers', async (req, res) => {
       }
     }
 
-    // If all methods fail
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch Twitter followers. Please configure API keys.',
-      error: 'No valid API configuration found'
+    // If all methods fail, return fallback value
+    console.log('Using fallback Twitter value');
+    followerCache.twitter = { value: FALLBACK_STATS.twitter, timestamp: Date.now() };
+    
+    res.json({
+      success: true,
+      followers: FALLBACK_STATS.twitter,
+      cached: false,
+      fallback: true
     });
 
   } catch (error) {
@@ -530,11 +542,15 @@ app.get('/api/tiktok-followers', async (req, res) => {
       }
     }
 
-    // If all methods fail
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch TikTok followers. Please configure API keys.',
-      error: 'No valid API configuration found'
+    // If all methods fail, return fallback value
+    console.log('Using fallback TikTok value');
+    followerCache.tiktok = { value: FALLBACK_STATS.tiktok, timestamp: Date.now() };
+    
+    res.json({
+      success: true,
+      followers: FALLBACK_STATS.tiktok,
+      cached: false,
+      fallback: true
     });
 
   } catch (error) {
@@ -670,19 +686,32 @@ app.get('/api/youtube-latest-video', async (req, res) => {
         console.error('YouTube search fallback error:', searchError.message);
       }
 
-      res.status(500).json({
-        success: false,
-        message: 'Failed to fetch latest YouTube video',
-        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      // Return fallback video after all methods fail
+      console.log('Using fallback YouTube video (after search attempt)');
+      followerCache.youtubeVideo = FALLBACK_STATS.youtubeVideo;
+      followerCache.youtubeVideoTime = Date.now();
+      
+      return res.json({
+        success: true,
+        videoId: FALLBACK_STATS.youtubeVideo,
+        cached: false,
+        fallback: true
       });
     }
 
   } catch (error) {
     console.error('YouTube latest video error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch latest YouTube video',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    
+    // Return fallback video on error
+    console.log('Using fallback YouTube video');
+    followerCache.youtubeVideo = FALLBACK_STATS.youtubeVideo;
+    followerCache.youtubeVideoTime = Date.now();
+    
+    res.json({
+      success: true,
+      videoId: FALLBACK_STATS.youtubeVideo,
+      cached: false,
+      fallback: true
     });
   }
 });
@@ -741,11 +770,22 @@ app.get('/api/health', (req, res) => {
     status: 'OK', 
     message: 'Server is running',
     sendgridConfigured: !!process.env.SENDGRID_API_KEY,
+    youtubeConfigured: !!process.env.YOUTUBE_API_KEY,
     instagramConfigured: !!process.env.INSTAGRAM_ACCESS_TOKEN || !!process.env.RAPIDAPI_KEY,
     twitterConfigured: !!process.env.TWITTER_BEARER_TOKEN || !!process.env.RAPIDAPI_KEY,
-    tiktokConfigured: !!process.env.TIKHUB_API_KEY || !!process.env.RAPIDAPI_KEY
+    tiktokConfigured: !!process.env.TIKHUB_API_KEY || !!process.env.RAPIDAPI_KEY,
+    corsOrigins: allowedOrigins
   });
 });
+
+// Hardcoded fallback values for social media (updated manually based on current stats)
+const FALLBACK_STATS = {
+  instagram: '174K+',
+  twitter: '36.1K+',
+  tiktok: '224K+',
+  youtube: '447K+',
+  youtubeVideo: 'Rz1cRLl0wdA' // Default video ID
+};
 
 // Start server
 app.listen(PORT, () => {
