@@ -149,9 +149,14 @@ app.post('/api/send-resource', async (req, res) => {
     // Check if PDF exists
     if (!fs.existsSync(pdfPath)) {
       console.error(`PDF not found: ${pdfPath}`);
+      console.error(`Looking for PDF at: ${pdfPath}`);
+      console.error(`Current directory: ${__dirname}`);
+      console.error(`PDFs directory exists: ${fs.existsSync(path.join(__dirname, 'pdfs'))}`);
+      
       return res.status(404).json({
         success: false,
-        message: 'Resource file not found'
+        message: 'Resource file not found. Please contact support.',
+        error: 'PDF file missing'
       });
     }
 
@@ -180,10 +185,17 @@ app.post('/api/send-resource', async (req, res) => {
     };
 
     // Send email to user
+    try {
     await sgMail.send(msg);
-    console.log(`Email sent successfully to ${email}`);
+      console.log(`Email sent successfully to ${email} with PDF: ${pdfFileName}`);
+    } catch (sendError) {
+      console.error('Failed to send email to user:', sendError);
+      // Re-throw to be caught by outer catch block
+      throw sendError;
+    }
 
-    // Send admin notification
+    // Send admin notification (don't fail if this fails)
+    try {
     const adminNotification = {
       to: process.env.ADMIN_EMAIL || process.env.SENDGRID_FROM_EMAIL,
       from: {
@@ -205,7 +217,12 @@ app.post('/api/send-resource', async (req, res) => {
     };
 
     await sgMail.send(adminNotification);
-    console.log(`Admin notification sent`);
+      console.log(`Admin notification sent to ${process.env.ADMIN_EMAIL || process.env.SENDGRID_FROM_EMAIL}`);
+    } catch (adminError) {
+      // Log but don't fail the request if admin notification fails
+      console.error('Failed to send admin notification:', adminError);
+      console.log('User email was sent successfully, but admin notification failed');
+    }
 
     // Return success response
     res.status(200).json({
@@ -216,13 +233,44 @@ app.post('/api/send-resource', async (req, res) => {
   } catch (error) {
     console.error('Error sending email:', error);
     
+    // More detailed error logging
     if (error.response) {
-      console.error('SendGrid error details:', error.response.body);
+      console.error('SendGrid error details:', JSON.stringify(error.response.body, null, 2));
+      console.error('SendGrid error status:', error.response.status);
+    }
+    
+    // Check if SendGrid is configured
+    if (!process.env.SENDGRID_API_KEY) {
+      console.error('SendGrid API key is not configured!');
+      return res.status(500).json({
+        success: false,
+        message: 'Email service is not configured. Please contact support.',
+        error: 'SENDGRID_API_KEY not set'
+      });
+    }
+    
+    // Check if sender email is configured
+    if (!process.env.SENDGRID_FROM_EMAIL) {
+      console.error('SendGrid FROM email is not configured!');
+      return res.status(500).json({
+        success: false,
+        message: 'Email service is not configured. Please contact support.',
+        error: 'SENDGRID_FROM_EMAIL not set'
+      });
+    }
+    
+    // Provide more helpful error messages
+    let errorMessage = 'Failed to send email. Please try again later.';
+    if (error.response?.body?.errors) {
+      const sendGridError = error.response.body.errors[0];
+      if (sendGridError.message) {
+        errorMessage = `Email error: ${sendGridError.message}`;
+      }
     }
     
     res.status(500).json({
       success: false,
-      message: 'Failed to send email. Please try again later.',
+      message: errorMessage,
       error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }

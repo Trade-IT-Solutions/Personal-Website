@@ -219,10 +219,17 @@ Kelly Ohgee Team`;
         }),
       });
 
+      if (!response.ok) {
+        // Handle HTTP errors
+        const errorData = await response.json().catch(() => ({ message: 'Server error occurred' }));
+        throw new Error(errorData.message || `Server error: ${response.status}`);
+      }
+
       const data = await response.json();
 
       if (data.success) {
         setSubmitMessage(`Thank you! ${resourceTitle} has been sent to ${formData.email}. Please check your inbox (and spam folder).`);
+        setErrorMessage(""); // Clear any previous errors
         
         setTimeout(() => {
           setShowForm(null);
@@ -236,10 +243,20 @@ Kelly Ohgee Team`;
         }, 5000);
       } else {
         setErrorMessage(data.message || "Failed to send email. Please try again.");
+        setSubmitMessage(""); // Clear success message if there's an error
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage("Network error. Please check your connection and try again.");
+      
+      // More specific error messages
+      if (error.message.includes('CORS') || error.message.includes('fetch')) {
+        setErrorMessage("Connection error. Please check your internet connection and try again.");
+      } else if (error.message.includes('Failed to fetch')) {
+        setErrorMessage("Unable to connect to server. Please try again in a moment.");
+      } else {
+        setErrorMessage(error.message || "An error occurred. Please try again or contact support.");
+      }
+      setSubmitMessage(""); // Clear success message
     } finally {
       setIsSubmitting(false);
     }
@@ -346,6 +363,13 @@ Kelly Ohgee Team`;
                 {errorMessage && (
                   <div className={styles.errorMessage}>
                     <p>{errorMessage}</p>
+                    <p style={{ marginTop: '10px', fontSize: '14px' }}>
+                      If this problem persists, please email us directly at{' '}
+                      <a href="mailto:contact@kellyohgee.com" style={{ color: '#DAC5A7', textDecoration: 'underline' }}>
+                        contact@kellyohgee.com
+                      </a>
+                      {' '}to request the PDF.
+                    </p>
                   </div>
                 )}
                 
