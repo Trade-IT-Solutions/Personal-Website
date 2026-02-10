@@ -111,13 +111,26 @@ app.use((req, res, next) => {
 });
 
 // Set SendGrid API Key
+if (process.env.SENDGRID_API_KEY) {
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-console.log('SendGrid configured:', !!process.env.SENDGRID_API_KEY);
+  console.log('SendGrid API Key configured');
+} else {
+  console.warn('WARNING: SENDGRID_API_KEY not found in environment variables');
+}
 
 // Email sending endpoint
 app.post('/api/send-resource', async (req, res) => {
   try {
+    // Check if SendGrid is configured before processing
+    if (!process.env.SENDGRID_API_KEY || !process.env.SENDGRID_FROM_EMAIL) {
+      console.error('SendGrid not configured - missing API key or FROM email');
+      return res.status(500).json({
+        success: false,
+        message: 'Email service is not configured. Please contact support at contact@kellyohgee.com',
+        error: 'SENDGRID_API_KEY or SENDGRID_FROM_EMAIL not set'
+      });
+    }
+
     const { name, email, phone, countryCode, resourceType, emailTemplate } = req.body;
 
     // Validate required fields
@@ -259,13 +272,28 @@ app.post('/api/send-resource', async (req, res) => {
       });
     }
     
-    // Provide more helpful error messages
+    // Provide more helpful error messages based on SendGrid response
     let errorMessage = 'Failed to send email. Please try again later.';
     if (error.response?.body?.errors) {
       const sendGridError = error.response.body.errors[0];
       if (sendGridError.message) {
         errorMessage = `Email error: ${sendGridError.message}`;
+        
+        // Check for common SendGrid errors
+        if (sendGridError.message.includes('sender email') || sendGridError.message.includes('verified')) {
+          errorMessage = 'Sender email is not verified in SendGrid. Please verify contact@kellyohgee.info in your SendGrid account.';
+        } else if (sendGridError.message.includes('API key') || sendGridError.message.includes('unauthorized')) {
+          errorMessage = 'SendGrid API key is invalid or expired. Please check your API key configuration.';
+        } else if (sendGridError.message.includes('rate limit')) {
+          errorMessage = 'Email sending rate limit exceeded. Please try again later.';
+        }
       }
+      
+      // Log full error details for debugging
+      console.error('SendGrid error code:', sendGridError.field || 'unknown');
+      console.error('SendGrid error message:', sendGridError.message);
+    } else if (error.message) {
+      console.error('SendGrid error (no response body):', error.message);
     }
     
     res.status(500).json({
