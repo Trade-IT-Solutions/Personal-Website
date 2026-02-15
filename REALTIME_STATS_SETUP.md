@@ -110,7 +110,7 @@ Use RapidAPI or keep hardcoded values.
 
 YouTube is already configured in your `.env` file:
 ```
-YOUTUBE_API_KEY=AIzaSyD_6EZIO3Zr5wTmYCSLq0Kw_8jLmDXOpDc
+YOUTUBE_API_KEY=your_youtube_api_key_here
 YOUTUBE_CHANNEL_ID=UCM84WjkyLm1_sa17G8DYzRg
 ```
 

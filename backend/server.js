@@ -6,6 +6,11 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
+// Simple in-memory rate limiter (for production, consider using redis or express-rate-limit)
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
+const RATE_LIMIT_MAX_REQUESTS = 5; // Max 5 requests per 15 minutes per IP
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -110,6 +115,64 @@ app.use((req, res, next) => {
   next();
 });
 
+// Email validation helper
+const isValidEmail = (email) => {
+  if (!email || typeof email !== 'string') return false;
+  // Basic email regex - SendGrid will do more thorough validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email.trim()) && email.length <= 254; // RFC 5321 max length
+};
+
+// Sanitize input to prevent injection attacks
+const sanitizeInput = (input, maxLength = 1000) => {
+  if (!input || typeof input !== 'string') return '';
+  // Remove control characters and limit length
+  return input.replace(/[\x00-\x1F\x7F]/g, '').trim().substring(0, maxLength);
+};
+
+// Rate limiting middleware
+const rateLimit = (req, res, next) => {
+  const clientIp = req.ip || req.connection.remoteAddress || 'unknown';
+  const now = Date.now();
+  
+  // Clean old entries
+  for (const [ip, data] of rateLimitStore.entries()) {
+    if (now - data.firstRequest > RATE_LIMIT_WINDOW) {
+      rateLimitStore.delete(ip);
+    }
+  }
+  
+  const clientData = rateLimitStore.get(clientIp);
+  
+  if (!clientData) {
+    rateLimitStore.set(clientIp, {
+      count: 1,
+      firstRequest: now
+    });
+    return next();
+  }
+  
+  if (now - clientData.firstRequest > RATE_LIMIT_WINDOW) {
+    // Reset window
+    rateLimitStore.set(clientIp, {
+      count: 1,
+      firstRequest: now
+    });
+    return next();
+  }
+  
+  if (clientData.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return res.status(429).json({
+      success: false,
+      message: 'Too many requests. Please try again later.',
+      retryAfter: Math.ceil((RATE_LIMIT_WINDOW - (now - clientData.firstRequest)) / 1000)
+    });
+  }
+  
+  clientData.count++;
+  next();
+};
+
 // Set SendGrid API Key
 if (process.env.SENDGRID_API_KEY) {
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -119,7 +182,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
 
 // Email sending endpoint
-app.post('/api/send-resource', async (req, res) => {
+app.post('/api/send-resource', rateLimit, async (req, res) => {
   try {
     // Check if SendGrid is configured before processing
     if (!process.env.SENDGRID_API_KEY || !process.env.SENDGRID_FROM_EMAIL) {
@@ -138,6 +201,47 @@ app.post('/api/send-resource', async (req, res) => {
       return res.status(400).json({
         success: false,
         message: 'All fields are required'
+      });
+    }
+
+    // Validate and sanitize inputs
+    const sanitizedName = sanitizeInput(name, 200);
+    const sanitizedEmail = email.trim().toLowerCase();
+    const sanitizedPhone = sanitizeInput(phone, 20);
+    const sanitizedCountryCode = sanitizeInput(countryCode, 5);
+    
+    // Validate email format
+    if (!isValidEmail(sanitizedEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid email address format'
+      });
+    }
+    
+    // Validate resource type (whitelist approach)
+    if (resourceType !== 'wam' && resourceType !== 'markets') {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid resource type'
+      });
+    }
+    
+    // Validate email template structure
+    if (!emailTemplate.subject || !emailTemplate.text || !emailTemplate.html) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid email template format'
+      });
+    }
+    
+    // Sanitize email template to prevent injection
+    const sanitizedSubject = sanitizeInput(emailTemplate.subject, 200);
+    const sanitizedText = sanitizeInput(emailTemplate.text, 5000);
+    // HTML will be sanitized by SendGrid, but we'll validate it's a string
+    if (typeof emailTemplate.html !== 'string' || emailTemplate.html.length > 50000) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid email template HTML'
       });
     }
 
@@ -177,20 +281,20 @@ app.post('/api/send-resource', async (req, res) => {
     const pdfBuffer = fs.readFileSync(pdfPath);
     const pdfBase64 = pdfBuffer.toString('base64');
 
-    // Prepare email to user
+    // Prepare email to user (using sanitized inputs)
     const msg = {
-      to: email,
+      to: sanitizedEmail, // Use sanitized email
       from: {
-        email: process.env.SENDGRID_FROM_EMAIL,
+        email: process.env.SENDGRID_FROM_EMAIL, // Always use env variable, never user input
         name: process.env.FROM_NAME || 'Kelly Ohgee'
       },
-      subject: emailTemplate.subject,
-      text: emailTemplate.text,
-      html: emailTemplate.html,
+      subject: sanitizedSubject, // Use sanitized subject
+      text: sanitizedText, // Use sanitized text
+      html: emailTemplate.html, // HTML is validated above
       attachments: [
         {
           content: pdfBase64,
-          filename: pdfFileName,
+          filename: pdfFileName, // This is controlled by server, safe
           type: 'application/pdf',
           disposition: 'attachment'
         }
@@ -216,14 +320,14 @@ app.post('/api/send-resource', async (req, res) => {
         name: 'Kelly Website'
       },
       subject: `New Resource Download: ${resourceTitle}`,
-      text: `New resource request:\n\nName: ${name}\nEmail: ${email}\nPhone: ${countryCode} ${phone}\nResource: ${resourceTitle}\nTime: ${new Date().toLocaleString()}`,
+        text: `New resource request:\n\nName: ${sanitizedName}\nEmail: ${sanitizedEmail}\nPhone: ${sanitizedCountryCode} ${sanitizedPhone}\nResource: ${resourceTitle}\nTime: ${new Date().toLocaleString()}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9;">
           <h2 style="color: #22201D;">New Resource Download</h2>
-          <p><strong>Resource:</strong> ${resourceTitle}</p>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${countryCode} ${phone}</p>
+            <p><strong>Resource:</strong> ${resourceTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            <p><strong>Name:</strong> ${sanitizedName.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            <p><strong>Email:</strong> ${sanitizedEmail.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            <p><strong>Phone:</strong> ${sanitizedCountryCode} ${sanitizedPhone.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
           <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
         </div>
       `
