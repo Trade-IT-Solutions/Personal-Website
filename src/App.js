@@ -11,6 +11,7 @@ import Frontpage from "./pages/Frontpage.js";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.js";
 import Bookings from "./pages/Bookings.jsx";
+import TalkWithKelly from "./pages/TalkWithKelly.jsx";
 import Resources from "./pages/Resources.js";
 import TestPage from "./pages/testPage.jsx";
 import Layout from "./components/Layout/Layout.jsx";
@@ -52,6 +53,12 @@ function App() {
         metaDescription =
           "Book Kelly Ohgee for keynotes, panels, workshops, podcasts and speaking engagements. Transform your event with purpose-driven education and inspiration.";
         break;
+      case "/talk-with-kelly":
+        title =
+          "Talk with Kelly - 1:1 Video Call | Kelly Ohgee";
+        metaDescription =
+          "Book a paid 1:1 video session with Kelly. Choose your duration, pick a time, pay securely with Stripe, and receive a Google Meet link by email.";
+        break;
       case "/resources":
         title = "Resources - Kelly Ohgee | Empowerment Through Education";
         metaDescription =
@@ -82,6 +89,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/bookings" element={<Bookings />} />
+        <Route path="/talk-with-kelly" element={<TalkWithKelly />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/test" element={<TestPage />} />
 

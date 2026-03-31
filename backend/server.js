@@ -4,7 +4,9 @@ const sgMail = require('@sendgrid/mail');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const bookingService = require('./bookingService');
 require('dotenv').config();
+
 
 // Simple in-memory rate limiter (for production, consider using redis or express-rate-limit)
 const rateLimitStore = new Map();
@@ -13,6 +15,12 @@ const RATE_LIMIT_MAX_REQUESTS = 5; // Max 5 requests per 15 minutes per IP
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.post(
+  '/api/stripe/webhook',
+  express.raw({ type: 'application/json' }),
+  (req, res) => bookingService.handleStripeWebhook(req, res)
+);
 
 // CORS configuration for global access
 const allowedOrigins = [
@@ -114,6 +122,13 @@ app.use((req, res, next) => {
   // Note: Cross-Origin policies removed to allow frontend access
   next();
 });
+
+app.get('/api/booking/slots', bookingService.getSlots);
+app.post(
+  '/api/booking/checkout',
+  bookingService.rateLimitBookingCheckout,
+  bookingService.createCheckoutSession
+);
 
 // Email validation helper
 const isValidEmail = (email) => {
@@ -1014,6 +1029,8 @@ app.get('/api/health', (req, res) => {
     status: 'OK', 
     message: 'Server is running',
     sendgridConfigured: !!process.env.SENDGRID_API_KEY,
+    stripeConfigured: !!process.env.STRIPE_SECRET_KEY,
+    bookingCalendarConfigured: !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
     instagramConfigured: !!process.env.INSTAGRAM_ACCESS_TOKEN || !!process.env.RAPIDAPI_KEY,
     twitterConfigured: !!process.env.TWITTER_BEARER_TOKEN || !!process.env.RAPIDAPI_KEY,
     tiktokConfigured: !!process.env.TIKHUB_API_KEY || !!process.env.RAPIDAPI_KEY

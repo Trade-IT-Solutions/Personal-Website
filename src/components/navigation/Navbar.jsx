@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { FiHome, FiUser, FiCalendar, FiMail, FiBook } from "react-icons/fi";
+import { FiHome, FiUser, FiCalendar, FiMail, FiBook, FiVideo } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import styles from "./Navbar.module.css";
 import { useEffect, useState, useRef } from "react";
@@ -26,7 +26,11 @@ const pages = [
     href: "/resources",
     mobileIcon: <FiBook size={20} />,
   },
-  
+  {
+    label: "talk",
+    href: "/talk-with-kelly",
+    mobileIcon: <FiVideo size={20} />,
+  },
   {
     label: "bookings",
     href: "/bookings",

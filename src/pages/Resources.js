@@ -20,7 +20,7 @@ const Resources = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Email template generator
-  const generateEmailTemplate = (name, resourceTitle, resourceType) => {
+  const generateEmailTemplate = (name, resourceTitle) => {
     const subject = `Your Resource: ${resourceTitle}`;
     
     const text = `Hi ${name},

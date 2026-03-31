@@ -1,0 +1,24 @@
+{
+  "name": "Kelly Ohgee",
+  "short_name": "Kelly Ohgee",
+  "description": "Empowerment Through Education",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#0E0E0E",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}
