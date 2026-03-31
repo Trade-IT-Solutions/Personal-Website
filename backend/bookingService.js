@@ -20,6 +20,23 @@ const BOOKING_END_HOUR = parseInt(process.env.BOOKING_END_HOUR || '17', 10);
 const MIN_LEAD_HOURS = parseInt(process.env.BOOKING_MIN_LEAD_HOURS || '4', 10);
 const SITE_URL = (process.env.PUBLIC_SITE_URL || 'https://www.kellyohgee.com').replace(/\/$/, '');
 
+/** Stripe Checkout Session metadata: each value max 500 characters */
+const MAX_BOOKING_METADATA_DESC = 480;
+const MAX_BOOKING_PHONE_LEN = 32;
+
+function sanitizeBookingPhone(raw) {
+  if (!raw || typeof raw !== 'string') return '';
+  return raw.replace(/[^\d+\s().-]/g, '').trim().slice(0, MAX_BOOKING_PHONE_LEN);
+}
+
+function sanitizeBookingDescription(raw) {
+  if (!raw || typeof raw !== 'string') return '';
+  return raw
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+    .trim()
+    .slice(0, MAX_BOOKING_METADATA_DESC);
+}
+
 let stripeClient = null;
 function getStripe() {
   if (!stripeClient && process.env.STRIPE_SECRET_KEY) {
@@ -233,6 +250,8 @@ async function createCheckoutSession(req, res) {
       slotStart,
       email,
       name,
+      phone,
+      description: descriptionRaw,
     } = req.body;
 
     const durationMinutes = parseDuration(durRaw);
@@ -246,6 +265,8 @@ async function createCheckoutSession(req, res) {
     }
 
     const customerName = typeof name === 'string' ? name.trim().slice(0, 200) : '';
+    const customerPhone = sanitizeBookingPhone(phone);
+    const bookingDescription = sanitizeBookingDescription(descriptionRaw);
 
     const startMs = Date.parse(slotStart);
     if (Number.isNaN(startMs)) {
@@ -277,17 +298,21 @@ async function createCheckoutSession(req, res) {
       }
     }
 
+    const sessionMetadata = {
+      durationMinutes: String(durationMinutes),
+      slotStart: new Date(startMs).toISOString(),
+      customerEmail,
+      customerName,
+    };
+    if (customerPhone) sessionMetadata.customerPhone = customerPhone;
+    if (bookingDescription) sessionMetadata.bookingDescription = bookingDescription;
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
       customer_email: customerEmail,
       line_items: [{ price: priceId, quantity: 1 }],
-      metadata: {
-        durationMinutes: String(durationMinutes),
-        slotStart: new Date(startMs).toISOString(),
-        customerEmail,
-        customerName,
-      },
+      metadata: sessionMetadata,
       success_url: `${SITE_URL}/talk-with-kelly?session_id={CHECKOUT_SESSION_ID}&booking=success`,
       cancel_url: `${SITE_URL}/talk-with-kelly?booking=cancelled`,
     });
@@ -302,7 +327,16 @@ async function createCheckoutSession(req, res) {
   }
 }
 
-async function sendBookingEmails(customerEmail, customerName, meetLink, startIso, endIso, durationMinutes) {
+async function sendBookingEmails(
+  customerEmail,
+  customerName,
+  meetLink,
+  startIso,
+  endIso,
+  durationMinutes,
+  customerPhone = '',
+  bookingDescription = ''
+) {
   if (!process.env.SENDGRID_API_KEY || !process.env.SENDGRID_FROM_EMAIL) {
     console.warn('SendGrid not configured; skipping booking email');
     return;
@@ -314,16 +348,31 @@ async function sendBookingEmails(customerEmail, customerName, meetLink, startIso
   const when = `${startLocal.toFormat('FFFF')} – ${endLocal.toFormat('t')} (${BOOKING_TZ})`;
 
   const safeName = customerName || 'there';
+  const phoneBlock = customerPhone
+    ? `<p><strong>Phone:</strong> ${escapeHtml(customerPhone)}</p>`
+    : '';
+  const noteBlock = bookingDescription
+    ? `<p><strong>Your notes:</strong> ${escapeHtml(bookingDescription)}</p>`
+    : '';
   const html = `
     <div style="font-family: Arial, sans-serif; padding: 24px; background: #f6f3ee; color: #222;">
       <h1 style="color: #22201D;">You're booked — Talk with Kelly</h1>
       <p>Hi ${escapeHtml(safeName)},</p>
       <p>Thanks for booking a <strong>${durationMinutes}-minute</strong> session. Here are your details:</p>
       <p><strong>When:</strong> ${escapeHtml(when)}</p>
+      ${phoneBlock}
+      ${noteBlock}
       <p><strong>Google Meet:</strong> <a href="${escapeHtml(meetLink)}">${escapeHtml(meetLink)}</a></p>
       <p>If you need to reschedule, reply to this email.</p>
       <p>— Kelly Ohgee</p>
     </div>`;
+
+  const textExtras = [
+    customerPhone ? `Phone: ${customerPhone}` : null,
+    bookingDescription ? `Notes: ${bookingDescription}` : null,
+  ]
+    .filter(Boolean)
+    .join('\n');
 
   await sgMail.send({
     to: customerEmail,
@@ -332,7 +381,10 @@ async function sendBookingEmails(customerEmail, customerName, meetLink, startIso
       name: process.env.FROM_NAME || 'Kelly Ohgee',
     },
     subject: 'Your Talk with Kelly — Google Meet link',
-    text: `Hi ${safeName},\n\nYou're booked for a ${durationMinutes}-minute session.\nWhen: ${when}\nMeet: ${meetLink}\n\n— Kelly`,
+    text:
+      `Hi ${safeName},\n\nYou're booked for a ${durationMinutes}-minute session.\nWhen: ${when}\n` +
+      (textExtras ? `${textExtras}\n` : '') +
+      `Meet: ${meetLink}\n\n— Kelly`,
     html,
   });
 
@@ -345,8 +397,11 @@ async function sendBookingEmails(customerEmail, customerName, meetLink, startIso
         name: 'Kelly Website',
       },
       subject: `New paid booking: ${customerEmail}`,
-      text: `New Talk with Kelly booking\n` +
+      text:
+        `New Talk with Kelly booking\n` +
         `Customer: ${customerName || '—'}\nEmail: ${customerEmail}\n` +
+        (customerPhone ? `Phone: ${customerPhone}\n` : '') +
+        (bookingDescription ? `Description: ${bookingDescription}\n` : '') +
         `Duration: ${durationMinutes} min\nWhen: ${when}\nMeet: ${meetLink}`,
     });
   }
@@ -364,10 +419,18 @@ async function notifySlackBooking(payload) {
   const url = process.env.SLACK_BOOKING_WEBHOOK_URL;
   if (!url) return;
   try {
+    const phoneLine = payload.customerPhone
+      ? `• Phone: ${payload.customerPhone}\n`
+      : '';
+    const descLine = payload.bookingDescription
+      ? `• *Notes:* ${payload.bookingDescription}\n`
+      : '';
     await axios.post(url, {
       text:
         `*New Talk with Kelly (paid)*\n` +
         `• ${payload.customerName || '—'} <${payload.customerEmail}>\n` +
+        phoneLine +
+        descLine +
         `• ${payload.durationMinutes} min\n` +
         `• ${payload.when}\n` +
         `• Meet: ${payload.meetLink}\n` +
@@ -378,7 +441,15 @@ async function notifySlackBooking(payload) {
   }
 }
 
-async function createGoogleMeetEvent({ customerEmail, customerName, startIso, endIso, durationMinutes }) {
+async function createGoogleMeetEvent({
+  customerEmail,
+  customerName,
+  startIso,
+  endIso,
+  durationMinutes,
+  customerPhone = '',
+  bookingDescription = '',
+}) {
   const calendar = await getCalendarApi();
   if (!calendar) {
     throw new Error('Google Calendar is not configured');
@@ -390,9 +461,17 @@ async function createGoogleMeetEvent({ customerEmail, customerName, startIso, en
   const startLocal = DateTime.fromISO(startIso, { zone: 'utc' }).setZone(BOOKING_TZ);
   const endLocal = DateTime.fromISO(endIso, { zone: 'utc' }).setZone(BOOKING_TZ);
 
+  const descParts = [
+    'Paid session via website.',
+    `Guest: ${customerName || '—'}`,
+    `Email: ${customerEmail}`,
+  ];
+  if (customerPhone) descParts.push(`Phone: ${customerPhone}`);
+  if (bookingDescription) descParts.push(`Notes: ${bookingDescription}`);
+
   const event = {
     summary: `Talk with Kelly (${durationMinutes} min) — ${customerName || customerEmail}`,
-    description: `Paid session via website.\nGuest: ${customerName || '—'}\nEmail: ${customerEmail}`,
+    description: descParts.join('\n'),
     start: {
       dateTime: startLocal.toFormat("yyyy-MM-dd'T'HH:mm:ss"),
       timeZone: BOOKING_TZ,
@@ -438,7 +517,9 @@ async function fulfillBookingFromSession(session) {
         cached.meetLink,
         cached.startIso,
         cached.endIso,
-        cached.durationMinutes
+        cached.durationMinutes,
+        cached.customerPhone,
+        cached.bookingDescription
       );
     } catch (e) {
       console.error('Retry: resend booking email failed:', e.message);
@@ -451,6 +532,8 @@ async function fulfillBookingFromSession(session) {
   const slotStart = meta.slotStart;
   const customerEmail = session.customer_email || meta.customerEmail || session.customer_details?.email;
   const customerName = meta.customerName || '';
+  const customerPhone = meta.customerPhone || '';
+  const bookingDescription = meta.bookingDescription || '';
 
   if (!DURATION_MINUTES.includes(durationMinutes) || !slotStart || !customerEmail) {
     throw new Error('Incomplete session metadata for booking');
@@ -471,6 +554,8 @@ async function fulfillBookingFromSession(session) {
     startIso,
     endIso,
     durationMinutes,
+    customerPhone,
+    bookingDescription,
   });
 
   cacheFulfillment(session.id, {
@@ -481,6 +566,8 @@ async function fulfillBookingFromSession(session) {
     endIso,
     durationMinutes,
     when,
+    customerPhone,
+    bookingDescription,
   });
 
   await sendBookingEmails(
@@ -489,12 +576,16 @@ async function fulfillBookingFromSession(session) {
     meetLink,
     startIso,
     endIso,
-    durationMinutes
+    durationMinutes,
+    customerPhone,
+    bookingDescription
   );
 
   await notifySlackBooking({
     customerEmail,
     customerName,
+    customerPhone,
+    bookingDescription,
     durationMinutes,
     when,
     meetLink,

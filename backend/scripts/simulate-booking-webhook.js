@@ -70,6 +70,8 @@ async function main() {
       slotStart,
       customerEmail,
       customerName: 'Stripe webhook simulation',
+      customerPhone: '+1 555-0100',
+      bookingDescription: 'Test note for Slack — simulate phone + description in metadata.',
     },
   };
 

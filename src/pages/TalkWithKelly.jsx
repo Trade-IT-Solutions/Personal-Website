@@ -30,6 +30,8 @@ const TalkWithKelly = () => {
   const [slotStart, setSlotStart] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [description, setDescription] = useState("");
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [error, setError] = useState("");
@@ -99,6 +101,8 @@ const TalkWithKelly = () => {
           slotStart,
           email: email.trim(),
           name: name.trim(),
+          phone: phone.trim(),
+          description: description.trim(),
         }),
       });
       const data = await res.json();
@@ -183,14 +187,16 @@ const TalkWithKelly = () => {
           {timezone && (
             <p className={styles.tzNote}>Times are shown in {timezone}.</p>
           )}
-          <div className={styles.fieldBlock}>
-            <input
-              type="date"
-              className={styles.input}
-              value={dateStr}
-              min={todayYmd()}
-              onChange={(e) => setDateStr(e.target.value)}
-            />
+          <div className={`${styles.fieldBlock} ${styles.fieldBlockDate}`}>
+            <div className={styles.dateInputWrap}>
+              <input
+                type="date"
+                className={`${styles.input} ${styles.inputDate}`}
+                value={dateStr}
+                min={todayYmd()}
+                onChange={(e) => setDateStr(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className={styles.fieldBlock}>
@@ -239,9 +245,42 @@ const TalkWithKelly = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              enterKeyHint="done"
+              enterKeyHint="next"
               id="booking-email"
               inputMode="email"
+            />
+          </div>
+
+          <div className={styles.fieldBlock}>
+            <label className={styles.visuallyHidden} htmlFor="booking-phone">
+              Phone number
+            </label>
+            <input
+              type="tel"
+              className={styles.input}
+              placeholder="Phone (optional)"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              autoComplete="tel"
+              enterKeyHint="next"
+              id="booking-phone"
+              inputMode="tel"
+              maxLength={32}
+            />
+          </div>
+
+          <div className={styles.fieldBlock}>
+            <label className={styles.labelText} htmlFor="booking-description">
+              What would you like to focus on?
+            </label>
+            <textarea
+              id="booking-description"
+              className={styles.textarea}
+              placeholder="Short description (optional, max 450 characters)"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={4}
+              maxLength={450}
             />
           </div>
 
