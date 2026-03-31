@@ -10,16 +10,16 @@
 
 .kellyLogo1 {
   display: block;
-  height: 40px;
+  height: 46px;
   width: auto;
-  max-width: 140px;
+  max-width: min(200px, 42vw);
   object-fit: contain;
   object-position: left center;
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transition: opacity 0.25s ease;
 }
 
 .logoContainer:hover .kellyLogo1 {
-  opacity: 0.92;
+  opacity: 0.88;
 }
 
 .navbarDesktop {
@@ -39,48 +39,52 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+  gap: clamp(1.35rem, 2.5vw, 2.75rem);
 }
 
+/* Full-bleed bar: minimal, no card border — typography + color only */
 .navbarDesktopHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  background-color: #0e0e0e;
+  border: none;
+  box-shadow: none;
+  font-family: var(--text-meta);
+  color: var(--text-default);
+}
+
+.navbarDesktopInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(1rem, 2vw, 1.75rem);
-  min-height: 72px;
-  padding: 0.65rem clamp(1.1rem, 2.5vw, 1.85rem);
-  position: fixed;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(56rem, calc(100vw - 32px));
-  max-width: calc(100vw - 32px);
-  box-sizing: border-box;
-  z-index: 1000;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background-color: rgba(34, 32, 29, 0.92);
-  border: 1px solid rgba(218, 197, 167, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  text-align: left;
-  font-size: var(--text-meta-size);
-  color: var(--text-default);
-  font-family: var(--text-meta);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  min-height: 84px;
+  padding: 1rem clamp(1.25rem, 4vw, 3.5rem);
 }
 
 .navbarLinks {
   font-family: "Inter", sans-serif;
+  font-weight: 500;
   position: relative;
-  letter-spacing: 0.12em;
-  font-size: clamp(11px, 0.85vw, 13px);
-  line-height: 1.4;
+  letter-spacing: 0.14em;
+  font-size: clamp(10.5px, 0.78vw, 12px);
+  line-height: 1.5;
   text-transform: uppercase;
   display: inline-block;
-  color: #dac5a7;
+  color: #e8dfd3;
   text-decoration: none;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition: color 0.2s ease;
   white-space: nowrap;
-  padding: 0.35rem 0;
+  padding: 0.4rem 0;
 }
 
 /* Tablet  */
@@ -275,18 +279,17 @@ nav[class*="navbar" i] ul li:has(a) {
 }
 /* The same as about but with hover */
 nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)):hover {
-  color: #e8d9c4;
-  opacity: 1;
+  color: #f5ebe0;
 }
-/* Active nav link — underline offset from text, not a heavy bottom border */
+/* Active: slim underline, same ivory family as reference */
 nav[class*="navbar" i]:not([class*="topnav" i]) a[class*="active"] {
-  color: #dac5a7;
+  color: #f5ebe0;
   text-decoration: underline;
-  text-decoration-color: #cbb89d;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.38em;
+  text-decoration-color: rgba(232, 223, 211, 0.85);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.42em;
   border-bottom: none;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.4rem;
 }
 
 @keyframes fadeOutOverlay {
@@ -311,12 +314,23 @@ nav[class*="navbar" i]:not([class*="topnav" i]) a[class*="active"] {
 
 @media screen and (max-width: 1150px) {
   .navbarDesktopMenu {
-    gap: 1.1rem;
+    gap: 0.95rem;
+  }
+
+  .navbarDesktopInner {
+    min-height: 76px;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
   }
 
   .kellyLogo1 {
-    max-width: 120px;
-    height: 36px;
+    max-width: 150px;
+    height: 40px;
+  }
+
+  .navbarLinks {
+    letter-spacing: 0.11em;
+    font-size: 10px;
   }
 }
 

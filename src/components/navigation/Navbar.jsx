@@ -40,34 +40,36 @@ const pages = [
 
 function NavbarDesktop() {
   return (
-    <header className={`${styles.navbarDesktopHeader}`}>
-      <Link to="/" className={styles.logoContainer}>
-        <img
-          className={styles.kellyLogo1}
-          alt="Kelly Logo"
-          src="/kelly-logo-11@2x.png"
-          loading="lazy"
-        />
-      </Link>
-      <nav className={styles.navbarDesktop}>
-        <ul className={styles.navbarDesktopMenu}>
-          {pages.map((page) => (
-            <li key={page.label} role="none">
-              <NavLink
-                to={page.href}
-                className={({ isActive }) =>
-                  isActive
-                    ? `active ${styles.navbarLinks}`
-                    : `${styles.navbarLinks}`
-                }
-                key={page.label}
-              >
-                {page.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <header className={styles.navbarDesktopHeader}>
+      <div className={styles.navbarDesktopInner}>
+        <Link to="/" className={styles.logoContainer}>
+          <img
+            className={styles.kellyLogo1}
+            alt="Kelly Ohgee"
+            src="/kelly-logo-11@2x.png"
+            loading="eager"
+          />
+        </Link>
+        <nav className={styles.navbarDesktop} aria-label="Primary">
+          <ul className={styles.navbarDesktopMenu}>
+            {pages.map((page) => (
+              <li key={page.label} role="none">
+                <NavLink
+                  to={page.href}
+                  className={({ isActive }) =>
+                    isActive
+                      ? `active ${styles.navbarLinks}`
+                      : `${styles.navbarLinks}`
+                  }
+                  key={page.label}
+                >
+                  {page.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }
