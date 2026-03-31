@@ -5,7 +5,7 @@ import styles from "./TalkWithKelly.module.css";
 const API_URL =
   process.env.NODE_ENV === "production"
     ? "https://personal-website-backend-e74k.onrender.com"
-    : "http://localhost:5000";
+    : process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function todayYmd() {
   const d = new Date();

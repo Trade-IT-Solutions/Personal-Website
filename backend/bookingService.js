@@ -13,7 +13,7 @@ const PRICE_BY_DURATION = {
   60: process.env.STRIPE_PRICE_60_MIN || 'price_1TH5QVEoPlVeWCJveHKq584U',
 };
 
-const BOOKING_TZ = process.env.BOOKING_TIMEZONE || 'America/New_York';
+const BOOKING_TZ = process.env.BOOKING_TIMEZONE || 'America/Chicago';
 const SLOT_STEP_MIN = 15;
 const BOOKING_START_HOUR = parseInt(process.env.BOOKING_START_HOUR || '9', 10);
 const BOOKING_END_HOUR = parseInt(process.env.BOOKING_END_HOUR || '17', 10);
