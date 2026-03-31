@@ -1,79 +1,86 @@
 @import url("https://fonts.cdnfonts.com/css/satoshi");
 
-/* Desktop  */
+/* Desktop */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
 .kellyLogo1 {
-  position: absolute;
-  top: 24.9px;
-  left: 23.5px;
-  width: 115.1px;
-  height: 42.4px;
-  object-fit: cover;
-  transition: transform 0.2s ease-in-out;
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  object-position: left center;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.logoContainer:hover .kellyLogo1 {
+  opacity: 0.92;
 }
 
 .navbarDesktop {
-  position: absolute;
-  top: 23px;
-  left: 15%;
-  flex-direction: row;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 100px;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
 }
 
 .navbarDesktopMenu {
   margin: 0;
   padding: 0;
-  flex: 1;
+  list-style: none;
   display: flex;
   flex-direction: row;
-  width: 100%;
-  gap: 2.5rem;
-  margin-left: 130px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
 }
 
 .navbarDesktopHeader {
-  height: 87px;
-  position: absolute;
-  top: 30.1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  min-height: 72px;
+  padding: 0.65rem clamp(1.1rem, 2.5vw, 1.85rem);
+  position: fixed;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
-  backdrop-filter: var(--blur-default);
-  background-color: #22201d;
-  border: 1px solid var(--border-default);
+  width: min(56rem, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
   box-sizing: border-box;
-  max-width: 100%;
-  z-index: 10;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background-color: rgba(34, 32, 29, 0.92);
+  border: 1px solid rgba(218, 197, 167, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   text-align: left;
   font-size: var(--text-meta-size);
   color: var(--text-default);
   font-family: var(--text-meta);
-  padding-left: 15%;
-  width: 52rem;
-}
-
-.DesktopContainer {
-  display: flex;
-  align-items: center;
-  padding-top: 0px;
-  box-sizing: border-box;
-  position: relative;
-  gap: var(--gap-base);
-  height: auto;
-  max-width: 100%;
 }
 
 .navbarLinks {
   font-family: "Inter", sans-serif;
   position: relative;
-  letter-spacing: 1.5px;
-  line-height: 160%;
+  letter-spacing: 0.12em;
+  font-size: clamp(11px, 0.85vw, 13px);
+  line-height: 1.4;
   text-transform: uppercase;
   display: inline-block;
   color: #dac5a7;
   text-decoration: none;
-  transition: transform 0.3s ease-in-out;
+  transition: color 0.2s ease, opacity 0.2s ease;
   white-space: nowrap;
+  padding: 0.35rem 0;
 }
 
 /* Tablet  */
@@ -261,22 +268,25 @@ nav[class*="topnav" i] a[class^="active"] {
 /* Select every non-active link that doesn't have an img tag as child and also
  descents from a navbar that has the substring navbar without matter about case sensitivity (i)  */
 nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)) {
-  transition: transform 0.3s ease-in-out;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 nav[class*="navbar" i] ul li:has(a) {
   list-style: none;
 }
 /* The same as about but with hover */
 nav[class*="navbar" i] a:not([class*="active"]):not(:has(img)):hover {
-  transform: scale(1.3);
+  color: #e8d9c4;
+  opacity: 1;
 }
-/* Add active link color */
+/* Active nav link — underline offset from text, not a heavy bottom border */
 nav[class*="navbar" i]:not([class*="topnav" i]) a[class*="active"] {
-  /* For testing, i like the other one better */
-  /* color: #e0b084; */
-  padding-bottom: 2px;
-  border-bottom: 2px solid #d4a67c;
-  color: #d4a67c;
+  color: #dac5a7;
+  text-decoration: underline;
+  text-decoration-color: #cbb89d;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.38em;
+  border-bottom: none;
+  padding-bottom: 0.35rem;
 }
 
 @keyframes fadeOutOverlay {
@@ -294,22 +304,19 @@ nav[class*="navbar" i]:not([class*="topnav" i]) a[class*="active"] {
 
 /* Responsive adjustments */
 @media screen and (max-width: 1280px) {
-  .navbarDesktopHeader {
-    width: 50rem;
-  }
-  
   .navbarDesktopMenu {
-    gap: 2rem;
+    gap: clamp(1rem, 1.8vw, 1.75rem);
   }
 }
 
 @media screen and (max-width: 1150px) {
-  .navbarDesktopHeader {
-    width: 46rem;
-  }
-  
   .navbarDesktopMenu {
-    gap: 1.8rem;
+    gap: 1.1rem;
+  }
+
+  .kellyLogo1 {
+    max-width: 120px;
+    height: 36px;
   }
 }
 
