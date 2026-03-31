@@ -57,7 +57,7 @@ function App() {
         title =
           "Talk with Kelly - 1:1 Video Call | Kelly Ohgee";
         metaDescription =
-          "Book a paid 1:1 video session with Kelly. Choose your duration, pick a time, pay securely with Stripe, and receive a Google Meet link by email.";
+          "Break down your challenges, clarify your skill set, and build a path to scaling income. Book a session with Kelly, choose a time, and get your Google Meet link after secure payment.";
         break;
       case "/resources":
         title = "Resources - Kelly Ohgee | Empowerment Through Education";

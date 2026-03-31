@@ -120,10 +120,13 @@ const TalkWithKelly = () => {
         <header className={styles.header}>
           <h1 className={styles.title}>Talk with Kelly</h1>
           <p className={styles.subtitle}>
-            Book a private video call. Choose a length, pick a time, complete
-            payment securely with Stripe, then you&apos;ll receive a Google Meet
-            link by email. Available times reflect Kelly&apos;s calendar when
-            Google Calendar is connected on the server.
+            This call is designed to help you break down your current
+            challenges, identify your skill set, and build a clear path to
+            scaling and accelerating your income.
+          </p>
+          <p className={styles.subtitleLead}>
+            Book your session, choose a time, and receive your Google Meet link
+            after secure payment.
           </p>
         </header>
 
