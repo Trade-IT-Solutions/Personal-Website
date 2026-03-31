@@ -116,7 +116,7 @@ const TalkWithKelly = () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.container}>
+      <main className={styles.container} id="talk-booking-main">
         <header className={styles.header}>
           <h1 className={styles.title}>Talk with Kelly</h1>
           <p className={styles.subtitle}>
@@ -134,7 +134,7 @@ const TalkWithKelly = () => {
             it, check spam or contact{" "}
             <a
               href="mailto:contact@kellyohgee.info"
-              style={{ color: "#dff7ea" }}
+              className={styles.bannerLink}
             >
               contact@kellyohgee.info
             </a>
@@ -148,7 +148,11 @@ const TalkWithKelly = () => {
           </div>
         )}
 
-        <form className={styles.form} onSubmit={goToCheckout}>
+        <form
+          className={styles.form}
+          onSubmit={goToCheckout}
+          autoComplete="on"
+        >
           {error && (
             <div className={styles.errorBox} role="alert">
               {error}
@@ -221,6 +225,8 @@ const TalkWithKelly = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               autoComplete="name"
+              enterKeyHint="next"
+              id="booking-name"
             />
             <input
               type="email"
@@ -230,6 +236,9 @@ const TalkWithKelly = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
+              enterKeyHint="done"
+              id="booking-email"
+              inputMode="email"
             />
           </div>
 
@@ -241,7 +250,7 @@ const TalkWithKelly = () => {
             {checkoutLoading ? "Redirecting to Stripe…" : "Continue to payment"}
           </button>
         </form>
-      </div>
+      </main>
     </div>
   );
 };
