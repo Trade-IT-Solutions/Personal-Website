@@ -1,8 +1,15 @@
 .vscode/
 .qodo
 node_modules/
+
+# Env files (never commit secrets)
 .env
 backend/.env
 *.env
+!.env.example
+!backend/.env.example
+
+# CRA production output — generate with npm run build
+build/
 # Local secret paste sheet — do not commit
 RENDER_ENV_PASTE.md

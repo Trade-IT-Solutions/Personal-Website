@@ -1,4 +1,0 @@
-Contact: mailto:contact@kellyohgee.info
-Expires: 2026-12-31T23:59:59.000Z
-Preferred-Languages: en
-Canonical: https://kellyohgee.info/.well-known/security.txt
