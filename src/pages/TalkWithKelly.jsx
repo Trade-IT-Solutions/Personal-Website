@@ -15,6 +15,34 @@ function todayYmd() {
   return `${y}-${m}-${day}`;
 }
 
+function parseYmdLocal(ymd) {
+  const [year, month, day] = ymd.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function isAllowedBookingDate(ymd) {
+  const weekday = parseYmdLocal(ymd).getDay();
+  return weekday === 2 || weekday === 3 || weekday === 5;
+}
+
+function nextAllowedBookingDate(startYmd = todayYmd()) {
+  const next = parseYmdLocal(startYmd);
+
+  for (let i = 0; i < 14; i += 1) {
+    const y = next.getFullYear();
+    const m = String(next.getMonth() + 1).padStart(2, "0");
+    const day = String(next.getDate()).padStart(2, "0");
+    const ymd = `${y}-${m}-${day}`;
+
+    if (isAllowedBookingDate(ymd)) {
+      return ymd;
+    }
+    next.setDate(next.getDate() + 1);
+  }
+
+  return startYmd;
+}
+
 const DURATIONS = [
   { minutes: 15, label: "15 min" },
   { minutes: 30, label: "30 min" },
@@ -24,7 +52,7 @@ const DURATIONS = [
 const TalkWithKelly = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [durationMinutes, setDurationMinutes] = useState(30);
-  const [dateStr, setDateStr] = useState(todayYmd);
+  const [dateStr, setDateStr] = useState(() => nextAllowedBookingDate(todayYmd()));
   const [timezone, setTimezone] = useState("");
   const [slots, setSlots] = useState([]);
   const [slotStart, setSlotStart] = useState(null);
@@ -51,6 +79,14 @@ const TalkWithKelly = () => {
     setError("");
     setLoadingSlots(true);
     setSlotStart(null);
+
+    if (!isAllowedBookingDate(dateStr)) {
+      setSlots([]);
+      setLoadingSlots(false);
+      setError("Bookings are available on Tuesdays, Wednesdays, and Fridays only.");
+      return;
+    }
+
     try {
       const q = new URLSearchParams({
         date: dateStr,
@@ -65,6 +101,9 @@ const TalkWithKelly = () => {
       }
       setTimezone(data.timezone || "");
       setSlots(data.slots || []);
+      if (data.message) {
+        setError(data.message);
+      }
     } catch (e) {
       setSlots([]);
       setError("Network error loading availability.");
@@ -193,11 +232,24 @@ const TalkWithKelly = () => {
                 type="date"
                 className={`${styles.input} ${styles.inputDate}`}
                 value={dateStr}
-                min={todayYmd()}
-                onChange={(e) => setDateStr(e.target.value)}
+                min={nextAllowedBookingDate(todayYmd())}
+                onChange={(e) => {
+                  const nextDate = e.target.value;
+                  if (!isAllowedBookingDate(nextDate)) {
+                    setDateStr(nextAllowedBookingDate(nextDate));
+                    setError(
+                      "Bookings are available on Tuesdays, Wednesdays, and Fridays only."
+                    );
+                    return;
+                  }
+                  setDateStr(nextDate);
+                }}
               />
             </div>
           </div>
+          <p className={styles.tzNote}>
+            Booking days are limited to Tuesdays, Wednesdays, and Fridays.
+          </p>
 
           <div className={styles.fieldBlock}>
             {loadingSlots ? (

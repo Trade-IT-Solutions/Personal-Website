@@ -19,6 +19,7 @@ const BOOKING_START_HOUR = parseInt(process.env.BOOKING_START_HOUR || '9', 10);
 const BOOKING_END_HOUR = parseInt(process.env.BOOKING_END_HOUR || '17', 10);
 const MIN_LEAD_HOURS = parseInt(process.env.BOOKING_MIN_LEAD_HOURS || '4', 10);
 const SITE_URL = (process.env.PUBLIC_SITE_URL || 'https://www.kellyohgee.com').replace(/\/$/, '');
+const ALLOWED_BOOKING_WEEKDAYS = new Set([2, 3, 5]); // Tuesday, Wednesday, Friday
 
 /** Stripe Checkout Session metadata: each value max 500 characters */
 const MAX_BOOKING_METADATA_DESC = 480;
@@ -149,6 +150,10 @@ function parseDuration(value) {
   return n;
 }
 
+function isAllowedBookingDay(day) {
+  return ALLOWED_BOOKING_WEEKDAYS.has(day.weekday);
+}
+
 async function getSlots(req, res) {
   try {
     const dateStr = req.query.date;
@@ -163,6 +168,15 @@ async function getSlots(req, res) {
     let day = DateTime.fromISO(dateStr, { zone: BOOKING_TZ }).startOf('day');
     if (!day.isValid) {
       return res.status(400).json({ success: false, message: 'Invalid date' });
+    }
+    if (!isAllowedBookingDay(day)) {
+      return res.json({
+        success: true,
+        timezone: BOOKING_TZ,
+        slots: [],
+        calendarConfigured: !!getGoogleAuth(),
+        message: 'Bookings are available on Tuesdays, Wednesdays, and Fridays only.',
+      });
     }
 
     const now = DateTime.now().setZone(BOOKING_TZ);
@@ -275,6 +289,12 @@ async function createCheckoutSession(req, res) {
     const endMs = startMs + durationMinutes * 60 * 1000;
     const startDt = DateTime.fromMillis(startMs, { zone: 'utc' }).setZone(BOOKING_TZ);
     const now = DateTime.now().setZone(BOOKING_TZ);
+    if (!isAllowedBookingDay(startDt)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Bookings are available on Tuesdays, Wednesdays, and Fridays only.',
+      });
+    }
     if (startDt < now.plus({ hours: MIN_LEAD_HOURS })) {
       return res.status(400).json({ success: false, message: 'This time is no longer available. Pick another slot.' });
     }
